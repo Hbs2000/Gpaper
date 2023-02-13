@@ -1,0 +1,2 @@
+- [Factorzoo](/docs/factor%20zoo/factorzoo.md)
+- [Back to Homepage](README.md)
