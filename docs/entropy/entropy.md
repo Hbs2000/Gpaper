@@ -1,4 +1,4 @@
-
+<div style="display:none">
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
@@ -40,7 +40,7 @@
     - [4.2.3 class three](#423-class-three)
 
 <!-- /code_chunk_output -->
-
+</div>
 
 # 1. Preview of Hansen Jagannathan Bound
 > *Cochrane J H, Hansen L P. Asset pricing explorations for macroeconomics[J]. **NBER macroeconomics annual**, 1992, 7: 115-165.*
