@@ -1,1 +1,2 @@
-- [Entropy](_sidebar.md)
+- [Entropy](/entropy/entropy.md)
+  

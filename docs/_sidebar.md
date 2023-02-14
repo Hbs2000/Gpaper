@@ -1,3 +1,3 @@
-- [Courses in SUSTech](/Courses__in_SUSTech/README.md)
+- [Courses in SUSTech](/Courses_in_SUSTech/README.md)
 - [Entropy](/entropy/README.md)
 - [Factor Zoo](/factor_zoo/README.md)
