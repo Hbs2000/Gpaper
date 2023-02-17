@@ -1,0 +1,2 @@
+- [Lecture 1](/Courses_in_SUSTech/机器学习/Lecture_1_PRML.md)
+- [Back to Homepage](../README.md)

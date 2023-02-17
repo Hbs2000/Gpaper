@@ -1,2 +1,3 @@
 - [Factor Zoo](/factor_zoo/factor_zoo.md)
+- [Regularization, Bayes and Shrinkage](/factor_zoo/Shrinkage.md)
 - [Back to Homepage](README.md)
