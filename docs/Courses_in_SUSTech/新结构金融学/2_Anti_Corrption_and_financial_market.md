@@ -10,6 +10,8 @@ Laura Xiaolei Liu<sup>1</sup>, Haibing Shu<sup>2</sup>, and K.C. John Wei<sup>3<
 
 文章研究了中国股市中的政治风险，利用薄熙来事件作为外生的事件冲击（shock），论证了政治上的不确定性会作为一种风险来源造成股票价格变化，暴露在这种风险下越多，受此事件影响也越多。
 
+[Week 1 Review Report](/新结构金融学/Week1_RR.md)
+
 ## [Background](http://en.wikipedia.org/wiki/Bo_Xilai)
 
 ## Proxy
