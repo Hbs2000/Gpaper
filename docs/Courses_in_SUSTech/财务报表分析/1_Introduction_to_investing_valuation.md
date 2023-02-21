@@ -53,11 +53,11 @@ In this chapter, you will learn:
 - Fundamental analysis:
   - Requires work ! (The costs to collect, process, and analyze information, including taking this course!)
 
-> [!TIP|label:问题]
+> [!TIP]
 > When information is costly, is it possible that the market is efficient? Why?
 
 **Grossman-Stiglitz Paradox**: if prices perfectly reflected available information, there is no profit to gathering information(cause there is no misprice), in which case there would be little reason to trade and markets would eventually collapse.【？】
-## 
+
 
 
 ## Alpha and Betas
@@ -89,7 +89,7 @@ Meanwhile, the returns to active stock selection can be very large, if the inves
 - **Operating Activities**: 
   - Utilizing investments to produce and sell products
 
-> ![NOTE|label:注意]
+> [!NOTE]
 > Need to know how to differentiate
 
 
