@@ -122,7 +122,11 @@ $$\begin{aligned}
 
 $$\begin{aligned}
 \text{Intrinsic Premium} &= \text{Intrinsic Value of Equity- Book Value of Equity} \\
-\text{Market Premium} &= \text{Market Value of Equity- Book Value of Equity} \\ 
+\text{Market Premium} &= \text{Market Value of Equity- Book Value of Equity}
+\end{aligned}$$
+
+### PB ratio
+$$\begin{aligned}
 \text{Price-to-Book ratio} &= {\text{Market Value of Equity} \over \text{Book Value of Equity}} \\
 \text{Intrinsic Price-to-Book ratio} &= {\text{Intrinsic Value of Equity} \over \text{Book Value of Equity}}
 \end{aligned}$$
@@ -139,7 +143,8 @@ $$\begin{aligned}
 **(2) 为何中国P/B平均高于美国？**
 
 ![](../image/20230221FS3.png)
-GDP增速更快，因此全国范围内的企业整体上More Growth，赋予更多溢价，类似于成长股
+
+GDP增速更快，因此全国范围内的企业整体上More Growth，赋予更多溢价【price is about future】，类似于成长股
 
 **(3) Why Information Technology and HealthCare have bigger P/B?**
 <div align = 'center'>
@@ -154,6 +159,99 @@ GDP增速更快，因此全国范围内的企业整体上More Growth，赋予更
 - 会计谨慎性原则用于计算B
 - 会计面向过去（B），市场面向未来（P），因此，预期成分包含一定溢价
 
+### Measuring Value Added
+
+$$\begin{aligned}
+\text{Stock Return (Market Value added)} &= \text{Ending Value - Beginning Value + Divdend} \\
+&= P_t - P_{t-1} + d_t \\
+\text{Accounting Value added} &= \text{Ending Book Value - Beginning Book Value + Net Payout}\\
+&= \pmb{\text{Comprehensive Earnings}}
+\end{aligned}$$
+
+### Principles of Earnings Measurement
+(1) Recognize value added only when you have a **customer【？】**
+
+**Revenue recognition principles**
+- Add value when it has been earned: 
+   1. the earnings process is substantially accomplished; 
+   2. receipt of cash is reasonably certain
+
+**Matching principle**
+  - Match expenses against revenue for which they are incurred
+
+(2) $\text{Accounting value added (earnings)} = \text{Revenue – Expenses}$
+
+
+
+## Matching
+### Good Matching 
+- Only **costs of good sold**, not the full costs of producing or buying inventory,  are matched to sales revenue during the period. 
+  - Thus, gross margin (Revenue – Cost of good sold) measures value added from trading with customers.  
+- Costs for goods not sold are reported in the balance sheet, as **inventory**, to be matched with revenue in future periods when the inventory is sold. 
+- **Costs of buying plant** are not expensed when incurred. Rather, the cost is **“capitalized”** on the balance sheet and **depreciated** over years when the plant produces revenues
+  - Depreciation is a method of matching the cost of plant to the revenues the plant generates. 
+- Employee pension costs are recorded as an **expense in the period that employees generate revenues**, not when they are paid (in retirement).
+
+
+### Bad Matching 
+- **Research and development expenditures are expensed when incurred**, rather than matched to (subsequent) revenues they generate.
+- **Advertising and promotion costs are expensed when incurred**, rather than matched to (subsequent) revenues they generate.
+> [!NOTE]
+> What is the consequence of the above two matchings? 【the cash flow is changed】 <br>
+> Why do the above poor matchings still exist? 【in case of manipulating】
+
+- Estimating **useful lives** for plant assets that are **too long**: Depreciation is understated
+
+## Accounting Conservatism
+<div align = 'center'>
+
+![](../image/20230221FS5.png)
+</div>
+
+## PE ratio
+> [!TIP|label:PE]
+> Market’s anticipation of value to be added from sales **in the future** / value added from current sales (an interpretation for P/E)
+
+### Trailing P/E
+$$
+\text{Trailing P/E} = \frac{\text{Price}}{\text{Most Recent Annual EPS}}
+$$
+
+### Rolling P/E
+$$
+\text{Rolling P/E} = \frac{\text{Price}}{\text{Sum of EPS for Most Recent 4 Quarters}}
+$$
+
+### Forward P/E
+$$
+\text{Forward P/E} = \frac{\text{Price}}{\text{Forecast of Next Year's EPS}}
+$$
+
+### Dividend-Adjusted P/E
+$$
+\text{Dividend-Adjusted P/E} = \frac{\text{Price}+\text{Annual DPS}}{\text{EPS}}
+$$
+
+> [!NOTE]
+> Dividends affects prices but not earnings.
+
+
+
+
+## Leverage and Accounting Adjustment Ratios
+
+$$\begin{aligned}
+\text{Unlevered Price/Sales ratio} &= {\text{Market Value of Equity + Net Debt} \over \text{Sales}} \\
+\text{Unlevered Price/EBIT} &= {\text{Market Value of Equity + Net Debt} \over \text{EBIT}} \\
+\text{Unlevered Price/EBITDA} &= {\text{Market Value of Equity + Net Debt} \over \text{EBITDA}} \\
+\text{Enterprise P/B} &= {\text{Market Value of Equity + Net Debt} \over \text{Book Value of Equity + Net Debt}} 
+\end{aligned}$$
+> [NOTE]
+> the unlevered ratios are for the whole enterprise, the denominator is always the enterprise value. 
+
+$$
+\text{Enterprise value}=\text{Equity value+Net debt(+\pmb{Minority interest})}
+$$
 
 ## Where to get financial statements
 

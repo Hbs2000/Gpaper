@@ -1,3 +1,87 @@
+# China’s Anticorruption Campaign and Credit Reallocation From SOEs to Non-SOEs
+Bo Li, Zhengwei Wang, and Hao Zhou, working paper.
+1. *all PBC School of Finance, Tsinghua University*
+   
+文章主要研究反腐工作对信贷配置的调整作用，实际上，调整银行的信贷资源能够促进经济增长
+
+> ***2012会是历史性的一年***
+
+## 【资本】国进民退 or 无序扩张？
+<div align = 'center'>
+
+![](../image/20230221CF1.png)
+</div>
+07-09金融危机，私人投资意愿减弱，因此4万亿刺激后通过国有企业实施，而后信贷资源由民营配置居多到国有企业比例不断上升。
+
+<div align = 'center'>
+
+![](../image/20230221CF4.png)
+</div>
+
+左图反应**长期**以来市场SOE与non-SOE信贷资源的巨大剪刀差。右图是中纪委宣布查处重要官员后，与之相关联的行业中，民营企业随后得到的贷款增加，然而，五个季度后就不显著了【**短期**】。
+
+## Hypothesis
+<div align = 'center'>
+
+![](../image/20230221CF5.png)
+</div>
+
+腐败也许是润滑剂？但并不一定dominate
+
+## Literature
+- Economic cost of corruption or "grabbing the hand"(腐败到底是好是坏)
+  - Shleifer and Vishny (1993); Shleifer and Vishny (1994); Mauro (1995); Fisman (2001); Fisman and Svensson (2007)
+- Effectiveness of audit programs in curbing corruption(announcement effect)
+  - Besley and Pratt (2006); Ferraz and Finan (2008); Avis, Ferraz, and Finan (2018); Colonnelli and Prem (2020)
+- 信贷错配（credit misallocation）
+  - China: Brandt and Zhu (2001); Boyreau-Debray and Wei (2005); Song, Storesletten, and Zilibotti (2011); Cong, Gao, Ponticelli, and Yang (2019); Hsieh and Klenow (2009)
+  - Political connection and bank lending: Khwaja and Mian (2005);Claessens, Feijen, and Laeven (2008); Leuz and Oberholzer-Gee(2006)
+- China anti-corruption campaign
+  - Liu, Shu, and Wei(2017); Chen and Kung (2019); Griffin, Liu, and Shu (2022); Lin, Morck, Yeung, and Zhao (2023); Ding, Fang, Lin, and Shi (2020)
+
+Cong, Gao, Ponticelli, and Yang(2019) 指出，四万亿进一步加剧了信贷错配
+
+> [!NOTE|label:Idea]
+> 新冠疫情对于信贷影响?、
+
+## High profile investigation <!-- {docsify-ignore} -->
+
+<div align = 'center'>
+
+![](../image/20230221CF6.png)
+</div>
+
+由于土地资源管理权下放，导致这一部分省里权力大，然而，12年后房地产限制变严格，中央官员的权力整体来看上远远大于地方。例如，省级领导排队见中央处级领导。
+
+中央和地方的差距是实证检验的一部分佐证。
+
+
+2012年之前，并不立即公开谁被抓起来了,一般是审着审着才会公开，12年之后改变为【**immediate information disclosures**】。
+
+
+## High profile case: oil and gas <!-- {docsify-ignore} -->
+
+<div align = 'center'>
+
+![](../image/20230221CF7.png)
+</div>
+
+直接关联的样本是dirty的，背后具有mechanically relationship，非直接的才有研究意义【B,C】。
+
+
+P32 在调查后效率高的民企贷款增加，但国企内无反应
+
+P34 相比国有银行，非国有银行更倾向于贷款给民营企业
+
+
+## Conclusion
+<div align = 'center'>
+
+![](../image/20230221CF8.png)
+</div>
+
+文章研究了demand-side【SOE and non-SOE】与supply-side【bank】，最终从 supply-side channels解释。
+
 
 
 
@@ -10,7 +94,7 @@ Laura Xiaolei Liu<sup>1</sup>, Haibing Shu<sup>2</sup>, and K.C. John Wei<sup>3<
 
 文章研究了中国股市中的政治风险，利用薄熙来事件作为外生的事件冲击（shock），论证了政治上的不确定性会作为一种风险来源造成股票价格变化，暴露在这种风险下越多，受此事件影响也越多。
 
-[Week 1 Review Report](/新结构金融学/Week1_RR.md)
+[Week 1 Review Report](Week1_RR.md)
 
 ## [Background](http://en.wikipedia.org/wiki/Bo_Xilai)
 
@@ -59,6 +143,8 @@ Laura Xiaolei Liu<sup>1</sup>, Haibing Shu<sup>2</sup>, and K.C. John Wei<sup>3<
 
 
 假设结果并不是完美符合，作者最后也表明：***并非在试图证明另外两种假设都是无用的，而是在说并不只有这两种假设起作用，政治风险也是不可忽视的一部分***。
+
+严格来说这篇文章只采用了一个事件，统计方法上有一定的问题。
 
 
 

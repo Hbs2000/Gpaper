@@ -24,6 +24,7 @@
 - Capital misallocation between state and non-state sectors is the most restraining factor for growth, and investment intensive strategy is a marginal contributor in the last decade
   - 周皓教授论文(Wang, Wang, Wang, and Zhou, 2019)
 
+
 ## New Structural Financial Economics
 ### Research Three Level
 - Research with Chinese data(only different data)
