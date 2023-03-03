@@ -95,5 +95,135 @@ $$
 
 <mark> ***Example*** </mark>
 
-***Example***
+**A Discounted Cash Flow Valuation: General Mills, Inc. .**
+
+At the beginning of its fiscal year 2006, an analyst made the following forecast for General Mills, Inc., the consumer foods company, for 2006-2009 (in millions of dollars):
+
+<div class='centertable'>
+
+| |2006|2007|2008|2009| 
+|:--:|:--:|:--:|:--:|:--:|
+|Cash Flow from Operations|2014|2057|2095|2107| 
+|Cash investment in Operations|300|380|442|470|
+
+</div>
+
+General Mills reported $6, 192 million in short-term and long-term debt at the end of 2005 but very little in interest-bearing debt assets. Use a required return of 9 percent to **calculate both the enterprise value and equity value** for General Mills at the beginning of 2006 under two forecasts for long-run cash flows:
+1. Free cash flow will remain at 2009 levels after 2009.
+2. Free cash flow will grow at 3 percent per year after 2009.
+   
+General Mills had 369 million shares outstanding at the end of 2005, trading at $47 per share. **Calculate value per share and a value-to-price ratio under both scenarios.**
+<div align="center">
+
+![](../image/20230303FS1.png)
+</div>
+
+**Free cash flow with growth**
+
+<div align="center">
+
+![](../image/20230303FS2.png)
+</div>
+
+> [!ATTENTION|label:问题]
+> Will DCF Valuation Always Work?
+
+**A firm with negative cash flows**
+
+### Analysis of DCF
+Formal valuation aims to reduce our uncertainty about value and to discipline speculation. However, **the most uncertain (speculative) part of a valuation is the continuing value.**
+
+So valuation techniques are preferred if they result in <u>a smaller amount of the value attributable to the continuing value</u>.
+<div align="center">
+
+![](../image/20230303FS3.png)
+</div>
+
+公司可以通过减少投资来增加现金流，然而这并不能真正体现公司价值
+
+## Problem in Reported Cash Flow from Operations
+**按照会计准则要求**：Reported cash flows from operations in U.S. cash flow statements includes <u>interest</u> (a financing cash flow):
+
+
+$$\begin{aligned}
+\text{Cash flow from operations (C)}&= \text{Reported cash flow from operations + \pmb{After-tax net interest payments}} \\
+\text{After-tax Net Interest} &= \text{Net Interest × (1 - tax rate)} \\
+\text{Net interest} &= \text{Interest payments – Interest receipts}
+\end{aligned}$$
+
+Reported cash flow from operations is sometimes referred to as <u>*levered cash flow from operations*</u>
+
+
+Reported cash investments include <u>net investments</u> in interest bearing financial assets (excess cash) (which is a financing flow):
+
+$$\begin{aligned}
+\text{Cash investment in operations (I)}&= \text{Reported cash flow from investing − \pmb{Net investment in interest-bearing securities}} \\
+\text{Net investment} &= \text{purchases of investments – sales of investments}
+\end{aligned}$$
+
+这一部分对涉及投资的现金流做了调整：
+- Operation view：因为会计准则要求，所以将金融资产的利息收入纳入考量【税盾】
+- Investing view：投资金融资产也是投资的一部分【例如控股】，也应该计入现金流
+
+调整后计算流程，在Operation加入了利息获得，在investing加入了金融投资：
+
+<mark> ***Example*** </mark>
+
+<div align="center">
+
+![](../image/20230303FS4.png)
+</div>
+
+## Accrual accounting for value added
+
+上文中我们使用了Cash Flow这一概念来计算公司价值。然而，Cash Flow本质上还是属于流动性指标（a liquidation concept），而不能够完美的对应公司价值。就像上文提到的，公司可以减少生产资料投资而增加流动性，而这实际上是减损了公司价值。
+
+> [!NOTE]
+> *Analysts forecast earnings, not cash flows.*
+
+因此，也许应计盈余（Accural Accounting）是更好的选择？
+
+<div align="center">
+
+![](../image/20230303FS5.png)
+</div>
+
+通过这个图，我们可以发现，**短期Earnings有着更高的解释力度，然而长期来看二者区别正在逐渐缩小。**
+
+这个也很好理解：例如在一年里的一月份收到订金，此时现金流增加而盈余并没有增加。直到三月份将货送出去，才能算是交易完成，此时没有现金流增加而盈余增加。在短期来看二者不同，但若是从一整年（更长期）的角度出发，都属于在一年内完成了交易，收到了货款。
+
+$$\begin{aligned}
+\text{from FCF} &=\text{OCF − CAPX}\\
+\text{to FCF} &= \text{OCF + Accurals(noncash value flows)}
+\end{aligned}
+$$
+
+### Features of the Income Statement
+
+1. **Dividends don’t affect income**
+2. **Investment doesn’t affect income**
+3. There is a **matching** of
+   1. Value added		(revenues)
+   2. Value lost	   	(expenses)
+   3. Net value added	(net income)
+
+### Earnings and Cash Flows
+
+$$\begin{aligned}
+\text{\pmb{Earnings}}&=\text{OCF+accruals} \\
+&=\text{Operating earnings-Net interest (after tax)} \\
+&= \text{\pmb{FCF + I + Accruals-Net interest (after tax)}}
+\end{aligned}
+$$
+
+同样地，在计算operating earning的时候，相比于正常earning多了利息项
+
+$$\begin{aligned}
+\text{Earnings from the business (\pmb{Operating earnings})}&= \text{Earnings + Net interest (after tax)} \\
+&= \text{OCF+Accruals+Net interest (after tax)} \\
+&= \text{C + Accruals} \\
+&= \text{[C - I]+ I + Accruals} \\ 
+&= \text{\pmb{FCF + I + Accruals}}
+\end{aligned}
+$$
 

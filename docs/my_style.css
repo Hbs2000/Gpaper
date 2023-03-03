@@ -62,29 +62,38 @@
   src: url("./latex_fonts/simsun.ttc");
 }
 
+.pagination-item a {
+  color: currentColor;
+  font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+}
+
 h1 {
-  font-size: 32px !important;
+  font-size: 34px !important;
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 h2 {
-  font-size: 28px !important;
+  font-size: 32px !important;
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 h3 {
-  font-size: 25px !important;
+  font-size: 27px !important;
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 h4 {
-  font-size: 22px !important;
+  font-size: 25px !important;
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 h5,
 h6,
 pre,
-p,
+p {
+  font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+  font-size: 23px !important;
+}
+
 li {
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
-  font-size: 20px !important;
+  font-size: 23px !important;
 }
 
 code {
@@ -100,7 +109,7 @@ strong {
 }
 
 .sidebar ul li a {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 section.cover h1 {
@@ -112,6 +121,8 @@ section.cover h1 {
   display: table;
   margin-left: auto;
   margin-right: auto;
+  font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+  font-size: 23px !important;
 }
 
 mark {
