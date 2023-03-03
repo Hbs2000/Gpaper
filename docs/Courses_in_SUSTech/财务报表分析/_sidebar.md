@@ -1,4 +1,5 @@
 - [Lecture 1](/Courses_in_SUSTech/财务报表分析/1_Introduction_to_investing_valuation.md)
 - [Lecture 2](/Courses_in_SUSTech/财务报表分析/2_Introduction_to_the_financial_statements.md)
 - [Lecture 3](/Courses_in_SUSTech/财务报表分析/3_how_financial_statements_are_used_in_valuation.md)
+- [Lecture 4](/Courses_in_SUSTech/财务报表分析/4_Cash_Accounting_Accrual_Accounting_and_Discounted_Cash_Flow_Valuation.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)

@@ -1,8 +1,14 @@
+- China’s Anti-Corruption Campaign and Credit Reallocation to from SOEs to Non-SOEs, Bo Li, Zhengwei Wang, and Hao Zhou, Tsinghua University PBC School of Finance, 2022.
+
+- The Impacts of Political Uncertainty on Asset Prices: Evidence from the Bo Scandal in China, Laura Xiaolei Liu, Haibing Shu, and K.C. John Wei, ***Journal of Financial Economics***, 2017.
+
+- Busting the ‘Princelings’: The Campaign against Corruption in China’s Primary Land Market, Ting Chen and James Kai-sing Kung, ***Quarterly Journal of Economics***, 2019.
+
 # China’s Anticorruption Campaign and Credit Reallocation From SOEs to Non-SOEs
 Bo Li, Zhengwei Wang, and Hao Zhou, working paper.
 1. *all PBC School of Finance, Tsinghua University*
    
-文章主要研究反腐工作对信贷配置的调整作用，实际上，调整银行的信贷资源能够促进经济增长
+文章主要运用DID方法研究反腐工作对信贷配置的调整作用，实际上，调整银行的信贷资源能够促进经济增长
 
 > ***2012会是历史性的一年***
 
@@ -42,7 +48,7 @@ Bo Li, Zhengwei Wang, and Hao Zhou, working paper.
 Cong, Gao, Ponticelli, and Yang(2019) 指出，四万亿进一步加剧了信贷错配
 
 > [!NOTE|label:Idea]
-> 新冠疫情对于信贷影响?、
+> 新冠疫情对于信贷影响?
 
 ## High profile investigation <!-- {docsify-ignore} -->
 
@@ -69,10 +75,17 @@ Cong, Gao, Ponticelli, and Yang(2019) 指出，四万亿进一步加剧了信贷
 直接关联的样本是dirty的，背后具有mechanically relationship，非直接的才有研究意义【B,C】。
 
 
-P32 在调查后效率高的民企贷款增加，但国企内无反应
+在调查后效率高的民企贷款增加，但国企内无反应
+<div align = 'center'>
 
-P34 相比国有银行，非国有银行更倾向于贷款给民营企业
+![](../image/20230228CF1.png)
+</div>
 
+相比国有银行，非国有银行更倾向于贷款给民营企业
+<div align = 'center'>
+
+![](../image/20230228CF2.png)
+</div>
 
 ## Conclusion
 <div align = 'center'>
@@ -144,7 +157,8 @@ Laura Xiaolei Liu<sup>1</sup>, Haibing Shu<sup>2</sup>, and K.C. John Wei<sup>3<
 
 假设结果并不是完美符合，作者最后也表明：***并非在试图证明另外两种假设都是无用的，而是在说并不只有这两种假设起作用，政治风险也是不可忽视的一部分***。
 
-严格来说这篇文章只采用了一个事件，统计方法上有一定的问题。
+> [!NOTE|label:问题]
+> 严格来说这篇文章只采用了一个事件，统计方法上有一定的问题。
 
 
 
@@ -154,6 +168,29 @@ Ting Chen<sup>1</sup> and James Kai-sing Kung<sup>2</sup>, Quarterly Journal of 
 1. *Hong Kong Baptist University*
 2. *the University of Hong Kong*
 
+文章指出太子党相比于正常的地产商，在土地交易中以更低的价格拿了更多的土地，而这一现象实际上作为一种bribe存在，因为那些提供廉价土地的负责人在随后更容易得到晋升
 
 
+### Findings：
+- Politburo princelings享受折扣力度 55.4%
+- Standing politburo 享受比 normal member还要多 17.6–20.7%
+- 提供折扣的省委书记 23.4% 更容易得到晋升
+  - 但对省长不起作用，作者给出的解释是省长负责经济发展，晋升与否与GDP直接挂钩
+- 反腐运动使这一折扣降低 11.7–15.1%
 
+### Anti-corruption
+习近平的反腐运动部分遏制了这一现象，该运动与前几次的反腐运动有较大差异：
+1. 加强纪委权力
+2. 强度更高，持续时间更长，抓捕人数更多
+3. 房地产被单独列为重点审查行业
+4. 地方官员一把手必须来自于其他地方，制度上减少贪污可能
+5. 决心更大，忽略了最高权力人员隐含的“外交豁免权”（diplomatic immunity）：抓捕政治局常委周永康
+
+
+  
+
+中国政治经济的两大制度特征（institutional feature）：
+- 晋升对于官员来说极其重要，而且往往由上级领导直接决定
+- 自90年代末期以来，土地以及自然资源控制权下放至地方，因此地方政府获得了自由裁量权
+
+当权力下放地方后，结合体制内的晋升制度，大大强化了腐败发生的可能性
