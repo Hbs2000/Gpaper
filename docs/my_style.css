@@ -62,10 +62,22 @@
   src: url("./latex_fonts/simsun.ttc");
 }
 
-h1,
-h2,
-h3,
-h4,
+h1 {
+  font-size: 32px !important;
+  font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+}
+h2 {
+  font-size: 28px !important;
+  font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+}
+h3 {
+  font-size: 25px !important;
+  font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+}
+h4 {
+  font-size: 22px !important;
+  font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+}
 h5,
 h6,
 pre,
