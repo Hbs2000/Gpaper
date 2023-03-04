@@ -67,6 +67,7 @@
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 
+
 h1 {
   font-size: 34px !important;
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
@@ -89,11 +90,13 @@ pre,
 p {
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
   font-size: 23px !important;
+  line-height: 140% !important;
 }
 
 li {
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
   font-size: 23px !important;
+  line-height: 140% !important;
 }
 
 code {
@@ -105,7 +108,7 @@ strong {
 }
 
 .katex {
-  font-size: 1.1em;
+  font-size: 22px !important;
 }
 
 .sidebar ul li a {
