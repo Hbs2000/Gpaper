@@ -95,7 +95,7 @@ The balance sheet does this calculation, but **imperfectly**
 - Getting the value of “synergies” of assets being used together
 **Applications:**
 - “Asset-base” firms such as oil and gas and mineral products
-- Calculating liquidation values 【清算时候就没有上述问题了吗】
+- Calculating liquidation values 【清算时部分资产很难找到买家】
 
 
 

@@ -39,6 +39,8 @@ $$
 
 **Conclusion**: Focus on creation of wealth rather than distribution of wealth  
 
+因为dividend本质上是distribution of wealth，而并不是真正的creation of wealth，而且，如果公司短期内不发dividend，那么就无法通过DDM定价。因此，下面会提出DCF，试图measure creation of wealth。
+
 ### Analysis of DDM
 <div align = 'center'>
 
@@ -133,6 +135,8 @@ General Mills had 369 million shares outstanding at the end of 2005, trading at 
 ### Analysis of DCF
 Formal valuation aims to reduce our uncertainty about value and to discipline speculation. However, **the most uncertain (speculative) part of a valuation is the continuing value.**
 
+并且有时这种计算方法还会带来问题。因为DCF包括短期的cash flow和未来的continuing value，当短期cash flow为负数时，就要求continuing value大于当前价值，这是不合逻辑的。
+
 So valuation techniques are preferred if they result in <u>a smaller amount of the value attributable to the continuing value</u>.
 <div align="center">
 
@@ -143,6 +147,15 @@ So valuation techniques are preferred if they result in <u>a smaller amount of t
 
 ## Problem in Reported Cash Flow from Operations
 **按照会计准则要求**：Reported cash flows from operations in U.S. cash flow statements includes <u>interest</u> (a financing cash flow):
+
+背后含义是：利息实际上形成了税盾的作用，因此应该被记入现金流。在Net Income项里利息已经导致了现金流的减少，通过After-tax Net Interest恢复其贡献。
+
+> [!TIP]
+> 例如一个公司，资金30，其中20是equity，10是bond，赚了10，产生1利息，那么最终profit就是9，税率30%，那么最终cash flow为$ 9\times 0.7=6.3$。
+>
+> 然而，真正由于operation产生的现金流应该是$ 10\times 0.7=7$，这其中的差别就是由于融资活动（利息）引起的。
+> 
+> 利息的影响是多重的，由于有1的利息，导致现金流减少了1，但是税也少交了0.3，因此最终的净影响是减少了0.7。将这一部分由于融资活动引起的现金流变化recover，就得到了真正由于经营活动产生的现金流。
 
 
 $$\begin{aligned}
@@ -176,7 +189,7 @@ $$\begin{aligned}
 
 ## Accrual accounting for value added
 
-上文中我们使用了Cash Flow这一概念来计算公司价值。然而，Cash Flow本质上还是属于流动性指标（a liquidation concept），而不能够完美的对应公司价值。就像上文提到的，公司可以减少生产资料投资而增加流动性，而这实际上是减损了公司价值。
+上文中我们使用了Cash Flow这一概念来计算公司价值。然而，Cash Flow本质上还是属于清算指标（a liquidation concept），而不能够完美的对应公司价值。就像上文提到的，公司可以减少生产资料投资而增加流动性，而这实际上是减损了公司价值。
 
 > [!NOTE]
 > *Analysts forecast earnings, not cash flows.*

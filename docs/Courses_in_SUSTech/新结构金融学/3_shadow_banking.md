@@ -1,8 +1,12 @@
+# Shadow Banking
+
 ## Reference
 - Shadow Banking: China’s Dual-Track Interest Rate Liberalization, with Hao Wang, Honglin Wang, Lisheng Wang, and Hao Zhou, Tsinghua University PBC School of Finance, 2019.
 - China’s Gradualistic Economic Approach and Financial Markets, Markus Brunnereier, Michael Sockin, and Wei Xiong, ***American Economic Review***, 2017.
 - The Nexus of Monetary Policy and Shadow Banking in China, Kaiji Chen, Jue Ren, and Tao Zha, ***American Economic Review***, 2018.
 - Fiscal Stimulus, Deposit Competition, and the Rise of Shadow Banking: Evidence from China, Viral V. Acharya, Jun Qian, Yang Su, and Zhishu Yang, NYU Stern Working Paper, 2022.
+
+## Shadow Banking: China’s Dual-Track Interest Rate Liberalization
 
 本节课是影子银行的第一节课，着眼于宏观【投行经济学家角度，宏观分析】，中国的影子银行与发达国家的影子银行有根本性的差别。
 
@@ -103,12 +107,13 @@ Kaiji Chen<sup>1</sup>, Jue Ren<sup>2</sup>, and Tao Zha<sup>3</sup>, ***America
 3.  *Emory University, NBER, and Federal Reserve Bank of Atlanta*
 
 
-08年后中国缩紧货币政策，造成09-15年影子银行贷款大量增长
-信贷是货币政策的扩张，当开始收缩时，地方基建资金受限，影子银行是传统信贷的替代。
+09年刺激政策后中国很快开始缩紧货币政策，造成09-15年影子银行贷款大量增长
+
+信贷是货币政策的扩张，当开始收缩时，地方基建资金受限，自然从传统信贷过渡到影子银行。
 
 **Four distinctive contributions**
 - Institutional details of China’s quantity-based monetary system
-  - PBC two regulations 也发挥了重要租用
+  - PBC two regulations 也发挥了重要作用
   - 国有银行与非国有银行在影子银行活动中扮演的角色有很大差异
 - The estimation of both endogenous and exogenous components of China's monetary policy
   - 通过估计出的外生时间序列估计SOB和non-SOB的差别

@@ -246,7 +246,7 @@ $$\begin{aligned}
 \text{Unlevered Price/EBITDA} &= {\text{Market Value of Equity + Net Debt} \over \text{EBITDA}} \\
 \text{Enterprise P/B} &= {\text{Market Value of Equity + Net Debt} \over \text{Book Value of Equity + Net Debt}} 
 \end{aligned}$$
-> [NOTE]
+> [!NOTE]
 > the unlevered ratios are for the whole enterprise, the denominator is always the enterprise value. 
 
 $$

@@ -1,4 +1,5 @@
 - [Lecture 1](/Courses_in_SUSTech/新结构金融学/Lecture_1.md)
 - [2_Anti-Corruption and Financial Market](/Courses_in_SUSTech/新结构金融学/2_Anti_Corrption_and_financial_market.md)
 - [3_Shadow Banking](/Courses_in_SUSTech/新结构金融学/3_shadow_banking.md)
+- [4_Local Government Debt](/Courses_in_SUSTech/新结构金融学/4_local_gov_debt.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)
