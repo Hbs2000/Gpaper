@@ -312,7 +312,7 @@ $\phi_i(x) = x^i \ \text{for} \ i = 0,....M$ 是多项式核函数（kernel func
 
 <div align = 'center'>
 
-![](../image/20230308ML2.png)
+![](../image/20230308ML3.png)
 </div>
 
 
