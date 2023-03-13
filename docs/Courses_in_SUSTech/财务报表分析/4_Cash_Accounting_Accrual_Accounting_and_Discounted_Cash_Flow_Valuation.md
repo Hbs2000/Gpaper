@@ -20,13 +20,13 @@ $$
 **Constant dividend**
 
 $$
-V^E = {1\over \rho^E -1}
+V^E = {d_1\over \rho^E -1}
 $$
 
 
 **Dividend with Growth $g$**
 $$
-V^E = {1\over \rho^E - g}
+V^E = {d_1\over \rho^E - (1+g)}
 $$
 
 

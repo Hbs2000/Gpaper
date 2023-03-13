@@ -58,7 +58,7 @@ On the contrary, A full-fledged fundamental analysis is detailed and costly
 > 二者都可measure intrinsic value, 互不重叠
 
 
-echnical Analysis(price and volume) or Fundamental Screens (fundamental indicators)
+Technical Analysis(price and volume) or Fundamental Screens (fundamental indicators)
 
 ***PROBLEM***
 - You could be loading up on a risk factor

@@ -1,8 +1,13 @@
 # Informative and Intresting books
 
-**Albert Einstein**
 
-*Education is what remains after one has forgotten everything he learned in school.*
+
+> 如果你站在童年的位置瞻望未来，你会说你前途未卜，你会说你前途无量；但要是你站在终点看你生命的轨迹，你看到的只有一条路，你就只能看到一条命定之路。
+>
+> 不知道命运是什么，才知道什么是命运。
+>
+> ——**史铁生**
+
 
 
 [](_sidebar.md ':include')
