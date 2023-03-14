@@ -71,6 +71,11 @@ Technical Analysis(price and volume) or Fundamental Screens (fundamental indicat
 
 ### The interpretation of why contrarian investment can work <!-- {docsify-ignore} -->
 
+高PE的股票被称之为glamour stocks（growth stock），而低PE则被称为constrain stocks（value stock）。那么为什么constrain investment有用呢？有以下两种解释
+
+> [TIP|Constrain]
+> It is said to be out of favor and trades at a low multiple
+
 - Bet against those “naïve” investors who extrapolate past performance too far into the future 
 - **Value stocks are fundamentally riskier** 
 
@@ -90,7 +95,7 @@ The balance sheet does this calculation, but **imperfectly**
 
 ***Problems*** 
 - Getting the value of operating assets when there is no market for them
-- Identifying value in use for a particular firm 【？？ what is particular firm】
+- Identifying value in use for a particular firm 
 - Getting the value of intangible assets  (brand names, R&D)
 - Getting the value of “synergies” of assets being used together
 **Applications:**
@@ -160,7 +165,14 @@ Financing activities typically **do not create value**.因此，在随后的计�
 
 
 
+## Conceptual Questions
 
+***Should a firm that pays higher dividends have a higher share value?***
+
+No. Paying a dividend actually reduces share value by the amount of the dividend (but
+does not affect the cum-dividend value). Shareholders are no better off, cum-dividend. Of course,
+it could be that firms that pay higher dividends are also more profitable (and so have higher
+prices), but that is due to the profitability, not the dividend.
 
 
 

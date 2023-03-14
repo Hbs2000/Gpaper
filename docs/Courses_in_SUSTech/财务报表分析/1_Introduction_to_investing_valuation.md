@@ -67,7 +67,7 @@ In this chapter, you will learn:
 - Alpha Technologies
   - abnormal return by exploiting the arbitrage opportunity from mispricing
 
-Passive investment needs a beta technology (except for index investing【？】) .
+Passive investment needs a beta technology (except for index investing) .
 **Fundamental investing needs both a beta and an alpha technology**.
 
 ## Risk and Return
@@ -75,7 +75,8 @@ Passive investment needs a beta technology (except for index investing【？】)
 - **Fundamental risk** is the risk that results from business operations (Passive investors also see this)
 - **Price risk** is the risk of trading at the wrong price (Fundamental investors see this) : Paying too much or Selling for too little
   
-Meanwhile, the returns to active stock selection can be very large, if the investor **is either fortunate or skilled enough** to select a concentrated port- folio containing stocks that go on to earn extreme positive returns.
+下图可以看出，按照wealth creation对股票进行排序，少部分的股票产生了绝大部分的收益。如果投资者足够幸运，选择到了小部分的股票，那么能够获得惊人的回报。
+
 
 ![](../image/20230215FS1.png)
 
@@ -173,4 +174,38 @@ The analyst evaluates the equity value as $\text{\textdollar}850 \text{ million}
 
 - Analyst profile:
   - http://exam.sac.net.cn/pages/registration/sac-publicity-report.html
+
+## Conceptual Questions
+***What is the difference between fundamental risk and price risk?***
+
+**Fundamental risk** arises from the inherent risk in the business – from sales revenue falling or expenses rising unexpectedly, for example. **Price risk** is the risk of prices deviating from fundamental value. Prices are subject to fundamental risk, but can move away from fundamental value, irrespective of outcomes in the fundamentals. When an investor buys a stock, she takes on fundamental risk – the stock price could drop because the firm’s operations don’t meet expectations – but she also runs the (price) risk of buying a stock that is overpriced or selling a stock that is underpriced.
+
+***What is the difference between passive investor and active investor?***
+
+A passive investor does not investigate the price at which he buys an investment. He
+assumes that the investment is fairly (efficiently) priced and that he will earn the normal return
+for the risk he takes on. The active investor investigates whether the investment is efficiently
+priced. He looks for mispriced investments that can earn a return in excess of the normal return.
+
+***Should a shareholder be indifferent between selling her shares on the open market and selling them to the firm in a stock repurchase?***
+
+The firm has to repurchase the stock at the market price, so the shareholder will get
+the same price from the firm as from another investor. But one should be wary of trading with
+insiders (the management) who might have more information about the firm’s prospects than
+outsiders (and might make stock repurchases when they consider the stock to be underpriced).
+Some argue that stock repurchases are indicative of good prospects for the firm that are not
+reflected in the market price, and firms repurchase stocks to signal these prospects. Firms buy
+stocks because they think the stock is cheap.
+
+
+
+
+
+
+
+
+
+
+
+
 

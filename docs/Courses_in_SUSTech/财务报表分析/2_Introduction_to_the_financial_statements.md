@@ -93,12 +93,17 @@ $$\begin{aligned}
 > A share issue refers to the process of a company releasing shares to sell either to existing shareholders or the public. 
 
 $$\begin{aligned}
-\text{Comprehensive Income} &=  \text{NI} + 76 = -294 \\
+\text{Comprehensive Income} &=  \text{NI + Other comprehensive earnings} \\
+&=-370 + 76 = -294 \\
 \text{Net Payout} &= \text{Pay} - \text{Receive} \\
 &= 140-680 = -540 \\
 \text{Ending Equity} &= 3270 + \text{Comprehensive Income} - \text{Net Payout} \\
 &= 3516
 \end{aligned}$$
+
+> [!NOTE]
+> Total Earning 等价于 Comprehensive Earnings，但不等价于Net income。
+
 
 **(2) Using Accounting Relations to Check Errors.**
 
@@ -141,8 +146,10 @@ $$\begin{aligned}
 > 因此，low P/B don't always mean undervalue.
 
 **(2) 为何中国P/B平均高于美国？**
+<div align = 'center'>
 
 ![](../image/20230221FS3.png)
+</div>
 
 GDP增速更快，因此全国范围内的企业整体上More Growth，赋予更多溢价【price is about future】，类似于成长股
 
@@ -167,6 +174,7 @@ $$\begin{aligned}
 \text{Accounting Value added} &= \text{Ending Book Value - Beginning Book Value + Net Payout}\\
 &= \pmb{\text{Comprehensive Earnings}}
 \end{aligned}$$
+
 
 ### Principles of Earnings Measurement
 (1) Recognize value added only when you have a **customer【？】**
@@ -202,32 +210,32 @@ $$\begin{aligned}
 
 - Estimating **useful lives** for plant assets that are **too long**: Depreciation is understated
 
-## Accounting Conservatism
+## Accounting Conservatism <!-- {docsify-ignore} -->
 <div align = 'center'>
 
 ![](../image/20230221FS5.png)
 </div>
 
-## PE ratio
+## PE ratio <!-- {docsify-ignore} -->
 > [!TIP|label:PE]
 > Market’s anticipation of value to be added from sales **in the future** / value added from current sales (an interpretation for P/E)
 
-### Trailing P/E
+### Trailing P/E <!-- {docsify-ignore} -->
 $$
 \text{Trailing P/E} = \frac{\text{Price}}{\text{Most Recent Annual EPS}}
 $$
 
-### Rolling P/E
+### Rolling P/E <!-- {docsify-ignore} -->
 $$
 \text{Rolling P/E} = \frac{\text{Price}}{\text{Sum of EPS for Most Recent 4 Quarters}}
 $$
 
-### Forward P/E
+### Forward P/E <!-- {docsify-ignore} -->
 $$
 \text{Forward P/E} = \frac{\text{Price}}{\text{Forecast of Next Year's EPS}}
 $$
 
-### Dividend-Adjusted P/E
+### Dividend-Adjusted P/E <!-- {docsify-ignore} -->
 $$
 \text{Dividend-Adjusted P/E} = \frac{\text{Price}+\text{Annual DPS}}{\text{EPS}}
 $$
@@ -261,4 +269,48 @@ $$
   - https://www.hkexnews.hk/index_c.htm
 - Firms listed in US exchanges
   - https://www.sec.gov/edgar/searchedgar/companysearch
+
+
+
+## Conceptual Questions
+***Explain the difference between net income and net income available to common. Which definition of income is used in earnings-per-share calculations?***
+
+Net income available to common is net income minus preferred dividends. The earnings
+per share calculation uses net income available to common (divided by shares outstanding)
+
+
+***Why might a firm trade at a price-to-book ratio (P/B) greater than 1.0? ***
+
+1. The firm is mispriced in the market
+2.  The firm is carrying assets on its balance sheet at less than market value, or is omitting other assets like brand assets and knowledge assets. Historical cost accounting and the immediate expensing of R&D and expenditures on brand creation produce balance sheets that are likely to be below market value.
+
+
+***Explain why some firms have high price-earnings (PIE) ratios***
+
+P/E ratios indicate growth in earnings. The numerator (price) is based on expected future
+earnings whereas the denominator is current earnings. If future earnings are expected to be
+higher than current earnings (that is, growth in earnings is expected), the P/E will be high. (If
+future earnings are expected to be lower, the P/E ratio will be low). P/E ratios can **also** be high
+because the market is too optimistic in its earnings growth foreasts.
+
+
+***Give some examples in which there is poor matching of revenues and expenses.***
+
+1. Expensing research and development expenditures
+2. The depreciation is understated or overstated
+3. Underestimating bad debts
+4. Expensing advertising and brand creation costs
+
+
+***Why are dividends not an expense in the income statement?***
+
+Dividends are distributions of the value created in a firm; they are **not a loss** in
+generating value. So accountants calculate the value added (earnings), add it to equity, and then
+treat dividends as a distribution of the value added (by charging dividends against equity in the
+balance sheet).
+
+
+
+
+
 
