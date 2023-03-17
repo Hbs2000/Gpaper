@@ -1,42 +1,88 @@
 # Factor investing: A Bayesian hierarchical approach
 
-Guanhao Feng<sup>1</sup>, Jingyu He <sup>1</sup>
+Guanhao Feng<sup>1</sup>, Jingyu He <sup>1</sup>, ***Journal of Econometrics***, 2022
 
 1. *City University of Hong Kong*
 
 ## Abstract 
 
+This paper investigates the **asset allocation** problem when **returns are predictable**<sup>1</sup>. We introduce a market-timing **Bayesian hierarchical (BH)** approach that adopts **heterogeneous** time-varying coefficients driven by lagged fundamental characteristics. Our approach estimates the conditional expected returns and residual covariance matrix<sup>2</sup> **jointly** enables evaluating the **estimation risk**<sup>3</sup> in the portfolio analysis. The hierarchical prior allows the modeling of different assets separately while **sharing information** across assets. 
+
+We demonstrate the performance of the U.S. equity market, and our BH approach <u>outperforms most alternative methods in terms of point prediction and interval coverage</u>. In addition, the BH efficient portfolio achieves monthly returns of 0.92% and a significant Jensen’s alpha of 0.32% in sector investment over the past twenty years. We detect that technology, energy, and manufacturing are the most critical sectors in the past decade, and size, investment, and short-term reversal factors are heavily weighted in our portfolio. Furthermore, the stochastic discount factor constructed by our BH approach can explain many risk anomalies.
+
+> [!TIP]
+> 1. means **conditional**. If returns are unpredictable, the mean–variance efficient portfolio is time-invariant. Therefore, the econometric interest lies in the estimation property of unconditional expected returns and the covariance matrix
+> 2. not **return** covariance matrix
+> 3. investor uncertainty about the **parameters** of the return
+
+
+***Main contributions***
+
+- Estimates the conditional expected returns and residual covariance matrix **jointly**
+- The hierarchical prior allows the modeling of different assets separately while **sharing information** across assets
+- The stochastic discount factor constructed by our BH approach can explain many risk anomalies
+
+## Conceptual Details
+factor rotation?
+### Uncertainty of Parameters
+
+贝叶斯方法允许我们将经济学先验加入到统计模型中，以及评估参数估计中的不确定性。
+
+然而，在传统频率学派的方法以及现代机器学习方法中，并没有考虑参数的不确定性，特别是在高维的情况下，需要面临更加huge的参数空间。
+
+we project the time-varying coefficients of each asset onto its fundamental characteristics
+
+### Motivation
+#### Hierachical Modeling
+
+- The existing empirical literature focuses on testing the existence of return predictability for a single market index using market-timing macro predictors
+- current literature struggles to find consistent predictability evidence across multiple assets
+ 
+When we try to model multiple assets, **the time series of asset return is usually short (e.g., monthly data with hundreds of observations), but the number of time series is relatively large (e.g., hundreds or even thousands of assets)**
+
+Researchers either sacrifice the potential benefit from massive data and model each asset independently (time series modeling) or ignore the heterogeneity of assets, stack all time-series together, and train a single model (pool modeling).
+
+**Neither way properly takes advantage of information from massive data**. Time series fits individual assets poorly due to the small sample size used, whereas pooled modeling is naive and loses heterogeneous signals
+
+Our BH approach sheds light on this problem from **a Bayesian perspective**. BH provides a framework for studying the joint predictability for multiple assets. The hierarchical model4 provides a way to **share information** across numerous assets. Hence, it can handle the cross-sectional return dependence. **The Markov chain Monte Carlo (MCMC)** sampling process of our BH approach can be interpreted as two intuitive cyclic steps. 
+
+
+
+
+### Variables
+Market-timing macro predictors and fundamental characteristics
+
+sector portfolios, tradable risk factors, and characteristics-sorted portfolios.
+
+
+
 ## Empirical results
 
 
+<div align = 'center'>
+
+![](image/20230317PP1.png)
+</div>
+
+<div align = 'center'>
+
+![](image/20230317PP2.png)
+</div>
 
 
-- estimates the conditional expected returns and residual covariance matrix **jointly**
-- The hierarchical prior allows the modeling of different assets separately while **sharing information** across assets
-- the stochastic discount factor constructed by our BH approach can explain many risk anomalies
+## Technical Details
+The first step (information sharing step) takes condition on the hierarchical prior and updates regression coefficients of each asset separately. Note that the
+hierarchical prior provides information from all other assets. The second step (information grouping step) evaluates
+regression coefficients of all asset returns and updates parameters of the hierarchical prior to gathering information from
+individual assets. Intuitively, the hierarchical prior builds an overline bridge linking multiple asset returns. The within asset part describes the predictor-return dynamics, and the cross-asset part incorporates the heterogeneity of predictor existence and strength.
 
-- what is estimation risk
-- hierarchical因为是different asset所以才hierarchical吗 
-- what is model heterogeneity
-
-By contrast, traditional frequentist statistical approaches or modern machine learning predictive methods fail to evaluate such prediction risk properly. The estimation risk issue dramatically increases when investors allocate funds among multiple assets due to the high dimension of the parameter space.
-
-
-
-
-- we project the time-varying coefficients of each asset onto its fundamental characteristics
-- the conditional expected returns and covariance matrix are driven by macro predictors and fundamental characteristics
-- we can study factor rotation under changing macroeconomic conditions over time and maintain the heterogeneity of assets
-
-
-Particular attention should be paid to modeling multiple assets. In this case, the time series of asset return is usually short (e.g., monthly data with hundreds of observations), but the number of time series is relatively large (e.g., hundreds or even thousands of assets). Researchers either sacrifice the potential benefit from massive data and model each asset independently (time series modeling) or ignore the heterogeneity of assets, stack all time-series together, and train a single model (pool modeling).3 Neither way properly takes advantage of information from massive data. Time series fits individual assets poorly due to the small sample size used, whereas pooled modeling is naive and loses heterogeneous signals. Stock return data usually suffer from extremely low signal-to-noise ratios, and the predictive power of predictors changes under different macroeconomic conditions. Therefore, it is desirable to model returns jointly while assuming the heterogeneity of individual assets.
-
-
-The Markov chain Monte Carlo (MCMC) sampling process
-
-
-
-## Process
+Despite the advantages above, our Bayesian framework is flexible enough to model heterogeneous time-varying
+coefficients driven by lagged fundamental characteristics of each asset. Avramov and Chordia (2006b) find these macro
+predictors are linked to the underlying business cycles for conditional investing or market timing, and their analysis
+focuses on individual stocks. Our paper pursues a similar goal: to assess the economic value of predictability and show
+portfolio strategies successfully rotate across different risk factor styles during changing business conditions. Furthermore,
+our BH approach models the covariance matrix simultaneously with the expected return, thus enabling the creation of
+mean–variance efficient portfolios.
 
 ### BayesIan predictive model
 
@@ -177,6 +223,12 @@ $$
 
 ### Markov chain Monte Carlo scheme
 
+> [!NOTE|label:MCMC]
+> 理论上来说MCMC能够得到真实值，就像理论上来说Mixture of Gaussian能够拟合一切分布。但是MCMC extremely computational expensive
+>
+> Variational Inference算起来就比较快，但是它假设了隐变量之间独立性，which 并不适用于现实情况
+
+
 [为什么要用MCMC采样](https://www.zhihu.com/question/45196331/answer/2376274957)
 
 [Gibbs sampler(alternative conditional sampling)](https://zhuanlan.zhihu.com/p/25072161)
@@ -222,6 +274,10 @@ $$
 where $\tilde{E} = [\hat{\epsilon_1},\cdots,\hat{\epsilon_N}]$ is a $TxN$ matrix of residuals, $\hat{\epsilon_i} = r_i-f_i^T b_i$. Calculate $\Omega = \Sigma \otimes I_T$ accordingly.
 
 **Convergence is always a concern for MCMC algorithms**. We confirm the convergence of the algorithm by examining the trace plot of posterior samples and effective sample size (ESS) for all parameters using the R package coda.The trace plot stabilizes fast, and we achieve an average effective sample size of 1800 out of 2000 posterior draws, which indicates that the sampler explores the posterior efficiently.
+
+> [!ATTENTION|label:Convergence]
+> MCMC方法的难点是如何判断我们已经到达稳态了，**目前还没有明确的理论指导表明其是否到达稳态，何时能到达稳态**，所以需要一些直观判断方法如人为的检验样本或观察连续采样间的关联。
+
 
 
 ### Predicting returns and creating efficient portfolio

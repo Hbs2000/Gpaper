@@ -47,6 +47,12 @@ $$
 ![](../image/20230302FS1.png)
 </div>
 
+> [!NOTE|Important]
+> DDM 折现的是股利，反映的是权益的价值，所以**贴现和应该是权益价值**
+>
+> 而DCF 折线的是现金流，反应的是公司价值，最终**贴现和是公司价值**
+
+
 ## Discount Free Cash Flow Model（DCF）
 
 $$
@@ -247,7 +253,7 @@ $$
 
 ## Conceptual Questions
 
-***Investors receive dividends as payoffs for investing in equity shares. Thus the value of a share should be calculated by discounting expected dividends. True or false? ***
+***Investors receive dividends as payoffs for investing in equity shares. Thus the value of a share should be calculated by discounting expected dividends. True or false?***
 
 The first sentence is true: dividends are the payoff to equity investing. The second sentence
 is true in theory but not in practice. Equity value is the present value of the infinite stream of
@@ -260,7 +266,7 @@ many years, nor did Microsoft. Dell pays no dividends. Yet these are companies t
 considerable value. This is this dividend conundrum: Value is based on expected dividends, but
 forecasting dividends is not relevant to value as a practical matter.
 
-***What explains the difference between cash flow from operations and earnings? ***
+***What explains the difference between cash flow from operations and earnings?***
 $$
 \text{Earnings = Cash from operations – net interest payments + accruals}
 $$

@@ -15,11 +15,10 @@ But:  Beware of paying for growth
 
 **Abnormal earnings growth** is the metric that protects from paying too much for growth
 
-## The concept behind P/E ratio
-
 
 ## From PB to PE
-在PB valuation中，我们可以通过计算Residual Earning并折现，而在PE Valuation中，我们通过计算RE的变化来得到估值。
+
+在PB valuation中，我们可以通过计算Residual Earning并折现，而在PE Valuation中，我们通过计算**RE的变化**来得到估值。
 <div align = 'center'>
 
 ![](../image/20230314FS1.png)
@@ -28,6 +27,11 @@ But:  Beware of paying for growth
 $$
 V_0^E = {1\over \rho_E -1} \Big[ EPS_t + {\Delta RE_2\over \rho_E}+{\Delta RE_3\over \rho_E}{\Delta RE_4\over \rho_E}+{\Delta RE_4\over \rho_E}  \Big]
 $$
+
+
+### The concept behind P/E ratio
+
+## Abnormal Earnings Return
 
 ### Change in Residual Earnings and Abnormal Earnings Growth
 
@@ -44,7 +48,7 @@ $$
 
 Abnormal Earnings Growth (AEG), which is the center for P/E valuation, is **growth in earnings over the required growth rate**
 
-## Saving Account
+### Saving Account
 
 <div align = 'center'>
 
@@ -77,14 +81,15 @@ $$
 
 ***Abnormal Earnings Growth (AEG)***
 
-Abnormal Earning Growth 与 Residual Earnings有着close relation：
+Abnormal Earning Growth 与 Residual Earnings有着close relation，通过简单推导即可得出：
 $$\begin{aligned}
 \text{AEG}_t &= \text{RE}_t - \text{RE}_{t-1} \\
 &= [Earn_t+(\rho_E-1)d_{t-1}]-\rho_E Earn_{t-1} \\
 &= \pmb{\text{Cum-dividend earn}_t - \text{Normal Earn}_t}
 \end{aligned}$$
 
-通过简单推导即可得出。
+> [!NOTE|AEG与RE]
+> AEG与前面RE的区别就在于将红利的计算从Anchor【book value】中移到了Extra Value【AEG】
 
 
 ### Lessons from the Savings Account
@@ -94,10 +99,10 @@ $$\begin{aligned}
 ![](../image/20230314FS4.png)
 </div>
 
-<mark>
 
-### Exercise
-</mark>
+
+### <mark> Exercise </mark>
+
 
 <div align ='center'>
 
@@ -149,12 +154,151 @@ AEG_t &= \text{Cum dividend earnings}_t - \text{Normal earn}_t \\
 
 
 
+### <mark> Example </mark>
+
+
+<div  align = 'center'>
+
+![](../image/20230315FS1.png)
+</div>
+
+<div  align = 'center'>
+
+![](../image/20230315FS2.png)
+</div>
+
+<div  align = 'center'>
+
+![](../image/20230315FS3.png)
+</div>
+
+<div  align = 'center'>
+
+![](../image/20230315FS4.png)
+</div>
+
+
+### PE Calculation 
+
+> [!TIP|label:PE]
+> Market’s anticipation of value to be added from sales **in the future** / value added from current sales (an interpretation for P/E)
+
+### Forward P/E <!-- {docsify-ignore} -->
+$$
+\text{Forward P/E} = \frac{\text{Price}_0}{\text{Earnings}_1}
+$$
+
+### Trailing P/E <!-- {docsify-ignore} -->
+$$
+\text{Trailing P/E} = \frac{\text{Price}_0+\text{Dividend}_0}{\text{Earnings}_0}
+$$
+
+### Normal P/E <!-- {docsify-ignore} -->
+$$
+\text{Normal P/E} = \frac{1}{\text{Required Return}}
+$$
+
+### Normal Trailing P/E <!-- {docsify-ignore} -->
+$$
+\text{Normal Trailing P/E} = \frac{1+\text{Required Return}}{\text{Required Return}}
+$$
+因此：
+$$
+\text{Normal P/E} = \text{Normal Trailing P/E} -1
+$$
+> [!NOTE]
+> Dividends affects prices but not earnings.
 
 
 
 
 
+### <mark> Exercise </mark>
+
+In 2010, some fundamental investors believed that Microsoft, after being overpriced in the stock market for many years, was now a firm to buy. Microsoft's shares traded at 24.30 in September 2010, down from a peak of 60 (split-adjusted) in January 2000. Analysts' consensus EPS forecasts for 2011 and 2012 fiscal years (ending in June) were 2.60 and 2.77, respectively. A dividend of 0.40 per share was indicated for fiscal year 2011.
 
 
+**a. Calculate Microsoft's normal forward P/E and the forward P/E at which it traded in September 2010. Use a required return of 9 percent.**
+
+11.11, 9.346
+
+**b. Calculate the intrinsic P/E implied by the analysts' forecasts with the assumption that there will be no abnormal earnings growth after 2012.**
+
+$$
+V_2010 = {1\over 0.09} \Big[ 2.60+{-0.028\over 1.09} \Big] = 28.6
+$$
+
+$$
+\text{Intrinsic P/E} = {28.6\over2.6} =11 
+$$
+
+**c. If you forecast that there will be significant abnormal earnings growth after 2012, do you think this stock is appropriately priced at $24.30?**
+
+if there is AEG, the price must be higher than the market price
+
+
+### Protections from earning created by Accounting
+
+<div  align = 'center'>
+
+![](../image/20230315FS5.png)
+</div>
+
+### Analysis of AEG
+
+<div  align = 'center'>
+
+![](../image/20230315FS6.png)
+</div>
+
+
+## Conceptual Questions
+
+***The historical earnings growth rate for the S&P 500 companies has been about 8.5 percent. Yet the required growth rat e for equity investors is considered to be about 10 percent. Can you explain the in consistency?***
+
+The historical 8.5% growth rate that is often quoted is the ex-dividend growth rate. It
+ignores the fact that earnings were also earned by investors from reinvesting dividends (in the
+S&P 500 stocks, for example) that were typically 40% of earnings. The cum-dividend rate is
+about 13%.
+
+***Why the following equation leads to error?***
+
+- This formula capitalizes earnings at the ex-dividend earnings growth rate, g. This ignores growth that comes from reinvesting dividends. 
+- Further, if earnings are expected to grow at a rate equal to the required return, r, then the growth should not be valued , and forward earnings should be capitalized at the rate, r, not r – g. Only growth in excess on the required rate should be recognized.
+- The formula also has mathematical problems. If g = r, then the denominator is zero and the value is infinite. If g is greater than r (which is necessary for growth to have value), the denominator is negative.
+
+***A firm's earnings are expected to grow at a rate equal to the required rate ofretum for its equity, 12 percent. What is the trailing PIE ratio? What is the forward PIE ratio?***
+
+Trailing P/E = 1.12/0.12 = 9.33, Forward PE = 1/0.12 = 8.33
+
+***The normal forward P/E and the normal trailing P/E always differ by 1.0. Explain why***
+
+The difference is that, for the trailing P/E, one more years of earnings are involved (the
+current year). The trailing P/E can be interpreted as paying for the value of forward earnings (at
+the multiple for forward earnings) plus a dollar for every dollar of current earnings
+
+***Abnormal earnings growth is always equal to growth of (change in) residual earnings. Correct?***
+
+Correct
+
+***A P/E ratio for a bond is always less than that for a stock. Correct?***
+
+Incorrect. As the normal (forward) P/E ratio is the inverse of the required return and the
+required return for a bond is (usually) lower than that for a stock, the normal P/E ratio for a bond
+is greater than that for a stock. But P/E also values abnormal earnings growth. A bond cannot
+deliver abnormal earnings growth, so the P/E ratio for a growth stock might well be greater than
+that for a bond.
+
+***Why might an analyst refer to a leading (forward) PIE ratio rather than a trailing PIE ratio?***
+
+The trailing P/E, based on current earnings, is affected by transitory (one-time) earnings.
+The forward P/E based on next years' forecasted earnings is less likely to be so affected, and so
+is a better base for growth.
+
+***P/E ratios were quite low in 2008- 2012 (about 11- 12 on average), even though interest rates were also very low (with 10-year Treasury yields below 3.5 percent). Explain how this could be.***
+
+Yes; eps growth can be increased with investment, but the investment may earn only the
+required return, and thus not add value. A firm can also increase its expected earnings growth
+through accounting methods, but not add value
 
 

@@ -32,10 +32,9 @@ $$
 
 当未来没有超过the required return的增长预期时【可理解为CV = 0】，其Book Value就应该是当前价格。
 
-<mark> 
 
-### Residual Earning 
-</mark>
+### <mark>  Residual Earning  </mark>
+
 
 $$
 \text{Value of common equity}(V_0^E) = B_0+\pmb{{RE_1\over \rho_E}+{RE_2\over \rho_E^2}+{RE_3\over \rho_E^3}}.....
@@ -91,20 +90,20 @@ $$\begin{aligned}
 \end{aligned}$$
 
 
-<mark> 
 
-***Example*** 
-</mark>
+
+<mark>  ***Example***  </mark>
+
 
 <div align = 'center'>
 
 ![](../image/20230306FS2.png)
 </div>
 
-<mark> 
 
-### Calculation
-</mark>
+
+### <mark>  Calculation </mark>
+
 
 ***Case 1 Zero RE after the Forecast Horizon***
 

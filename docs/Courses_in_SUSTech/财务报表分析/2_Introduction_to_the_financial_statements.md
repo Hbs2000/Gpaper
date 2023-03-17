@@ -216,32 +216,7 @@ $$\begin{aligned}
 ![](../image/20230221FS5.png)
 </div>
 
-## PE ratio <!-- {docsify-ignore} -->
-> [!TIP|label:PE]
-> Market’s anticipation of value to be added from sales **in the future** / value added from current sales (an interpretation for P/E)
 
-### Trailing P/E <!-- {docsify-ignore} -->
-$$
-\text{Trailing P/E} = \frac{\text{Price}}{\text{Most Recent Annual EPS}}
-$$
-
-### Rolling P/E <!-- {docsify-ignore} -->
-$$
-\text{Rolling P/E} = \frac{\text{Price}}{\text{Sum of EPS for Most Recent 4 Quarters}}
-$$
-
-### Forward P/E <!-- {docsify-ignore} -->
-$$
-\text{Forward P/E} = \frac{\text{Price}}{\text{Forecast of Next Year's EPS}}
-$$
-
-### Dividend-Adjusted P/E <!-- {docsify-ignore} -->
-$$
-\text{Dividend-Adjusted P/E} = \frac{\text{Price}+\text{Annual DPS}}{\text{EPS}}
-$$
-
-> [!NOTE]
-> Dividends affects prices but not earnings.
 
 
 
@@ -279,7 +254,7 @@ Net income available to common is net income minus preferred dividends. The earn
 per share calculation uses net income available to common (divided by shares outstanding)
 
 
-***Why might a firm trade at a price-to-book ratio (P/B) greater than 1.0? ***
+***Why might a firm trade at a price-to-book ratio (P/B) greater than 1.0?***
 
 1. The firm is mispriced in the market
 2.  The firm is carrying assets on its balance sheet at less than market value, or is omitting other assets like brand assets and knowledge assets. Historical cost accounting and the immediate expensing of R&D and expenditures on brand creation produce balance sheets that are likely to be below market value.
