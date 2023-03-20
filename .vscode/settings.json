@@ -1,0 +1,9 @@
+{
+    "grammarly.selectors": [
+        {
+            "language": "markdown",
+            "scheme": "file",
+            "pattern": "docs/Courses_in_SUSTech/新结构金融学/proposal.md"
+        }
+    ]
+}
