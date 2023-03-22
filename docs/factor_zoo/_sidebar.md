@@ -1,4 +1,5 @@
 - [Factor Zoo](/factor_zoo/factor_zoo.md)
 - [Regularization, Bayes and Shrinkage](/factor_zoo/Shrinkage.md)
 - [Factor Investing, A hierarchical approach](/factor_zoo/A_Bayesian_hierarchical_approach.md)
+- [Forest through the trees](/factor_zoo/forest_through_the_trees.md)
 - [Back to Homepage](README.md)

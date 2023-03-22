@@ -153,5 +153,8 @@ mark {
   border-color: #ffbdaa !important;
 }
 
-
+hr {
+  height:  3px;
+  background-color: rgb(0, 0, 0);
+}
 

@@ -522,7 +522,7 @@ $$
 b \sim \mathcal{N}\Big(0,{\kappa^2 \over \tau} I_K \Big)
 $$
 
-为什么说这个先验分布十分巧妙，因为这一分布使得我们的待估参数 $b$ 仍然满足同方差，因此，仍然具有贝叶斯和正则化两种解释：
+为什么说这个先验分布十分巧妙，因为这一分布使得我们的**待估参数 $b$ 仍然满足同方差**，因此，仍然具有贝叶斯和正则化两种解释：
 $$
 \underset{b}{\mathop{\arg\min}} ~ \left(\overline{\mu} - \Sigma b \right)^{\mathsf{T}} \left(\overline{\mu} - \Sigma b \right) + \gamma b^{\mathsf{T}} \Sigma b
 $$
@@ -531,9 +531,12 @@ $$
 \hat{b}_{P} = (\Sigma + \gamma I)^{-1} \overline{\mu}_{P}
 $$
 
+乍一看上式与上文介绍的岭回归不同，实际上该式可以写成另一种表达：
+$$
+\underset{b}{\mathop{\arg\min}} ~ \left(\Sigma^{-\frac{1}{2}}\overline{\mu} -  \Sigma^{\frac{1}{2}} b \right)^{\mathsf{T}} \left(\Sigma^{-\frac{1}{2}}\overline{\mu} -  \Sigma^{\frac{1}{2}} b \right) + \gamma b^{\mathsf{T}} b
+$$
 
-
-统计极限
+如此看来，实际上还是岭回归的形式。只是将原先的因变量 $\overline{\mu}$ 和自变量 $\Sigma$ 同时做了线性变换，令 $\Sigma^{-\frac{1}{2}} \overline{\mu}$ 岭回归到 $\Sigma^{\frac{1}{2}}$ 上。目的就是让回归系数 $b$ 先验满足同方差的假定。
 
 
 

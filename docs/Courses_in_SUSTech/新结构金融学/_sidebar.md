@@ -3,4 +3,5 @@
 - [3_影子银行](/Courses_in_SUSTech/新结构金融学/3_shadow_banking.md)
 - [4_地方债](/Courses_in_SUSTech/新结构金融学/4_local_gov_debt.md)
 - [5_股权分置改革](/Courses_in_SUSTech/新结构金融学/5_split_share_reform.md)
+- [6_微观货币政策](/Courses_in_SUSTech/新结构金融学/6_monetary_policy.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)
