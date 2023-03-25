@@ -103,9 +103,19 @@ code {
   font-family: 'LM Mono 10', 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 
+.markdown-section strong {
+  color: #067283;
+  font-weight: 1000;
+}
+
 strong {
   font-weight: bolder;
 }
+
+.markdown-section em {
+  color: #232c2c;
+}
+
 
 .katex {
   font-size: 25px !important;
