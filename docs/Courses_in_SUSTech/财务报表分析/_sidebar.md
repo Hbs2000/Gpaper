@@ -4,4 +4,5 @@
 - [Lecture 4](/Courses_in_SUSTech/财务报表分析/4_Cash_Accounting_Accrual_Accounting_and_Discounted_Cash_Flow_Valuation.md)
 - [Lecture 5](/Courses_in_SUSTech/财务报表分析/5_Accrual_Accounting_and_Valuation_Pricing_Book_Values.md)
 - [Lecture 6](/Courses_in_SUSTech/财务报表分析/6_Pricing_Earnings.md)
+- [Lecture 7](/Courses_in_SUSTech/财务报表分析/8_Viewing_the_business.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)
