@@ -1,2 +1,3 @@
 - [红楼梦](/books/red_tower_dream.md)
+- [Most Harmless Econometrics: An Empiricist's Companion](/books/mostly_harmless_eco.md)
 - [Back to Homepage](README.md)

@@ -1,4 +1,4 @@
-/* LM Roman 10 */
+/* LM Roman 10 
 @font-face {
   font-family: 'LM Roman 10';
   font-style: normal;
@@ -22,11 +22,71 @@
 
 @font-face {
   font-family: 'LM Roman 10';
-  font-size: larger;
   font-style: italic;
   font-weight: bold;
   src: url('./latex_fonts/lmroman10-bolditalic.otf');
 }
+*/
+@font-face {
+  font-family: 'Georgia,serif';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./latex_fonts/georgia.ttf');
+}
+
+@font-face {
+  font-family: 'Georgia,serif';
+  font-style: italic;
+  font-weight: normal;
+  src: url('./latex_fonts/georgiai.ttf');
+}
+
+@font-face {
+  font-family: 'Georgia,serif';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./latex_fonts/georgiab.ttf');
+}
+
+@font-face {
+  font-family: 'Georgia,serif';
+  font-style: italic;
+  font-weight: bold;
+  src: url('./latex_fonts/georgiaz.ttf');
+}
+
+/*
+@font-face {
+  font-family: 'Crimson Pro,serif';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./latex_fonts/CrimsonPro-Regular.otf');
+}
+
+@font-face {
+  font-family: 'Crimson Pro,serif';
+  font-style: italic;
+  font-weight: normal;
+  src: url('./latex_fonts/CrimsonPro-italic.otf');
+}
+
+@font-face {
+  font-family: 'Crimson Pro,serif';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./latex_fonts/CrimsonPro-bold.otf');
+}
+
+@font-face {
+  font-family: 'Crimson Pro,serif';
+  font-size: larger;
+  font-style: italic;
+  font-weight: bold;
+  src: url('./latex_fonts/CrimsonPro-bolditalic.otf');
+}
+*/
+
+
 
 /* LM Mono 10 */
 @font-face {
@@ -76,10 +136,12 @@ h1 {
 h2 {
   font-size: 32px !important;
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+  background-color: #5ac6df4d;
 }
 h3 {
   font-size: 27px !important;
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+  background-color: #90d3e33b;
 }
 h4 {
   font-size: 25px !important;
@@ -168,4 +230,6 @@ hr {
   height:  3px;
   background-color: rgb(0, 0, 0);
 }
+
+
 
