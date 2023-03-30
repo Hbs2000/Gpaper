@@ -1,3 +1,4 @@
 - [What is Research?](/Courses_in_SUSTech/金融学术/what_is_research.md)
 - [Chapter 2](/Courses_in_SUSTech/金融学术/chapter2.md)
+- [[JFE2020] All the president’s friends: Political access and firm value](/Courses_in_SUSTech/金融学术/presidents_friends.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)

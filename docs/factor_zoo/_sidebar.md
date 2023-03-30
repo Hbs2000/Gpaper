@@ -1,4 +1,5 @@
 - [[Book] Regularization, Bayes and Shrinkage](/factor_zoo/Shrinkage.md)
+- [[JF2023] Principal Portfolios](/factor_zoo/principal_portfolios.md)
 - [[JE2022] Factor Investing, A hierarchical approach](/factor_zoo/A_Bayesian_hierarchical_approach.md)
 - [[JE2021] Autoencoder asset pricing models](/factor_zoo/Autoencoder_asset_pricing.md)
 - [[WP] Forest through the trees: Building Cross-Sections of Stock Returns](/factor_zoo/forest_through_the_trees.md)
