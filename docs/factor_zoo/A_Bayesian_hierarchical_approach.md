@@ -260,7 +260,7 @@ $R$ 是 $NT \times 1$ 维公司收益率向量, $F$ 是 $NT × NK$ 块对角矩�
 
 即使在协方差的估计中，要么是假定低维因子结构如FF3，HXZ q-factor等，或者是对协方差矩阵做收缩（shrinkage）。
 
-然而，在本文中，***二者的估计同时进行***。
+然而，在本文中， ***二者的估计同时进行***。
 
 假设**covariance matrix of the stacked residual** $E$ 如下 $Cov(E) := \Omega = \Sigma \otimes I_T$ , where $\Sigma$ is a **dense** matrix of cross-sectional covariance, and $I_T$ 是 T × T 维单位矩阵. 这个结构代表着**资产在截面上是相关的，在时序上是无关的**, which is a **standard assumption** in the empirical asset pricing literature.
 
@@ -287,7 +287,7 @@ $$
 $$
 \Delta_b \sim IW(v_b,V_b) \tag{10}
 $$
-This setup is **the standard normal-inverse-Wishart conjugate prior** for $\bar{b}$ and $\Delta_b$。所有预测变量的平均预测能力（average predictability）是 $\bar{\bar{b}}$, and $\Delta_b$ 代表这种预测能力的可信度【方差】。在实际应用中，我们设定 $\bar{\bar{b}} = 0$, 代表着我们认为***所有预测变量均没有预测能力***. 这种先验设定涉及4个超参数: $\{ \bar{\bar{b}},\ \Delta_{\bar{b}},\ v_b, \ V_b  \}$
+This setup is **the standard normal-inverse-Wishart conjugate prior** for $\bar{b}$ and $\Delta_b$。所有预测变量的平均预测能力（average predictability）是 $\bar{\bar{b}}$, and $\Delta_b$ 代表这种预测能力的可信度【方差】。在实际应用中，我们设定 $\bar{\bar{b}} = 0$, 代表着我们认为 ***所有预测变量均没有预测能力***. 这种先验设定涉及4个超参数: $\{ \bar{\bar{b}},\ \Delta_{\bar{b}},\ v_b, \ V_b  \}$
 
 > [!TIP|label:Wishart distribution]
 > 在算multivariate normal distribution 的posterior distribution的时候，inverse Wishart是协方差矩阵的conjugate prior
