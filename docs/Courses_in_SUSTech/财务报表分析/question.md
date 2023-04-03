@@ -18,7 +18,7 @@
 6. Free cash flow drops out in this calculation: Free cash flow (C - I) does not add value to shareholders.  Free cash flow is a dividend from the operating activities to the financing activities.
 
 
-
+7. dirty surplus 与 hidden dirty surplus不同？
 
 
 

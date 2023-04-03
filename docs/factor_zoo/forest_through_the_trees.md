@@ -120,9 +120,9 @@ $C_{t-1,i}$ 是 $N \times K$ 维矩阵，股票数量是 $N$，特征数量是 $
 
 有解析解的（reduced-form）资产定价模型通过许多（甚至是无限）**基础函数**（basis function）来估计这一关系：$f(C_{t-1,i}) \approx \sum_{j=1}^J f_j(C_{t-1,i})w_j$
 
-$$
-M_t = 1 - \sum_{j=1}^J w_j R_{t,j}^{\text{managed}} \quad  R_{t,j}^{\text{managed}} = \sum_{i=1}^N f_j (C_{t-1,i})R_{t,i} \tag{1}
-$$
+$$\begin{equation}
+M_t = 1 - \sum_{j=1}^J w_j R_{t,j}^{\text{managed}} \quad  R_{t,j}^{\text{managed}} = \sum_{i=1}^N f_j (C_{t-1,i})R_{t,i} 
+\end{equation}$$
 
 通过这种方式，可以将conditional model表达为unconditional model，并且维度从individual stock level降至portfolio level。
 
@@ -156,7 +156,7 @@ AP tree作为传统排序方法的延申，能够很好地处理上述问题。
 ![](image/20230326PP1.png)
 </div>
 
-如果特征之间是独立的，那么排序顺序并不影响结果，但实际上，从左图可以看出特征之间并不独立，面板十分不平衡，这种情况下进行双重排序，结果是失真的。并且这种不独立带来的影响是不可忽视的，单独来看value effect对于smallest stock来说尤其强烈，the impact of accrual对于large stock来说影响是一致的，但是联合来看却呈现出奇妙的倒U形【右图】。
+如果特征之间是独立的，那么排序顺序并不影响结果，但实际上，从左图可以看出特征之间并不独立，面板十分不平衡，这种情况下进行双重排序，结果是失真的。并且这种不独立带来的影响是不可忽视的，单独来看value effect对于smallest stock来说尤其强烈，the impact of accrual对于large stock来说影响是一致的，但是联合来看却呈现出奇妙的倒U形【右图】。因此，特征之间的交互影响需要被纳入考量。
 <div align = 'center'>
 
 ![](image/20230326PP2.png)
@@ -180,11 +180,217 @@ AP-Pruning的问题在于 **bias-variance trade-off**。节点位置越高，股
 
 由于其recursive structure，AP-Trees最终选择少量组合的稀疏性与一般意义上的特设稀疏性假设（ad hoc sparsity）不同。AP-Trees是在经济学约束下对tree进行pruning形成的，如果子节点不能提供价值，则会被merge成父母结点，这一递归结构导致的特性与人为假设的稀疏性有很大区别。
 
-## Pruning AP-Trees and Portfolio Selection
+## Pruning AP-Trees and portfolio selection
+
+在对AP-Trees进行pruning时，也就是在进行portfolio selection，但是现行对tree的 pruning criteria仅作用于局部pruning，不能考虑整体节点。而当我们想要通过Tree来构造投资组合时，必须要关注所有结点的收益和方差协方差关系，因此，对于AP-Trees构建投资组合，需要特别设定一个目标函数。
+
+根据我们的目标函数，能够找到最大夏普比率的切线组合，在金融学理论中，这也等同于张成了SDF。
 
 
+另外，由于节点太多带来的高维度问题，还需要通过Shrinkage来避免过拟合问题，构造可靠、稳健的投资组合。
+
+设定均值估计量和协方差估计量分别为 $\hat{\mu}$ $\hat{\Sigma}$，当不对SDF组合权重施加任何Shrinkage，最终的解为： $\hat{w}_{naive} = \hat{\Sigma}^{-1}\hat{\mu} $，然而这种解面临严重的过拟合问题。
+
+本文估计流程为：
+
+1. 对于每一个目标收益率 $\mu_0$，都可以找到对应的最小方差权重 $\hat{w}_{robust}$，此时，$\mu_0$ 与 lasso参数 $\lambda_1$，ridge参数 $\lambda_2$ 一样都被视为超参数。
+
+优化问题如下：
+
+$$\begin{equation}
+min \qquad {1\over 2} w^T \hat{\Sigma} w + \lambda_1 ||w||^1+{1\over 2} \lambda_2 ||w||_2^2
+\end{equation}
+$$
+
+2. 利用验证集数据选择超参数 $\mu_0$，$\lambda_1$，$\lambda_2$
+3. 利用测试集数据测试结果
 
 
+### Proposition 1 Target Return and Shrinkage to the Mean
+
+当不对SDF组合权重施加任何Shrinkage，最终的解为： $\hat{w}_{naive} = \hat{\Sigma}^{-1}\hat{\mu} $。
+
+当仅考虑ridge正则项时，即 $\lambda_1 = 0$：
+$$
+\underset{w}{min} \ w^T \hat{\Sigma}+\lambda_2 ||w||_2^2 \qquad s.t. w^T \hat{\mu} = \mu_0 \ \text{and} \ w^T \bf{1} = 1
+$$
+
+最终解为
+$$
+\hat{w}_{robust} = \alpha_{\mu_0} \hat{w}_{tan,\lambda_2} + (1-\alpha_{\mu_0}) \hat{w}_{var,\lambda_2}
+$$
+
+其中：
+$$\begin{aligned}
+\hat{w}_{tan,\lambda_2} &= c_{tan} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \hat{\mu}, \qquad \hat{w}_{var,\lambda_2} = c_{var} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \bm{1} \\
+\alpha_{\mu_0} &= {\mu_0-\hat{\mu}^T \hat{w}_{var,\lambda_2} \over \hat{\mu}^T \hat{w}_{tan,\lambda_2}-\hat{\mu}^T \hat{w}_{var,\lambda_2} }, \qquad 
+c_{tan} = \left( \bm{1} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \hat{\mu} \right) ^{-1}\\
+c_{var} &= \left( \bm{1} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \bm{1} \right) ^{-1}
+\end{aligned}$$
+
+此时，如果目标收益率 $\mu_0$ 根据最大化训练集夏普比率设置，最终解为 $\alpha_{\mu_0}=1$，因此要根据验证集来选取 $\mu_0$。
+
+进一步放松假设 $w^T \bf{1} = 1$ (**which can be always enforced ex post**)，权重解为：
+
+> [!WARNING|label:Important tricks]
+> 放松权重和为1的假设不代表在**目标函数**中放弃，而是在后续的**公式变形中**放松该假设，因为不管后续算出的权重为多少，在事后均可以调整使其权重和为1。
+
+$$\begin{aligned}
+\hat{w}_{robust} = \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \hat{\mu} &+ \underbrace{\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big) \hat{\mu} - \mu_0 \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1} \over \mu_0 \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}-\hat{\mu}^T  \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}}_{\lambda_0} \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1} \\
+&= \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1}(\hat{\mu}+\lambda_0 \bm{1})
+\end{aligned}$$
+
+需要注意的是，此时 $\lambda_0$ 是 $\mu_0$ 的递减函数，当 $\mu_0$ 大时，$\lambda_0$ 小，而当 $\mu_0$ 小时，相对来说 $\lambda_0$ 会大。这也代表着一种收缩，但不同于传统的Shinkage向0收缩，而是**向截面均值收缩**。
+
+背后的经济学直觉<sup>**T**</sup>是：因为期望收益率的估计包含许多估计误差，因此很有可能过高或过低的估计值都是由于高估或低估引起的，而非真实值。
+
+> [!TIP|label:T]
+> The same reasoning famously underlines the use of adjusted stock betas by Bloomberg that shrink their sample estimates toward 1, which is the average in the overall cross-section.
+
+正是因为包括了对期望收益率均值的收缩，该方法也被称为对Kozak, Nagel, and Santosh (2020) 的拓展。
+此时二者有着一一对应的关系：
+$$
+\lambda_0 \in [0,+\infty)  \Rightarrow \mu_0 \in \left[ {\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big) \mu \over \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}},{\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1} \over \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}}  \right)
+$$
+
+> [!WARNING|label:The inverse]
+
+
+根据这一最终形式，易得此时的求样本外【$\lambda_0$】的最优组合前沿，等同于样本内最优化+样本截面均值shrinkage，并且有 one-to-one mapping。
+$$
+\hat{w}_{robust} = \hat{\Sigma}^{-1}(\hat{\mu}+\lambda_0 \bm{1})
+$$
+
+求样本外最优组合前沿+ridge penalty 等同于样本内最优化+样本均值shrinkage+样本协方差shrinkage
+$$
+\hat{w}_{robust} = \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1}(\hat{\mu}+\lambda_0 \bm{1})
+$$
+
+### Proposition 2 Robust SDF Discovery
+
+**robust = non-overfitting = non-high dimensional = sparse = lasso**
+
+在本节构造Robust SDF时，要考虑协方差矩阵是否为对角阵的两种情况。
+
+#### Diagonal covariance matrix <!-- {docsify-ignore} -->
+
+为了引入稀疏性，Kozak et al.(2020) 求解以下优化问题：
+$$
+\hat{w} = arg \underset{w}{min} {1\over2} \left( \hat{\mu}-\hat{\Sigma}w \right)^T \hat{\Sigma}^{-1} \left( \hat{\mu}-\hat{\Sigma}w \right)+\lambda_1 ||w||+{1\over2}\lambda_2 ||w||^2_2
+$$
+
+当协方差矩阵为对角阵，记为 $\hat{D}$，此时概念上也就类似于 PCA space，有以下解：
+$$
+\hat{w} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu}-\lambda_1 \bm{1})_+, \qquad (x) = max(x,0)
+$$
+而本文给出的解为：
+$$
+\hat{w}_{robust} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu}+\gamma \bm{1}-\lambda_1 \bm{1})_+
+$$
+求解过程如下：
+$$
+L = {1\over2}w^T \hat{D} w + {1\over2}\lambda_2 ||w||_2^2 + \lambda_1 ||w||_1 - \tilde{\gamma}_1 \left( w^T \hat{\mu}-\mu_0 \right)- \tilde{\gamma}_2 \left( w^T \bm{1}-1 \right)
+$$
+
+一阶导为，【active set意为 $w$ 非零】：
+$$
+(D_i+\lambda_2 I_N)\hat{w}_{robust,i} = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+$$
+因此：
+$$
+\hat{w}_{robust,i} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2 \bm{1} - \lambda_1 \bm{1})_+
+$$
+同样地，放松权重和为1的假设，可以得到：
+
+$$
+\hat{w}_{robust,i} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu}_i + \lambda_0 \bm{1} - \tilde{\lambda}_1 \bm{1})_+
+$$
+
+其中，
+$$
+\lambda_0 = {\tilde{\gamma}_2 \over \tilde{\gamma}_1}, \qquad \tilde{\lambda}_1 = {\lambda_1\over \tilde{\gamma}_1}
+$$
+
+因此，当对均值收缩程度 $\lambda_0$ 为0时，二者等价。
+
+#### Non-diagonal covariance matrix <!-- {docsify-ignore} -->
+
+在非对角阵的情况下，并不能分离出ridge和lasso的影响，因此，lasso惩罚项并不能包括均值收缩。
+
+> *In the general case of a non-diagonal sample covariance matrix, however, the impacts of ridge and lasso penalties cannot be separated, and, hence, the lasso penalization cannot subsume the mean shrinkage.*
+
+因此，需要求解以下最优化问题：
+$$
+L = {1\over2}w^T \hat{\Sigma} w + {1\over2}\lambda_2 ||w||_2^2 + \lambda_1 ||w||_1 - \tilde{\gamma}_1 \left( w^T \hat{\mu}-\mu_0 \right)- \tilde{\gamma}_2 \left( w^T \bm{1}-1 \right)
+$$
+
+相应地，导函数变为：
+$$
+(\Sigma_i+\lambda_2 I_N)\hat{w}_{robust,i} = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+$$
+
+放松假设为：
+$$
+(\Sigma_i+\lambda_2 I_N)\hat{w}_{robust,i} = \hat{\mu}_i + \lambda_0  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+$$
+
+对应在 Kozak et al.(2020) 中的导函数为：
+$$
+(\Sigma_i+\lambda_2 I_N)\hat{w}_{i} = \hat{\mu}_i  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+$$
+
+因此，当 Kozak et al.(2020) 使用 $\hat{\mu}+\lambda_0\bm{1}$ 代替 $\hat{\mu}$ 时，二者等价。
+
+或者说，当对均值收缩程度 $\lambda_0$ 为0时，二者等价。
+
+综上，在协方差矩阵的两种情况下，本文都属于对Kozak et al.(2020)的扩展。
+
+
+### Proposition 3 General Robust Estimation Perspective
+
+每一种收缩都对应着一类不确定性。
+
+> *Each type of shrinkage has a one-to-one correspondence to a specific type of uncertainty in the
+estimation.*
+
+> [!NOTE|label:Uncertainty]
+> Unceritainty means that *the true mean and covariance matrix lie in an uncertainty set around their sample estimates*
+>
+> 因此，在不确定性下，我们给出的是一个区间估计，而非点估计。
+
+首先考虑均值和协方差的不确定性。
+$$\begin{aligned}
+S_{\Sigma} &= \left\{ \Sigma: \Sigma_{i,j} = \hat{\Sigma}_{i,j} + e_{i,j}^{\sigma}; \ ||e^{\sigma}||^2_2 \leq \mathcal{k}_{\sigma} \  \Sigma \text{ is positive definite and } \ \mathcal{k}_{\sigma} \geq 0 \right\} \\
+S_{\mu} &= \left\{ \mu: \mu_i = \hat{\mu}_i + e_{\mu}^i; |e_{\mu}^i| \leq \mathcal{k}_{\mu} \ \text{ and } \mathcal{k}_{\mu} \geq 0  \right\}
+\end{aligned}
+$$
+
+参数 $\mathcal{k}_{\mu}, \mathcal{k}_{\sigma}$ 分别捕捉了均值和协方差估计量中的不确定性，
+
+稳健的投资组合最优化等价于在不确定性最大的情况下求解：
+
+$$
+\underset{w}{min} \ \underset{\Sigma \in S_{\Sigma},\mu \in S_{\mu}}{max} \ {1\over2}w^T \Sigma w - \tilde{\gamma}_1 \left( w^T \mu - \mu_0 \right)-\tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
+$$
+
+将 $S_{\mu}$ 代入：
+$$\begin{aligned}
+& \underset{w}{min} \ \underset{\Sigma \in S_{\Sigma}}{max} \ {1\over2}w^T \Sigma w -\tilde{\gamma}_1 \sum_{i=1}^N \left( w_i [ \hat{\mu}_i - \mathcal{k}_{\mu} sign(w_i) ] - \mu_0 \right) - \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right) \\
+= &\underset{w}{min} \ \underset{\Sigma \in S_{\Sigma}}{max} \ {1\over2}w^T \Sigma w -\tilde{\gamma}_1 \left( w^T \mu - \mu_0 \right)+\tilde{\gamma}_1 \sum_{i=1}^N \mathcal{k}_{\mu} |w_i|- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
+\end{aligned} 
+$$
+
+再将 $S_{\Sigma}$ 代入：
+$$
+\underset{w}{min} \ {1\over2} tr \left( w^T \Sigma w \right)+ \mathcal{k}_{\sigma}w^T w -\tilde{\gamma}_1 \left( w^T \mu - \mu_0 \right)+\tilde{\gamma}_1 \sum_{i=1}^N \mathcal{k}_{\mu} |w_i|- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
+$$
+
+最终，令 $ \lambda_1 = \tilde{\gamma}_1 \mathcal{k}_{\mu} \text{ and } \lambda_2 = \mathcal{k}_{\sigma} $，即可得到我们熟悉的式子：
+$$
+\underset{w}{min} \ {1\over2} tr \left( w^T \Sigma w \right)+ \lambda_2 ||w||^2_2 +\lambda_1 ||w||_1 -\tilde{\gamma}_1 \left( w^T \mu - \mu_0 \right)- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
+$$
+
+因此，**lasso shrinkage $\lambda_1$ 代表了均值的不确定性，而ridge shrinkage $\lambda_2$ 代表了方差的不确定性**。
 
 
 

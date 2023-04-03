@@ -129,74 +129,79 @@
   font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 
-body {
-  font-size: 100%;
-}
+
 
 h1 {
-  font-size: 2.125em !important;
+  font-size: 34px !important;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 h2 {
-  font-size: 2em !important;
+  font-size: 32px !important;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
   background-color: #5ac6df4d;
 }
 h3 {
-  font-size: 1.6875em !important;
+  font-size: 27px !important;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
   background-color: #90d3e33b;
 }
 h4 {
-  font-size: 1.5625em !important;
+  font-size: 25px !important;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
+
 h5,
 h6,
 pre,
 
+a {
+  font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+}
+
+code {
+  font-family: 'Georgia,serif', 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+}
+
 p {
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
-  font-size: 1.4em !important;
+  font-size: 23px !important;
   line-height: 140% !important;
 }
 
 li {
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+  font-size: 23px !important;
   line-height: 140% !important;
 }
 
 .markdown-section ol {
-  font-size: 1.4em !important;
+  font-size: 23px !important;
 }
 
 .markdown-section ul {
-  font-size: 1.4em !important;
+  font-size: 23px !important;
   list-style-type: square;
 }
 
 .markdown-section ul ul {
-  font-size: 1em !important;
+  font-size: 23px !important;
 }
 
 .markdown-section ol ol {
-  font-size: 1em !important;
+  font-size: 23px !important;
 }
 
+
 .sidebar ul li a {
-  font-size: 1em !important;
+  font-size: 20px !important;
 }
 
 .sidebar li {
   margin: 4px 0;
-  font-size: 1.2em !important;
+  font-size: 22px !important;
 }
 
 
-
-code {
-  font-family: 'LM Mono 10', 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
-}
 
 .markdown-section strong {
   color: #067283 !important ; 
@@ -216,7 +221,7 @@ strong {
 }
 
 .katex {
-  font-size: 1.2em !important;
+  font-size: 26px !important;
 }
 
 
@@ -230,8 +235,8 @@ section.cover h1 {
   display: table;
   margin-left: auto;
   margin-right: auto;
-  font-family: 'LM Roman 10', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
-  font-size: 1.4375em !important;
+  font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
+  font-size: 23px !important;
 }
 
 mark {
