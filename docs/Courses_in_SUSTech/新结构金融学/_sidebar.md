@@ -5,4 +5,5 @@
 - [5_股权分置改革](/Courses_in_SUSTech/新结构金融学/5_split_share_reform.md)
 - [6_货币政策【微观】](/Courses_in_SUSTech/新结构金融学/6_monetary_policy.md)
 - [7_公司债【宏观】](/Courses_in_SUSTech/新结构金融学/7_corporate_bond.md)
+- [8_房地产【宏观】](/Courses_in_SUSTech/新结构金融学/8_read_estate.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)

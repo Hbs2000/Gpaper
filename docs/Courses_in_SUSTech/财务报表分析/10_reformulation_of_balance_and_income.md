@@ -104,9 +104,11 @@ $$
 
 重要的仍然是将Financing tax 和 operating tax分割开。对于Financing tax ，其实就是税盾（tax shield）。
 
-$$
-\text{Effective tax rate for operations} = {\text{Tax on operating income}\over \text{Operating income before tax, equity income} }
-$$
+$$\begin{aligned}
+\text{Effective tax rate for operations} &= {\text{Tax on operating income}\over \text{Sum operating income} } \\
+\text{Sum operating income} =& \text{ Operating income before tax, equity income} \\
+&+ \text{extraordinary + dirty-surplus items} 
+\end{aligned}$$
 
 ### Issues in Reformulating Income Statements
 
