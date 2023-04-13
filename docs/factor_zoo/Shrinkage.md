@@ -361,7 +361,7 @@ X = Q_K \Lambda_K^{1\over 2}
 $$
 其中 $Q_K$ 是 $N\times K$ 维矩阵，$\Lambda_K$ 是以 $\lambda_j$ 为对角线元素的单位阵。这里我们仍然假设预测变量已经被正交化处理，但是允许它们在截面上有不同的标准差。在这个设定下， $Q_K$ 是正交阵，即 $Q_K'Q_K = I_K$，但是 $X'X = \Lambda_K$，因此 $\Lambda_K$ 的对角线元素决定了相应协变量在截面上的方差。与 $X'X = I_K$ 的情况不同，我们现在考虑了输入变量存在异方差的情况。
 
-此时，OLS估计量以及收益率预测值分别为 $\hat{g}_{OLS} = \Lambda_K^{1\over 2}Q_K'\overline{r} $以及 $\hat{\mu}_{OLS} = X \hat{g}_{OLS}$。而通过岭回归得到的收益率预测值为
+此时，OLS估计量以及收益率预测值分别为 $\hat{g}_{OLS} = \Lambda_K^{-1\over 2}Q_K'\overline{r} $以及 $\hat{\mu}_{OLS} = X \hat{g}_{OLS}$。而通过岭回归得到的收益率预测值为
 $$\begin{aligned}
 \mu &= X(\Lambda_K+\gamma I_K)^{-1} \Lambda_K^{1\over 2}Q_K'\overline{r} \\
 &= X(I_K+\gamma \Lambda_K^{-1})^{-1}\hat{g}_{OLS}

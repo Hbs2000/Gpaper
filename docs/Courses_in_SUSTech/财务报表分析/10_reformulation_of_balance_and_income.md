@@ -30,6 +30,11 @@ Operating obligation 一般被认为属于financial debt，但实际上这种"de
 
 如果是由交易产生的trade notes，分为两种情况。当短期票据是通过赊销赊购等来**吸引顾客**，此时票面利率很低甚至没有利率，此时的短期票据属于营运资产（operating asset），相应地，其产生的利息收入也属于营运收入（operating income）。而当其是用来获得利息收入时，票面利率一般等于市场利率甚至更高，此时属于金融资产（financial assets）。
 
+> [!NOTE]
+> 这里其实本质的区别在于票据能不能产生 Residual Earning，这也是整本书的核心。根据这一点来划分就比较清晰了。
+
+
+
 #### Debt investments <!-- {docsify-ignore} -->
 
 对于非金融公司，投资债券或其他有息证券属于金融资产。
@@ -95,7 +100,7 @@ $$
 
 ### Tax Allocation
 
-不只是income statement里的收入需要交税，有些在equity statement中的线下项目<sup>T</sup>收入也要交税。
+不只是income statement里的收入需要交税，有些在equity statement中的线下项目<sup>**T**</sup>收入也要交税。
 
 > [!TIP|label:Items Below the Line]
 > 以损益表中营业利润为界限，将营业利润之上的项目称为线上项目，大多被认为是经常性的；营业利润以下的项目为线下项目，即非核心收益，大多被认为是偶然性的。
@@ -109,6 +114,10 @@ $$\begin{aligned}
 \text{Sum operating income} =& \text{ Operating income before tax, equity income} \\
 &+ \text{extraordinary + dirty-surplus items} 
 \end{aligned}$$
+
+Tax allocatoin 分为 Top-down 和 Bottom-up 两种方法。
+
+
 
 ### Issues in Reformulating Income Statements
 
@@ -128,5 +137,24 @@ $$\begin{aligned}
 #### Segments of the firm <!-- {docsify-ignore} -->
 
 可以尝试为公司的各个部门制作报表，从而能够反映更多的信息。
+
+### Strategic Plan
+
+<div align = 'center'>
+
+![](../image/20230411FS1.jpg)
+</div>
+
+此时，Dell 的 NOA 是负数。它的 Residual Operating Income 有两个来源：OI 和 NOA：
+
+<div align = 'center'>
+
+![](../image/20230411FS2.png)
+</div>
+
+
+
+
+
 
 

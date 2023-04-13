@@ -135,12 +135,12 @@ M_t = 1 - \sum_{j=1}^J w_j R_{t,j}^{\text{managed}} \quad  R_{t,j}^{\text{manage
 
 但是，如果找到的managed portfolio并不能张成SDF，那么即使定价了这些managed portfolio，也不能说明找到了真正的SDF。甚至在某些情况下，能够解释某些managed portfolio的模型，并不比不能解释这些managed portfolio距离真实的SDF更近。
 
-根据经济学理论，最小化真实SDF和candidate SDF之间的距离，等价于最大化managed portfolio的夏普比率，这给了我们判断的依据。但需要注意的是，最大化的夏普比率指的是样本外，因为样本内很大程度上会受到过拟合的影响。
+根据经济学理论，**最小化真实SDF和candidate SDF之间的距离，等价于最大化managed portfolio的夏普比率**，这给了我们判断的依据。但需要注意的是，最大化的夏普比率指的是**样本外**，因为样本内很大程度上会受到过拟合的影响。
 
 并且模型还要考虑到特征之间的非线性和交互影响，因此trees method是一个很好的选择，通过tree，还能很方便的施加各种restriction【后文会讲】。
 
-> [!NOTE|label:economic continuity]
-> 理论上来说，可能有multiple rotations of managed portfolio张成同样的SDF。但是最优的基础函数应该能够保证模型的**经济一致性（economic continuity）**。PCA文献往往在最后会解释给出的主成分因子对应着哪些类型的因子，一个主成分因子内可能有很多特征的contribution，决定其属于哪一类是看哪一类特征contribution更多；而AP trees非常清晰地列出了组合是根据哪些特征划分的。因此，相比于PCA方法，AP trees的可解释性大大提高了，作者称之为**economic continuity**。
+> [!NOTE|label:Economic continuity]
+> 理论上来说，可能有multiple rotations of managed portfolio张成同样的SDF。但是最优的基础函数应该能够保证模型的**经济一致性（economic continuity）**。PCA文献往往在最后会解释给出的主成分因子对应着哪些类型的因子，一个主成分因子内可能有很多特征的contribution，决定其属于哪一类是看哪一类特征contribution更多；而AP trees非常清晰地列出了组合是根据哪些特征划分的【这实际上也是树方法的特性】。因此，相比于PCA方法，AP trees的可解释性大大提高了，作者称之为**economic continuity**。
 
 In summary，最终能够张成SDF的最优managed portfolio应该符合以下几个性质
 
@@ -176,6 +176,8 @@ AP tree作为传统排序方法的延申，能够很好地处理上述问题。
 
 下图为单变量排序的例子。目标节点包括**子节点和中间节点**，只要没有信息增益，就会将这个节点去除。
 
+这一点也与传统的树方法不同，因为经典的树方法中只包括子节点而无中间节点。
+
 <div align = 'center'>
 
 ![](image/20230326PP3.png)
@@ -196,30 +198,43 @@ AP-Pruning的问题在于 **bias-variance trade-off**。节点位置越高，股
 
 另外，由于节点太多带来的高维度问题，还需要通过Shrinkage来避免过拟合问题，构造可靠、稳健的投资组合。
 
-设定均值估计量和协方差估计量分别为 $\hat{\mu}$ $\hat{\Sigma}$，当不对SDF组合权重施加任何Shrinkage，最终的解为： $\hat{w}_{naive} = \hat{\Sigma}^{-1}\hat{\mu} $，然而这种解面临严重的过拟合问题。
+设定均值估计量和协方差估计量分别为 $\hat{\mu}$ ,  $\hat{\Sigma}$，当不对SDF组合权重施加任何Shrinkage，最终的解为： $\hat{w}_{naive} = \hat{\Sigma}^{-1}\hat{\mu} $，然而这种解面临严重的过拟合问题。
 
 本文估计流程为：
 
-1. 对于每一个目标收益率 $\mu_0$，都可以找到对应的最小方差权重 $\hat{w}_{robust}$，此时，$\mu_0$ 与 lasso参数 $\lambda_1$，ridge参数 $\lambda_2$ 一样都被视为超参数。
+1. 对于每一个目标收益率 $\mu_0$，都可以找到对应的最小方差权重 $\hat{w}_{robust}$，此时，$\mu_0$ 与 lasso参数 $\lambda_1$，ridge参数 $\lambda_2$ 一样都被视为**超参数**。
 
 优化问题如下：
 
 $$\begin{equation}
-min \qquad {1\over 2} w^T \hat{\Sigma} w + \lambda_1 ||w||^1+{1\over 2} \lambda_2 ||w||_2^2
+min \qquad {1\over 2} w^T \hat{\Sigma} w + \lambda_1 ||w||_1+{1\over 2} \lambda_2 ||w||_2^2
 \end{equation}
 $$
 
 2. 利用验证集数据选择超参数 $\mu_0$，$\lambda_1$，$\lambda_2$
 3. 利用测试集数据测试结果
 
+<mark> **这种两步法的估计流程有三种不同的统计解释。** </mark>
 
 ### Proposition 1 Target Return and Shrinkage to the Mean
 
+- 求解 【样本外目标函数】等价于 【样本内解析解】
+- 求解 【**样本外有效前沿**】 等价于 【**样本内数据最优化 + 样本均值收缩**】
+$$
+\hat{w}_{robust} = \hat{\Sigma}^{-1}(\hat{\mu}+\lambda_0 \bm{1})
+$$
+- 求解 【**样本外有效前沿 + Ridge**】 等价于 【**样本内数据最优化 + 样本均值收缩 + 协方差矩阵收缩**】
+$$
+\hat{w}_{robust} = \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1}(\hat{\mu}+\lambda_0 \bm{1})
+$$
+
+<hr>
+
 当不对SDF组合权重施加任何Shrinkage，最终的解为： $\hat{w}_{naive} = \hat{\Sigma}^{-1}\hat{\mu} $。
 
-当仅考虑ridge正则项时，即 $\lambda_1 = 0$：
+当仅考虑ridge正则项【为方便得到解析解，先不考虑Lasso】时，即 $\lambda_1 = 0$：
 $$
-\underset{w}{min} \ w^T \hat{\Sigma}+\lambda_2 ||w||_2^2 \qquad s.t. w^T \hat{\mu} = \mu_0 \ \text{and} \ w^T \bf{1} = 1
+\underset{w}{min} \ w^T \hat{\Sigma}w+\lambda_2 ||w||_2^2 \qquad s.t. \ w^T \hat{\mu} = \mu_0 \ \text{and} \ w^T \bf{1} = 1
 $$
 
 最终解为
@@ -229,13 +244,13 @@ $$
 
 其中：
 $$\begin{aligned}
-\hat{w}_{tan,\lambda_2} &= c_{tan} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \hat{\mu}, \qquad \hat{w}_{var,\lambda_2} = c_{var} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \bm{1} \\
+\hat{w}_{tan,\lambda_2} &= c_{tan} \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \hat{\mu}, \qquad \hat{w}_{var,\lambda_2} = c_{var} \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1} \\
 \alpha_{\mu_0} &= {\mu_0-\hat{\mu}^T \hat{w}_{var,\lambda_2} \over \hat{\mu}^T \hat{w}_{tan,\lambda_2}-\hat{\mu}^T \hat{w}_{var,\lambda_2} }, \qquad 
-c_{tan} = \left( \bm{1} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \hat{\mu} \right) ^{-1}\\
-c_{var} &= \left( \bm{1} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \bm{1} \right) ^{-1}
+c_{tan} = \left( \bm{1} \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \hat{\mu} \right) ^{-1}\\
+c_{var} &= \left( \bm{1} \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1} \right) ^{-1}
 \end{aligned}$$
 
-此时，如果目标收益率 $\mu_0$ 根据最大化训练集夏普比率设置，最终解为 $\alpha_{\mu_0}=1$，因此要根据验证集来选取 $\mu_0$。
+此时，如果目标收益率 $\mu_0$ 根据最大化训练集【**样本内**】夏普比率设置，最终解一定为 $\alpha_{\mu_0}=1$，因此要根据验证集【**样本外**】来选取 $\mu_0$。
 
 进一步放松假设 $w^T \bf{1} = 1$ (**which can be always enforced ex post**)，权重解为：
 
@@ -243,9 +258,11 @@ c_{var} &= \left( \bm{1} \Big( \hat{\Sigma+\lambda_2 I_N} \Big)^{-1} \bm{1} \rig
 > 放松权重和为1的假设不代表在**目标函数**中放弃，而是在后续的**公式变形中**放松该假设，因为不管后续算出的权重为多少，在事后均可以调整使其权重和为1。
 
 $$\begin{aligned}
-\hat{w}_{robust} = \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \hat{\mu} &+ \underbrace{\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big) \hat{\mu} - \mu_0 \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1} \over \mu_0 \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}-\hat{\mu}^T  \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}}_{\lambda_0} \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1} \\
+\hat{w}_{robust} = \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \hat{\mu} &+ \underbrace{\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \hat{\mu} - \mu_0 \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1} \over \mu_0 \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1}-\hat{\mu}^T  \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1}}_{\lambda_0} \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1} \\
 &= \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1}(\hat{\mu}+\lambda_0 \bm{1})
 \end{aligned}$$
+
+当不存在惩罚项时，$\lambda_2 = 0$.
 
 需要注意的是，此时 $\lambda_0$ 是 $\mu_0$ 的递减函数，当 $\mu_0$ 大时，$\lambda_0$ 小，而当 $\mu_0$ 小时，相对来说 $\lambda_0$ 会大。这也代表着一种收缩，但不同于传统的Shinkage向0收缩，而是**向截面均值收缩**。
 
@@ -255,7 +272,7 @@ $$\begin{aligned}
 > The same reasoning famously underlines the use of adjusted stock betas by Bloomberg that shrink their sample estimates toward 1, which is the average in the overall cross-section.
 
 正是因为包括了对期望收益率均值的收缩，该方法也被称为对Kozak, Nagel, and Santosh (2020) 的拓展。
-此时二者有着一一对应的关系：
+此时二者有着**一一对应**的关系：
 $$
 \lambda_0 \in [0,+\infty)  \Rightarrow \mu_0 \in \left[ {\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big) \mu \over \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}},{\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1} \over \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}}  \right)
 $$
@@ -263,19 +280,25 @@ $$
 > [!WARNING|label:The inverse]
 
 
-根据这一最终形式，易得此时的求样本外【$\lambda_0$】的最优组合前沿，等同于样本内最优化+样本截面均值shrinkage，并且有 one-to-one mapping。
-$$
-\hat{w}_{robust} = \hat{\Sigma}^{-1}(\hat{\mu}+\lambda_0 \bm{1})
-$$
-
-求样本外最优组合前沿+ridge penalty 等同于样本内最优化+样本均值shrinkage+样本协方差shrinkage
-$$
-\hat{w}_{robust} = \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1}(\hat{\mu}+\lambda_0 \bm{1})
-$$
-
 ### Proposition 2 Robust SDF Discovery
 
 **robust = non-overfitting = non-high dimensional = sparse = lasso**
+
+本文的 Robust SDF 泛化了 Kozak, Nagel, and Santosh (2020) 的估计，并且当**不实施均值收缩**【$\lambda_0 = 0$】，二者**等价**。
+
+当**协方差矩阵为对角阵**时，其解为：
+
+$$
+\hat{w}_{robust} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu} - \lambda_1 \bm{1})_+
+$$
+
+在**非对角**情况下：
+$$
+(\Sigma+\lambda_2 I_N)\hat{w}_{robust,i} = \hat{\mu}_i + \lambda_0  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+$$
+
+
+<hr>
 
 在本节构造Robust SDF时，要考虑协方差矩阵是否为对角阵的两种情况。
 
@@ -283,7 +306,7 @@ $$
 
 为了引入稀疏性，Kozak et al.(2020) 求解以下优化问题：
 $$
-\hat{w} = arg \underset{w}{min} {1\over2} \left( \hat{\mu}-\hat{\Sigma}w \right)^T \hat{\Sigma}^{-1} \left( \hat{\mu}-\hat{\Sigma}w \right)+\lambda_1 ||w||+{1\over2}\lambda_2 ||w||^2_2
+\hat{w} = arg \underset{w}{min} \ \ {1\over2} \left( \hat{\mu}-\hat{\Sigma}w \right)^T \hat{\Sigma}^{-1} \left( \hat{\mu}-\hat{\Sigma}w \right)+\lambda_1 ||w||+{1\over2}\lambda_2 ||w||^2_2
 $$
 
 当协方差矩阵为对角阵，记为 $\hat{D}$，此时概念上也就类似于 PCA space，有以下解：
@@ -301,13 +324,13 @@ $$
 
 一阶导为，【active set意为 $w$ 非零】：
 $$
-(D_i+\lambda_2 I_N)\hat{w}_{robust,i} = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+(D+\lambda_2 I_N)\hat{w}_{robust,i} = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 因此：
 $$
 \hat{w}_{robust,i} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2 \bm{1} - \lambda_1 \bm{1})_+
 $$
-同样地，放松权重和为1的假设，可以得到：
+同样地，放松权重假设，可以得到：
 
 $$
 \hat{w}_{robust,i} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu}_i + \lambda_0 \bm{1} - \tilde{\lambda}_1 \bm{1})_+
@@ -322,7 +345,7 @@ $$
 
 #### Non-diagonal covariance matrix <!-- {docsify-ignore} -->
 
-在非对角阵的情况下，并不能分离出ridge和lasso的影响，因此，lasso惩罚项并不能包括均值收缩。
+在非对角阵的情况下，并不能分离出ridge和lasso的影响，因此，lasso惩罚项并不能包括均值收缩。【？】
 
 > *In the general case of a non-diagonal sample covariance matrix, however, the impacts of ridge and lasso penalties cannot be separated, and, hence, the lasso penalization cannot subsume the mean shrinkage.*
 
@@ -333,17 +356,17 @@ $$
 
 相应地，导函数变为：
 $$
-(\Sigma_i+\lambda_2 I_N)\hat{w}_{robust,i} = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+(\Sigma+\lambda_2 I_N)\hat{w}_{robust,i} = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 
-放松假设为：
+放松权重假设为：
 $$
-(\Sigma_i+\lambda_2 I_N)\hat{w}_{robust,i} = \hat{\mu}_i + \lambda_0  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+(\Sigma+\lambda_2 I_N)\hat{w}_{robust,i} = \hat{\mu}_i + \lambda_0  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 
 对应在 Kozak et al.(2020) 中的导函数为：
 $$
-(\Sigma_i+\lambda_2 I_N)\hat{w}_{i} = \hat{\mu}_i  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+(\Sigma+\lambda_2 I_N)\hat{w}_{i} = \hat{\mu}_i  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 
 因此，当 Kozak et al.(2020) 使用 $\hat{\mu}+\lambda_0\bm{1}$ 代替 $\hat{\mu}$ 时，二者等价。
@@ -355,20 +378,24 @@ $$
 
 ### Proposition 3 General Robust Estimation Perspective
 
+本文的估计也**等价于**在不确定最大的情况下【包括均值不确定性，方差不确定性和夏普比率不确定性】求解均值方差优化问题。
+
 每一种收缩都对应着一类不确定性。
 
 > *Each type of shrinkage has a one-to-one correspondence to a specific type of uncertainty in the
 estimation.*
 
 > [!NOTE|label:Uncertainty]
-> Unceritainty means that *the true mean and covariance matrix lie in an uncertainty set around their sample estimates*
+> Unceritainty means that ***the true mean and covariance matrix lie in an uncertainty set around their sample estimates***
 >
 > 因此，在不确定性下，我们给出的是一个区间估计，而非点估计。
+
+<hr>
 
 首先考虑均值和协方差的不确定性。
 $$\begin{aligned}
 S_{\Sigma} &= \left\{ \Sigma: \Sigma_{i,j} = \hat{\Sigma}_{i,j} + e_{i,j}^{\sigma}; \ ||e^{\sigma}||^2_2 \leq \mathcal{k}_{\sigma} \  \Sigma \text{ is positive definite and } \ \mathcal{k}_{\sigma} \geq 0 \right\} \\
-S_{\mu} &= \left\{ \mu: \mu_i = \hat{\mu}_i + e_{\mu}^i; |e_{\mu}^i| \leq \mathcal{k}_{\mu} \ \text{ and } \mathcal{k}_{\mu} \geq 0  \right\}
+S_{\mu} &= \left\{ \mu: \mu_i = \hat{\mu}_i + e_i^{\mu}; |e_i^{\mu}| \leq \mathcal{k}_{\mu} \ \text{ and } \mathcal{k}_{\mu} \geq 0  \right\}
 \end{aligned}
 $$
 
@@ -398,6 +425,67 @@ $$
 $$
 
 因此，**lasso shrinkage $\lambda_1$ 代表了均值的不确定性，而ridge shrinkage $\lambda_2$ 代表了方差的不确定性**。
+
+因此，在考虑了两种不确定性的情况下，能够得到关于整个均值方差前沿的稳健估计，那么第二步就是找到切点组合。
+
+<hr>
+
+均值收缩能够与切点组合夏普比率的不确定性联系起来，从最一般的情况【即不带任何收缩】考虑：
+
+
+$$
+\underset{w}{max} \  \ w^T \hat{\mu} -  { \gamma \over2}w^T \Sigma w - {\gamma}_1 \left(1- w^T \bm{1} \right)
+$$
+
+其解为： $ w^* = \alpha_{\gamma} \hat{w}_{naive}+(1-\alpha_{\gamma} )\hat{w}_{var} \ \text{with} \ \alpha_{\gamma} = {1\over \gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu} $，因此每一个目标收益率 $\mu_0$ 都对应着一个唯一的风险厌恶系数 $\gamma$。
+
+在此基础上如果再加上对于样本均值向截面平均值的收缩，那么问题变为：
+
+$$
+\underset{w}{max} \  \ w^T \left(\delta \hat{\mu} + (1-\delta)\bar{\mu}\bm{1}  \right)-  { \gamma \over2}w^T \Sigma w - {\gamma}_1 \left(1- w^T \bm{1} \right)
+$$
+
+此时，其解变为： $ w^* = \alpha_{\delta} \hat{w}_{naive}+(1-\alpha_{\delta} )\hat{w}_{var} \ \text{with} \ \alpha_{\gamma} = { \delta \over \gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu} $。
+
+$\delta$ 的取值范围为0 ~ 1，当为 1 时，代表不收缩，而为 0 时，代表完全收缩到均值，因此这一写法称之为向截面均值的收缩。也正是因为 $\delta$ 的取值范围，实际上**均值收缩代表着更高程度的风险厌恶**，【见 $\alpha_{\gamma}$】。
+
+<hr>
+
+接下来从夏普比率的不确定性来看均值收缩这一问题：
+
+$$
+S_{SR} = \left\{ \mu : (\mu-\hat{\mu})^T \Sigma^{-1}  (\mu-\hat{\mu}) \leq \mathcal{k}_{SR} ; \ \mathcal{k}_{SR} \geq 0  \right\}
+$$
+
+> [!NOTE]
+> 尽管是夏普比率的不确定性，但此时 $\Sigma$ 并没有带有不确定性，因此，不确定性的来源还是 $\mu$
+
+同样，最优化不确定性：
+
+$$
+\underset{w}{max} \ \underset{\mu \in S_{SR}}{min} \ w^T \mu -{1\over2}w^T \Sigma w-\gamma_2 \left(\mathcal{k}_{SR}- (\mu-\hat{\mu})^T \Sigma^{-1}  (\mu-\hat{\mu}) \right) -\gamma_1 \left(1- w^T \bm{1}  \right)
+$$
+
+此时解为：
+$$\begin{aligned}
+w^* &= \alpha_{\mathcal{k}_{SR}} \hat{w}_{naive}+(1-\alpha_{\mathcal{k}_{SR}} )\hat{w}_{var} \\
+\alpha_{\mathcal{k}_{SR}} &= { 1 \over {\mathcal{k}_{SR} \over \sigma_p}+\gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu}
+\end{aligned}
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
