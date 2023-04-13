@@ -68,8 +68,6 @@ $P_s, \ \tau , \ Y_s$ 的计量有很多讲究。例如在美国，$P_s$ 可以�
 - 在上海，每个家庭成员可以申请豁免一套60平房屋的税款
 - 在重庆，别墅面积中的180平，或正常房屋的100平可以不收税
 
-帮我写一篇 Demystifying the Chinese Housing Boom, Hanming Fang, Quanlin Gu, Wei Xiong, and Li-An Zhou, NBER Macroeconomics Annual, 2015 的review report，要求英文，内容包括 summary，limitation和advantage，大概600字
-
 
 #### The property-tax rate is DIFFERENT <!-- {docsify-ignore} -->
 
