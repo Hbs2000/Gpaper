@@ -22,13 +22,21 @@ Chongen Bai<sup>1</sup>, Qi Li<sup>2</sup>, and Min Ouyang<sup>1</sup>, ***Journ
 
 房产税的实施，降低了上海的房价，但却提高了重庆的房价。  
 
-房产税是一种持有成本。经过疫情，以及出让收入一再下降，要改善地方政府的财务困境，就必须要推房产税。
+房产税是一种持有成本。经过疫情，以及土地出让收入一再下降，要改善地方政府的财务困境，就**必须要推房产税**。
 
-计量方法需要时间比较长
+
+房产定价公式：
 
 $$
 P_t = \sum_{s=t}^n {(Y_s - \tau P_s) \over (1+i)^{s-t}}
 $$
+
+- $Y_s$: inflow of housing value in period
+- $P_s$: home price in period
+- $\tau$: the property-tax rate
+- $i$: interest rate
+- $n$: the life span of the property
+
 
 $P_s, \ \tau , \ Y_s$ 的计量有很多讲究。例如在美国，$P_s$ 可以选取去年的房价，也可以选取购买时的房价【加州，但并不合理】。
 
@@ -53,7 +61,7 @@ $P_s, \ \tau , \ Y_s$ 的计量有很多讲究。例如在美国，$P_s$ 可以�
 在上海，除了本地居民的第一次买房之外，其余所有的新购买房屋都要收税。在重庆，仅对高档房屋【例如别墅，无论新购买与否】以及售价超过平均价格一倍的新购买房屋征税。
 
 尽管二者都主要针对于新购买房屋征税，但是细节仍有不同：在重庆，过去购买的别墅也要征税。
-s
+
 
 #### NOT the entire values of the taxable houses are actually taxed <!-- {docsify-ignore} -->
 
@@ -110,9 +118,16 @@ Fei Li<sup>1</sup>, Min Ouyang<sup>2</sup>, ***Working Paper***, 2023
 - Mafia (Gambetta 1996) 黑社会
 - Warlords (Gillian 2015) 军阀时期
 
-企业给腐败官员的贿赂，是远远小于其收益的，所以是绝对合得来的买卖。
+根据实证，企业给腐败官员的贿赂，是远远小于其收益的，所以是绝对合得来的买卖。
 
 ### 投名状机制 <!-- {docsify-ignore} --> 
+
+在这种非正式机制下，如果违约，就会失去政治靠山以及对应的好处。
+
+而为什么官员有动力去惩罚呢？
+- 维持自己的威望，例如老大哥、靠山的形象
+- 维持这种形象可以通过非正式的渠道促进经济发展，进而为自己的职业发展铺路
+- 出于个人想要展示权力的想法，例如，不把你办了我就不用混了 
 
 <div align = 'center'>
 
@@ -134,8 +149,7 @@ Fei Li<sup>1</sup>, Min Ouyang<sup>2</sup>, ***Working Paper***, 2023
 ![](../image/20230411CF5.png)
 </div>
 
-**腐败与违约有很强烈的联系**。
-
+可以看出**反腐败与违约有很强烈的联系**，这一点在某种程度上可以印证上述机制，当官员落马，这种机制自然就不生效了。
 
 
 ### Proposition <!-- {docsify-ignore} --> 
