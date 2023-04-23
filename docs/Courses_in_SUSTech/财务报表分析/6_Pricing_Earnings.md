@@ -25,11 +25,10 @@ But:  Beware of paying for growth
 </div>
 
 $$
-V_0^E = {1\over \rho_E -1} \Big[ EPS_t + {\Delta RE_2\over \rho_E}+{\Delta RE_3\over \rho_E}{\Delta RE_4\over \rho_E}+{\Delta RE_4\over \rho_E}  \Big]
+V_0^E = {1\over \rho_E -1} \Big[ EPS_1 + {\Delta RE_2\over \rho_E}+{\Delta RE_3\over \rho_E}+{\Delta RE_4\over \rho_E}+{\Delta RE_4\over \rho_E}  \Big]
 $$
 
 
-### The concept behind P/E ratio
 
 ## Abnormal Earnings Return
 
@@ -56,6 +55,8 @@ Abnormal Earnings Growth (AEG), which is the center for P/E valuation, is **grow
 </div>
 
 在这个例子中，每年分红并不会影响对于该账户的估值，即使而这个Earning Growth Rate和Book Value增长不同。原因就在于Cum Dividend Earnings。
+
+在这个例子中并不存在 Residual Earning，只是为了引入Cum-dividend earnings的概念。
 
 ### Cum dividend earnings
 
@@ -84,11 +85,29 @@ $$
 Abnormal Earning Growth 与 Residual Earnings有着close relation，通过简单推导即可得出：
 $$\begin{aligned}
 \text{AEG}_t &= \text{RE}_t - \text{RE}_{t-1} \\
-&= [Earn_t+(\rho_E-1)d_{t-1}]-\rho_E Earn_{t-1} \\
+&= [\text{Earn}_t+(\rho_E-1)d_{t-1}]-\rho_E \text{Earn}_{t-1} \\
 &= \pmb{\text{Cum-dividend earn}_t - \text{Normal Earn}_t}
 \end{aligned}$$
 
-> [!NOTE|AEG与RE]
+> [!TIP|label:推导]
+$$
+\begin{aligned}
+\text{RE}_t &= [\text{Earn}_t-(\rho_E-1)B_{t-1}] \\
+\text{AEG}_t &= [\text{Earn}_t+(\rho_E-1)d_{t-1}]-\rho_E \text{Earn}_{t-1} \\
+&= \text{Earn}_t-\text{Earn}_{t-1}-(\rho_E-1)[\text{Earn}_{t-1}-d_{t-1}]
+\end{aligned}
+$$
+>
+> 根据Clean Surplus equation:
+$$
+\begin{aligned}
+B_{t-1} &= B_{t-2} + \text{Earn}_{t-1}-d_{t-1} \\
+\text{so} \quad \text{Earn}_{t-1}-d_{t-1}  &= B_{t-1}-B_{t-2} \\
+\text{thus} \quad \bm{AEG}_t &= \text{Earn}_t-\text{Earn}_{t-1}-(\rho_E-1)[B_{t-1}-B_{t-2}] \\
+&= [\text{Earn}_t - (\rho_E-1)B_{t-1}]-[\text{Earn}_{t-1} - (\rho_E-1)B_{t-2}] \\
+&= \bm{RE}_t-\bm{RE}_{t-1}
+\end{aligned}
+$$
 > AEG与前面RE的区别就在于将红利的计算从Anchor【book value】中移到了Extra Value【AEG】
 
 
@@ -101,7 +120,7 @@ $$\begin{aligned}
 
 
 
-### <mark> Exercise </mark>
+#### <mark> Exercise </mark> <!-- {docsify-ignore} -->
 
 
 <div align ='center'>
@@ -125,7 +144,7 @@ $$
 根据上述等价关系，value of equity也有两种等价表达：
 $$\begin{aligned}
 V_0^E &= {1\over \rho_E-1}\Big[ Earn_1+{AEG_2\over \rho_E}+{AEG_3\over \rho_E^2} +{AEG_4\over \rho_E^3}+\cdots \Big] \\
-&= {1\over \rho_E-1}\Big[ Earn_1+{RE_2\over \rho_E}+{RE_3\over \rho_E^2} +{RE_4\over \rho_E^3}+\cdots \Big]
+&= {1\over \rho_E-1}\Big[ Earn_1+{\Delta RE_2\over \rho_E}+{\Delta RE_3\over \rho_E^2} +{\Delta RE_4\over \rho_E^3}+\cdots \Big]
 \end{aligned}$$
 
 当abnormal项为0，也就得到了normal PE：
@@ -140,9 +159,10 @@ G_t = {\text{Cum dividend earnings}_t \over \text{Earnings}_{t-1}}
 $$
 
 > [!NOTE]
-> $$
-> \pmb{NOT} \quad {\text{Cum dividend earnings}_t \over \text{Cum dividend earnings}_{t-1}}
-> $$
+$$
+\pmb{NOT} \quad {\text{Cum dividend earnings}_t \over \text{Cum dividend earnings}_{t-1}}
+$$
+> 
 
 根据$ G_t $的定义，AEG还有另一种表达：
 
@@ -154,7 +174,7 @@ AEG_t &= \text{Cum dividend earnings}_t - \text{Normal earn}_t \\
 
 
 
-### <mark> Example </mark>
+#### <mark> Example </mark> <!-- {docsify-ignore} -->
 
 
 <div  align = 'center'>
@@ -183,22 +203,22 @@ AEG_t &= \text{Cum dividend earnings}_t - \text{Normal earn}_t \\
 > [!TIP|label:PE]
 > Market’s anticipation of value to be added from sales **in the future** / value added from current sales (an interpretation for P/E)
 
-### Forward P/E <!-- {docsify-ignore} -->
+#### Forward P/E <!-- {docsify-ignore} -->
 $$
 \text{Forward P/E} = \frac{\text{Price}_0}{\text{Earnings}_1}
 $$
 
-### Trailing P/E <!-- {docsify-ignore} -->
+#### Trailing P/E <!-- {docsify-ignore} -->
 $$
 \text{Trailing P/E} = \frac{\text{Price}_0+\text{Dividend}_0}{\text{Earnings}_0}
 $$
 
-### Normal P/E <!-- {docsify-ignore} -->
+#### Normal P/E <!-- {docsify-ignore} -->
 $$
 \text{Normal P/E} = \frac{1}{\text{Required Return}}
 $$
 
-### Normal Trailing P/E <!-- {docsify-ignore} -->
+#### Normal Trailing P/E <!-- {docsify-ignore} -->
 $$
 \text{Normal Trailing P/E} = \frac{1+\text{Required Return}}{\text{Required Return}}
 $$
@@ -210,10 +230,7 @@ $$
 > Dividends affects prices but not earnings.
 
 
-
-
-
-### <mark> Exercise </mark>
+#### <mark> Exercise </mark> <!-- {docsify-ignore} -->
 
 In 2010, some fundamental investors believed that Microsoft, after being overpriced in the stock market for many years, was now a firm to buy. Microsoft's shares traded at 24.30 in September 2010, down from a peak of 60 (split-adjusted) in January 2000. Analysts' consensus EPS forecasts for 2011 and 2012 fiscal years (ending in June) were 2.60 and 2.77, respectively. A dividend of 0.40 per share was indicated for fiscal year 2011.
 
@@ -225,7 +242,7 @@ In 2010, some fundamental investors believed that Microsoft, after being overpri
 **b. Calculate the intrinsic P/E implied by the analysts' forecasts with the assumption that there will be no abnormal earnings growth after 2012.**
 
 $$
-V_2010 = {1\over 0.09} \Big[ 2.60+{-0.028\over 1.09} \Big] = 28.6
+V_{2010} = {1\over 0.09} \Big[ 2.60+{-0.028\over 1.09} \Big] = 28.6
 $$
 
 $$

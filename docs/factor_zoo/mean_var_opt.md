@@ -16,7 +16,7 @@ $$
 对 $w$ 求导，
 $$\begin{aligned}
 & \Sigma w - \lambda \hat{\mu} - \gamma \bm{1} = 0 \\
-\Longrightarrow \ & w^* = \lambda \Sigma^{-1} \hat{\mu} - \gamma \Sigma^{-1} \bm{1}
+\Longrightarrow \ & w^* = \lambda \Sigma^{-1} \hat{\mu} + \gamma \Sigma^{-1} \bm{1}
 \end{aligned}
 $$
 
@@ -44,9 +44,16 @@ $$
 w_{tan} = {\Sigma^{-1}\hat{\mu} \over \bm{1}^T \Sigma^{-1}\hat{\mu} }
 $$
 
+<hr>
+
+<div  class = 'cpart'>
+
+**变形1**
+</div>
+
 则原式变形为：
 $$\begin{aligned}
-w^* &= \lambda \Sigma^{-1} \hat{\mu} - \gamma \Sigma^{-1} \bm{1} \\ 
+w^* &= \lambda \Sigma^{-1} \hat{\mu} + \gamma \Sigma^{-1} \bm{1} \\ 
 &= \lambda \bm{1}^T \Sigma^{-1}\hat{\mu}{\Sigma^{-1}\hat{\mu} \over \bm{1}^T \Sigma^{-1}\hat{\mu} } + \gamma \bm{1}^T \Sigma^{-1}\bm{1} {\Sigma^{-1}\bm{1} \over \bm{1}^T \Sigma^{-1}\bm{1} } \\
 &= \alpha_{\mu_0}w_{tan}+(1-\alpha_{\mu_0})w_{var} \\
 \text{suppose} & \quad \alpha_{\mu_0} = \lambda \bm{1}^T \Sigma^{-1}\hat{\mu} \\
@@ -65,10 +72,10 @@ $$\begin{aligned}
 &= { \mu_0 - \hat{\mu}^T w_{var} \over  \hat{\mu}^T w_{tan} - \hat{\mu}^T w_{var}}
 \end{aligned}$$
 
-如此一来，二者之间非常明了的**一一对应的**关系跃然纸上，当我们以最大化样本内收益率为目标时，此时最大的收益率为：
+如此一来，$\mu_0$ 和 $\alpha_{\mu_0}$ 之间非常明了的**一一对应的**关系跃然纸上，当我们选择目标收益率 $\mu_0$ 来最大化样本内夏普比率时，此时一定会得到切点组合对应的收益率：
 
 $$
-\mu_0 = \mu_{max} = \hat{\mu}^T w_{tan}
+\mu_0 = \mu_{tan} = \hat{\mu}^T w_{tan}
 $$
 因此 $\alpha_{\mu_0}=1$，最终解为：
 
@@ -77,6 +84,53 @@ w^* = w_{tan} = {\Sigma^{-1}\hat{\mu} \over \bm{1}^T \Sigma^{-1}\hat{\mu} }
 $$
 
 也即我们常说的，**与夏普比率成正比的无约束解**。
+
+因为是完全通过样本内得出的最优解，所以有严重的过拟合问题。在实际操作中，可以先通过样本内求得有效前沿，第二步通过样本外数据得到最优组合。
+
+<hr>
+
+
+<div  class = 'cpart'>
+
+变形2
+</div>
+
+当放松**权重条件**【即权重相加为1】：
+$$\begin{aligned}
+w^* &=  \Sigma^{-1} \hat{\mu} + \gamma \Sigma^{-1} \bm{1} \\
+&= \Sigma^{-1} \hat{\mu} + {\gamma \over \lambda} \Sigma^{-1} \bm{1} \\
+&= \Sigma^{-1} \left( \hat{\mu} + {\gamma \over \lambda} \bm{1} \right) \\
+&= \Sigma^{-1} \left( \hat{\mu} + \lambda_0 \bm{1} \right)
+\end{aligned}$$
+
+此时：
+$$\begin{aligned}
+\lambda_0 &= {\gamma \over \lambda} \\ 
+&= {\hat{\mu}^T\Sigma^{-1}\hat{\mu} - \hat{\mu}^T \Sigma^{-1}\bm{1} \mu_0 \over \bm{1}^T\Sigma^{-1}\bm{1} \mu_0 - \hat{\mu}^T \Sigma^{-1}\bm{1}}
+\end{aligned}$$
+
+因此，$\lambda_0$ 和 $\mu_0$ 之间也存在**一一对应**的关系。
+
+$$\begin{aligned}
+\lambda_0 \in [0,+\infty)  \Rightarrow & \mu_0  \in \left( {\hat{\mu}^T  \hat{\Sigma}^{-1} \bm{1} \over \bm{1}^T  \hat{\Sigma} ^{-1} \bm{1}},\ {\hat{\mu}^T \hat{\Sigma}^{-1} \mu \over \hat{\mu}^T  \hat{\Sigma}^{-1} \bm{1}} \right] \\
+\Longrightarrow & \mu_0 \in \left( \hat{\mu}^T w_{var}, \ \hat{\mu}^T w_{tan} \right]
+\end{aligned}$$
+
+同样地，当最大化样本内 $\mu_0$ 为目标时，解得 $\lambda_0=0$。
+
+但是，在这种变形下，出现了另一种解释：**收缩**【Shrinkage】。
+
+$\lambda_0$ 是 $\mu_0$ 的递减函数，当 $\mu_0$ 大时，$\lambda_0$ 小，而当 $\mu_0$ 小时，相对来说 $\lambda_0$ 会大。这也代表着一种收缩，但不同于传统的Shinkage向0收缩，而是**向截面均值收缩**。
+
+
+> [!NOTE]
+> 在这种表达下，$\lambda_0$ 的取值范围也代表我们并不认为 $\mu_0$ 会超过切点组合收益率。
+>
+> 因为一旦 $\lambda_0$ 为负，就不再是收缩的作用，而是**会极化权重**，进而降低夏普比率。
+>
+> 根据变形1，应该是允许 $\mu_0$ 超过切点组合收益率的。
+
+
 
 
 

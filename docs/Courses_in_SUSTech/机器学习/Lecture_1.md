@@ -274,11 +274,11 @@ $$
 
 > [!TIP|label:推导]
 > 运用全概率公式：
-> $$\begin{aligned}
-> p(t|x,\pmb{x},\pmb{t}) &= \int p(t|x,\pmb{x},\pmb{t}|\pmb{w})p(w)d\pmb{w} \\
-> &= \int p(t|x,\pmb{x},\pmb{t},\pmb{w})p(w)d\pmb{w} \\
-> &= \int p(t|x,\pmb{w})p(w|\pmb{x},\pmb{t})d\pmb{w}
-> \end{aligned}$$
+$$\begin{aligned}
+p(t|x,\pmb{x},\pmb{t}) &= \int p(t|x,\pmb{x},\pmb{t}|\pmb{w})p(w)d\pmb{w} \\
+&= \int p(t|x,\pmb{x},\pmb{t},\pmb{w})p(w)d\pmb{w} \\
+&= \int p(t|x,\pmb{w})p(w|\pmb{x},\pmb{t})d\pmb{w}
+\end{aligned}$$
 >
 > 第一行到第二行运用了 $P(A|B|C) = P(A|BC)$ 
 >

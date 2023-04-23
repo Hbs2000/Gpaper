@@ -1,5 +1,5 @@
-# Shadow Banking
-
+# Shadow Banking Macro
+本节是影子银行的第一节课，着眼于宏观【投行经济学家角度，宏观分析】，后续会有微观角度【实务操作】。
 ## Reference
 - Shadow Banking: China’s Dual-Track Interest Rate Liberalization, with Hao Wang, Honglin Wang, Lisheng Wang, and Hao Zhou, Tsinghua University PBC School of Finance, 2019.
 - China’s Gradualistic Economic Approach and Financial Markets, Markus Brunnereier, Michael Sockin, and Wei Xiong, ***American Economic Review***, 2017.
@@ -8,11 +8,9 @@
 
 ## Shadow Banking: China’s Dual-Track Interest Rate Liberalization
 
-本节课是影子银行的第一节课，着眼于宏观【投行经济学家角度，宏观分析】，中国的影子银行与发达国家的影子银行有根本性的差别。
+中国的影子银行与发达国家的影子银行有根本性的差别。
 
-微观角度来看（第二节课）【实务操作】
-
-中国利率改革领域的双轨制，影子银行是利率从纯计划到市场转化过程中的有意无意的制度设计。在这个过程中，由完全管制到完全市场，中间会经历双轨制阶段。而**shadow banking就是这个阶段的试验产物**。影子银行有专门监管机构监管审查的。有试点，有计划有步骤有预谋，也有政府批，中国所有业务没有监管机构的设计和批准是不允许的。
+中国利率改革领域的双轨制，影子银行是利率从纯计划到市场转化过程中的有意无意的制度设计。在这个过程中，由完全管制到完全市场，中间会经历双轨制阶段。而**shadow banking就是这个阶段的试验产物**。体现在影子银行有专门监管机构监管审查，有试点，有计划有步骤有预谋，当然也有政府审批。中国所有业务没有监管机构的设计和批准是不允许的。
 
 钱颖一关于双轨制的定义：*保证低效部门活着，同时更多供血高效部门*。
 
@@ -20,18 +18,21 @@
 > 改革终极目标：管制利率转化为市场利率。
 
 
-影子银行最早以理财形式出现，6%高息吸储，再以更高的利率贷给房地产等高利润行业，其中影子银行50-60的行业是产业链上下游企业。影子银行广义来说应该包括民间借贷。而在中国仅狭义指理财信托委托贷款以及城投债，，民间借贷规模极其的小，就算1000亿，而影子银行实际上35万亿，相比之下非常非常小。银行业150万亿，相比之下保险和股市的规模小很多。因此， ***中国改革的所有关键都在银行（体量）。***  
-- 大型国企基本按照4%的最低基准利率（LPR）拿到贷款，民企8%，平均一般6%。这是一种misallocation
+影子银行最早以理财形式出现，6%高息吸储，再以更高的利率贷给房地产等高利润行业，其中影子银行50-60的行业是产业链上下游企业。影子银行广义来说应该包括民间借贷。而在中国仅狭义指理财信托委托贷款以及城投债，民间借贷规模极其的小，就算1000亿，而影子银行实际上35万亿，相比之下非常非常小。银行业150万亿，相比之下保险和股市的规模小很多。因此， ***中国改革的所有关键都在银行（体量）。***  
+- 大型国企基本按照4%的最低基准利率（LPR）拿到贷款，民企8%，平均一般6%。这是一种信贷资源的misallocation。
 - 国家保障的大国有银行的贷款利率差
   
-因此谁会反对利率市场化改革？大国企，因为它们能够拿到非常稳定的低利率贷款。怎么在改革的过程中压下去反对的声音，双轨制。这也是大多数改革的途径【reform without losers】。
+因此谁会反对利率市场化改革？大国企，因为它们能够拿到非常稳定的低利率贷款。怎么在改革的过程中压下去反对的声音，双轨制。这也是大多数改革的途径【**reform without losers**】。
 
 **Advantage of dual-track**：相比于overnight改革，稳步改革最后并轨更加稳定。利率并轨会导致影子银行业务的萎缩。市场下行时适合并轨。
 
 13-15之后计划存款利率和贷款利率都开始放松了，存款利率的高线和贷款低线都取消了。目前长期利率和计划长期利率正在逐渐接轨。这就说明市场利率改革正在逐渐完成。如果完成，那么SOE和NON-SOE的信贷剪刀差就会缩小。
 
-### Background of low interest
-低利率政策来源于50年代，当时有赶英超美政策。需要通过扭曲价格来实现，压低农产品（工人生活成本），抬高人民币压低美元（方便进口），降低利率（工业企业需要钱），统购统销等————赶超型政策的主要工具。大跃进与文革几乎抹杀了所有的增长。政策失败了，被逼无奈必须走改革之路
+### Background of low interest  <!-- {docsify-ignore} -->
+低利率政策来源于50年代，当时的赶英超美政策需要通过**扭曲价格**来实现：压低农产品价格【工人生活成本】，抬高人民币压低美元【方便进口】，降低利率【工业企业需要钱】，统购统销等，这些都是赶超型政策的主要工具。
+
+然而，DYJ与WG几乎抹杀了所有的增长。政策失败了，被逼无奈必须走改革之路。
+
 <div align ='center'>
 
 ![](../image/20230228CF5.png)
@@ -44,7 +45,7 @@
 中国原本只有PBC。80年代出现四大行，因为除了国企，还有许多集体企业等多种所有制，银行体制的丰富对应企业所有制的丰富。
 
 
-### Shadow banking in China
+### Shadow banking in China  <!-- {docsify-ignore} -->
 影子银行为了绕过国家对暴利行业的限制。但大国企往往有自己的金融子公司，银行会把钱给该子公司，子公司负责处理资产。
 <div align ='center'>
 
@@ -84,7 +85,7 @@ Markus Brunnereier<sup>1</sup>, Michael Sockin<sup>2</sup>, and Wei Xiong<sup>3<
 2. *McCombs School of Business, University of Texas at Austin*
 3. *Princeton University*
 
-过去几十年中国“摸着石头过河”（cross the river by touching the stones）的渐进式改革取得了很多的成果。
+过去几十年中国“**摸着石头过河**”（cross the river by touching the stones）的渐进式改革取得了很多的成果。
 
 渐进式改革的机制如下：首先做出微小的政策调整，随后根据实施效果反馈不断调整。政策实施后，往往会有持续几个月甚至几个季度的观察和反馈阶段，因此给与了政策制定者充分时间学习和调整。因为政策制定者也会有错误的时候，例如16年的股市熔断政策，几天之内就被认为是错误的决定，证监会主席肖钢引咎辞职。
 
@@ -106,24 +107,24 @@ Kaiji Chen<sup>1</sup>, Jue Ren<sup>2</sup>, and Tao Zha<sup>3</sup>, ***America
 2.  *Department of Finance, Neeley School of Business, Texas Christian University*
 3.  *Emory University, NBER, and Federal Reserve Bank of Atlanta*
 
+***Main Results***
 
-09年刺激政策后中国很快开始缩紧货币政策，造成09-15年影子银行贷款大量增长
+为了给在 4 万亿刺激后过热的信贷市场降温，政府在 2009-2015实施了紧缩的货币政策。然而，尽管对银行系统的信贷确实起到了一定的作用，但**预料之外的影子银行大规模增长很大程度上对冲了货币政策的预期效果**。
 
-信贷是货币政策的扩张，当开始收缩时，地方基建资金受限，自然从传统信贷过渡到影子银行。
 
-**Four distinctive contributions**
-- Institutional details of China’s quantity-based monetary system
-  - PBC two regulations 也发挥了重要作用
-  - 国有银行与非国有银行在影子银行活动中扮演的角色有很大差异
-- The estimation of both endogenous and exogenous components of China's monetary policy
-  - 通过估计出的外生时间序列估计SOB和non-SOB的差别
-- Two micro datasets at the level of individual banks
-  - 自建影子银行数据集，能够有效区分两类银行的行为差异
-- An analysis of how the rise of shadow banking dampens the effectiveness of monetary policy on the banking system
-  - 紧缩的货币政策使得商业银行将其贷款组合转向影子银行业务。大量的影子银行业务抵消了传统贷款业务的收缩，最终反而造成总信贷量的升高
+### Institutional details  <!-- {docsify-ignore} -->
 
-### China’s Banking System and Monetary Policy
-#### Quantity-Based Monetary Policy
+#### Facts about Shadow Banking during the Period of Monetary Policy Tightening  <!-- {docsify-ignore} -->
+自2009年以来，M2增速和银行贷款得到有效控制，然而影子银行贷款规模急剧上升。
+影子银行中占比最大的是**委托贷款**（entrusted loans），占比接近50%。
+委托贷款指的是由金融机构作为受托人（trustee）促成两家非金融机构的借款。
+而委托贷款发生最多（60%）的行业就是房地产、高能耗以及其他被政府限制贷款的风险行业。
+而在房地产行业所获得的影子贷款中，绝大多数（73.5%）都是由**非国有**的金融机构促成的。
+相比于正常的商业贷款，这些委托贷款不仅期限短，而且利率高。
+
+
+
+#### Quantity-Based Monetary Policy  <!-- {docsify-ignore} -->
 
 货币政策有中介指标和最终目标的说法，美国最终目标有两个：通胀和就业率，中介指标为联邦基金利率。
 
@@ -138,20 +139,17 @@ Kaiji Chen<sup>1</sup>, Jue Ren<sup>2</sup>, and Tao Zha<sup>3</sup>, ***America
 </div>
 
 通过银行来影响M2增速有两条限制：
-- **LDR regulation，存贷比**
-- **safe-loan regulation，限制贷款行业**
+- **LDR regulation，存贷比** 【control the quantity】
+- **safe-loan regulation，限制贷款行业** 【control the quality】
 
-#### Facts about Shadow Banking during the Period of Monetary Policy Tightening
-自2009年以来，M2增速和银行贷款得到有效控制，然而影子银行贷款规模急剧上升。
-影子银行中占比最大的是**委托贷款**，占比接近50%。
-委托贷款指的是由金融机构作为受托人（trustee）促成两家非金融机构的借款。
-而委托贷款发生最多（60%）的行业就是房地产、高能耗以及其他被政府限制贷款的风险行业。
-而在房地产行业所获得的影子贷款中，绝大多数（73.5%）都是由**非国有**的金融机构促成的。
-相比于正常的商业贷款，这些委托贷款不仅期限短，而且利率高。
+#### Regulation difference  <!-- {docsify-ignore} -->
 
-银行会将这些高风险的影子贷款隐藏在资产负债表中来规避PBC的两条监管。主要以ARIX的形式存在
+国有银行由中央政府控制，余下的商业银行都属于非国有银行。
 
-#### State versus Nonstate Commercial Banks
+国有银行隶属于政府，因此受到政策的影响更大，参与影子银行业务时受限更多。而非国有银行则不同，非国有银行占了整个银行系统规模的一半，并且密切地参与并推动了影子银行业务的发展，并且将影子银行打包成一个特殊的投资种类，称之为 ARI (account-receivable investment)。这种 ARI **不受存贷比和贷款行业限制**。
+
+
+#### State versus Nonstate Commercial Banks  <!-- {docsify-ignore} -->
 
 **（1） Three requirements**
 
@@ -167,8 +165,50 @@ Kaiji Chen<sup>1</sup>, Jue Ren<sup>2</sup>, and Tao Zha<sup>3</sup>, ***America
 
 并且在2013年，政府依然认为影子银行是金融结构多元化的表现。
 
-### Estimation of China’s Monetary Policy
+
+
+
+### Two micro datasets at the level of individual banks  <!-- {docsify-ignore} -->
+
+
 作者后续通过建模得到了外生的M2增长序列，并且自建了两个数据库，通过这些数据库估计出影子银行中国有银行和非国有银行行为的不一致性。
+
+从微观角度，作者自建了两个数据库，用以评估两类银行在影子银行业务中的不同表现。
+
+#### （1）委托贷款数据库  <!-- {docsify-ignore} -->
+
+通过2009-2015期间非金融公司的委托贷款数据，发现当货币政策紧缩时，由非国有银行主导的委托贷款数量显著增长，而国有银行则不显著。
+
+
+#### （2）银行资产数据集  <!-- {docsify-ignore} -->
+
+该数据集包括了两个银行资产的重要组成部分：银行贷款和除去中央银行票据和政府债的ARI，也称之为ARIX。
+ARIX的主要组成部分是以银行提供的委托贷款的受益权的形式出现的，因此ARIX能够用来衡量银行参与影子银行活动的程度。
+
+同样地，尽管M2 增速下降，但是非国有银行持有ARIX的数量显著上升，而国有银行则并不明显。
+
+
+### The impact of rising shadow banking   <!-- {docsify-ignore} -->
+
+文章通过组合最优化的理论模型论证了紧缩性货币政策和影子银行的影响。
+
+对于银行来说，资产组合中包括两部分：银行贷款和非贷款资产。前者安全但受到诸多限制，后者风险高但收益也高，并且不受监管。每一个银行都会在二者之间做权衡。
+
+当紧缩性货币政策实施时，银行会面临流动性收紧的风险，也就是取款的人变多了。那么银行进一步就会面临存款亏空的问题 (deposit shortfalls)，并且弥补存款亏空的成本也提高了，从而不得不在组合中配置更多的非贷款资产。最终综合来看，总信贷量反而提升了。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

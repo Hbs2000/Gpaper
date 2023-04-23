@@ -1,6 +1,6 @@
 # The Analysis of the Balance Sheet and Income Statement
 
-Chapter 9 通过对shareholders' equity进行重构，更好地体现了common shareholders' equity的comprehensive return的变化。而本章对于Balance Sheet 和 Income Statement的reformulation则能够揭示这种盈利【ROCE】和增长的来源。
+Chapter 9 通过对shareholders' equity进行重构，更好地体现了common shareholders' equity的comprehensive income的变化。而本章对于Balance Sheet 和 Income Statement的reformulation则能够揭示这种盈利【ROCE】和增长的来源。
 
 ## Reformulation of the Balance Sheet
 
@@ -56,9 +56,7 @@ Operating obligation 一般被认为属于financial debt，但实际上这种"de
 
 #### Lease <!-- {docsify-ignore} -->
 
-
-
-
+租赁中，租金为 financial obligation，而租赁资产为 operating assets。
 
 
 
@@ -91,6 +89,21 @@ $$
 \text{Operating Liability Leverage Ratio (OLLEV)} = \frac{\text{OL}}{\text{NOA}}
 $$
 
+**Example**
+
+<div align = 'center'>
+
+![](../image/20230421FS1.png)
+</div>
+
+<div align = 'center'>
+
+![](../image/20230421FS2.png)
+</div>
+
+注意**defered tax被记为 operation obligations**。
+
+
 
 ## Reformulation of Income Statement
 
@@ -117,6 +130,17 @@ $$\begin{aligned}
 
 Tax allocatoin 分为 Top-down 和 Bottom-up 两种方法。
 
+<div align = 'center'>
+
+![](../image/20230421FS3.png)
+</div>
+
+> [!NOTE]
+> Bottom-up是之间讲过的方法，interest虽然降低了现金流，但同时少交了税，因此净影响是0.7【1-税率0，3】
+>
+> 而Top-down是不考虑利息，直接减去**考虑了利息之后的税收**，因此实际上享受了税盾优惠，所以需要减去。
+>
+> 因此二者有种**双向奔赴**之感。
 
 
 ### Issues in Reformulating Income Statements
@@ -151,6 +175,59 @@ Tax allocatoin 分为 Top-down 和 Bottom-up 两种方法。
 
 ![](../image/20230411FS2.png)
 </div>
+
+
+## Conceptual questions
+
+***Why are refonnulated statements necessary to discover operating profitability?***
+
+Without the reformulation, operating profitability is confused with financing profitability, and the return on financial assets (and borrowing cost for financial obligations) is typically different from operating profitability. Operations add value whereas financing typically does not, so financing activities need to be separated out to uncover the operating profitability.
+
+***Classify each of the following as a financial asset or an operating asset***
+
+<div class='centertable'>
+
+| |category|
+|:--:|:--:|
+|Cash in a checking account used to pay bills | Operating |
+|Accounts receivable|Operating|
+|Finance receivables for an automobile firm| Operating |
+|Cash in 90-day interest-bearing deposits|Financing|
+|Debt investments held to maturity|Financing|
+|Short-term equity investment|Financing|
+|Long-term equity investments held to maturity|Operating|
+|Goodwill|Operating|
+|Lease assets|Operating|
+|Deferred compensation|Operating|
+</div>
+
+***Classify each of the following as a financial liability, an operating liability, or neither***
+<div class='centertable'>
+
+| |category|
+|:--:|:--:|
+|Accrued compensation|Operating liability|
+|Deferred revenues|**Operating liability**|
+|Preferred stock|Financial liability|
+|Deferred tax liability|Operating liability|
+|Lease obligations|Financial liability|
+|Interest-bearing note payable|Financial liability(market rate)|
+</div>
+
+***From the point of view of the common shareholders, minority interest is a financial obligation.***
+
+It is not, like debt, an obligation that is satisfied by free cash flow from operations it is equity that shares in a portion of profits after net financing costs
+
+
+***What does an operating profit margin reveal?***
+
+The operating profit margin is the profitability of sales, the percentage of a dollar of sales that ends up in operating income after operating expenses.
+
+***What does it mean to say that a firm is negatively levered?***
+
+A negatively levered firm has more financial assets than financial obligations, that is, it has negative net debt.
+
+
 
 
 

@@ -224,7 +224,16 @@ strong {
   font-size: 26px !important;
 }
 
+.cpart {
+  font-weight: bolder;
+  color: #067283;
+  font-family: 'Georgia,serif', 'Times New Roman', 'Arial';
+  text-align: center;
+}
 
+.cpart p {
+  font-size: 30px !important;
+}
 
 section.cover h1 {
   font-size: 2.125rem !important;
@@ -238,6 +247,7 @@ section.cover h1 {
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
   font-size: 23px !important;
 }
+
 
 mark {
   background-color: #f8aba6;

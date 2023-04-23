@@ -121,6 +121,7 @@ General Mills reported $6, 192 million in short-term and long-term debt at the e
 2. Free cash flow will grow at 3 percent per year after 2009.
    
 General Mills had 369 million shares outstanding at the end of 2005, trading at $47 per share. **Calculate value per share and a value-to-price ratio under both scenarios.**
+
 <div align="center">
 
 ![](../image/20230303FS1.png)

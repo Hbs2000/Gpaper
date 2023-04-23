@@ -202,7 +202,9 @@ AP-Pruning的问题在于 **bias-variance trade-off**。节点位置越高，股
 
 本文估计流程为：
 
-1. 对于每一个目标收益率 $\mu_0$，都可以找到对应的最小方差权重 $\hat{w}_{robust}$，此时，$\mu_0$ 与 lasso参数 $\lambda_1$，ridge参数 $\lambda_2$ 一样都被视为**超参数**。
+1. 对于每一个目标收益率 $\mu_0$，都可以找到对应的最小方差权重 $\hat{w}_{robust}$，进而得到有效前沿。此时，$\mu_0$ 与 lasso参数 $\lambda_1$，ridge参数 $\lambda_2$ 一样都被视为**超参数**。
+
+这一阶段给出不同的 $\mu_0$ 是为了求出有效前沿，**此时仅存在一个前沿**。
 
 优化问题如下：
 
@@ -212,6 +214,11 @@ min \qquad {1\over 2} w^T \hat{\Sigma} w + \lambda_1 ||w||_1+{1\over 2} \lambda_
 $$
 
 2. 利用验证集数据选择超参数 $\mu_0$，$\lambda_1$，$\lambda_2$
+
+**利用第一步得到的权重数据在前沿上寻找能够最大化验证集夏普比率的点**。
+
+根据不同的 $\mu_0$，由不同的收缩力度，**每个 $\mu_0$ 都对应着一个前沿**。
+
 3. 利用测试集数据测试结果
 
 <mark> **这种两步法的估计流程有三种不同的统计解释。** </mark>
@@ -274,11 +281,13 @@ $$\begin{aligned}
 正是因为包括了对期望收益率均值的收缩，该方法也被称为对Kozak, Nagel, and Santosh (2020) 的拓展。
 此时二者有着**一一对应**的关系：
 $$
-\lambda_0 \in [0,+\infty)  \Rightarrow \mu_0 \in \left[ {\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big) \mu \over \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}},{\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1} \over \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big) \bm{1}}  \right)
+\lambda_0 \in [0,+\infty)  \Rightarrow \mu_0 \in \left( {\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1} \over \bm{1}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1}} ,{\hat{\mu}^T\Big(  \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \hat{\mu} \over \hat{\mu}^T \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1} \bm{1}} \right]
 $$
 
-> [!WARNING|label:The inverse]
-
+> [!NOTE]
+> 在这种表达下，$\lambda_0$ 的取值范围也代表我们并不认为 $\mu_0$ 会超过切点组合收益率。
+>
+> 因为一旦 $\lambda_0$ 为负，就不再是收缩的作用，而是**会极化权重**。
 
 ### Proposition 2 Robust SDF Discovery
 

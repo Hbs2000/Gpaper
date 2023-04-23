@@ -5,15 +5,24 @@ This chapter reformulates the statement of **owners' equity**, which highlights 
 本节的reformulation 是站在**Common shareholders**视角来说的，之前的报表并不能反应Common shareholders的利益。
 
 
+- 如何重构股东权益表
+- 如何处理 dirty-surplus
+- 如何处理 hidden dirty-surplus
+
+尽管一般意义上来说股东权益表不是最重要的，但是在分析时，最应该先看的就是这个表
+
 ## Reformulating the statement of owners' equity
+
+股票发行和回购一般不会产生价值，但是有时可以作为等价物**交换货物或服务**，例如员工持股计划。
+
+
+
 
 <div align='center'>
 
 ![](../image/20230403FS1.png)
 </div>
 
-
-设定
 
 1. preferred equity【优先股】被视作债务，而非权益。所以 the beginning and ending balance refer only to common shareholder's equity。
 
@@ -23,7 +32,17 @@ redeemable？
 3. 优先股股利被视作expense，类似于 interest，因此从comprehensive income中去除
 
 ### Reformulation Procedures
-1. **restate beginning and ending balances for the period for items**
+
+**Accounting relation**
+
+$$
+\text{CSE}_t = \text{CSE}_{t-1} + \text{CI} - \text{d}
+$$
+
+根据这一公式，重构分为三步骤：
+
+
+1. **Restate beginning and ending balances for the period for items【CSE】**
 
 - preferred stock
 - noncontrolling interest
@@ -35,18 +54,18 @@ non-controlling interest and preferred stock are treated as obligations to other
 $$\begin{aligned}
 \text{CSE}_{new} = \text{CSE}_{old}&- \text{ Preferred stock } \\
 &-\text{ Noncontrolling interest reported within equity} \\
-&+\text{ Dividends payable}
+&+\text{Dividends payable}
 \end{aligned}$$
 
 
-2. Calculate **net transactions with shareholders**
+2. Calculate **net transactions with shareholders【d】**
 
 $$
 \text{Cash dividends = Dividends declared} - \text{change in dividends payable}
 $$
 
 
-3. Calcualte **comprehensive income**
+3. Calcualte **comprehensive income【CI】**
 
 需要考虑包含在equity statement里的other income
 
@@ -73,8 +92,9 @@ $$\begin{aligned}
 - Unrealized gains and losses on securities (debt and equity)
 - Gains and losses on derivative instruments 【硅谷银行】
 
+Dirty-Surplus 一般计入到 Other Comprehensive Income中
 
-### Hidden dirty surplus
+## Hidden dirty surplus
 在dirty surplus之外，还有Hidden dirty surplus，是由**期权**引起的复杂情况。
 
 期权本身也有不同，如果期权是来自于员工补偿或福利，那么应该记作**employee compensation expense**，但如果来自于可转债、权证或优先股等融资工具，那么应该记作**financing expense**。
@@ -148,6 +168,8 @@ This after-tax expense is also called **option overhang** or **contingent liabil
 
 ![](../image/20230403FS4.png)
 </div>
+
+
 where stock issues for stock options can be calculated by **sum of capital in excess of stated value and after-tax expense** (the right side) or by **sum of proceeds from exercise and before-tax expense** (the left side).
 
 
@@ -179,6 +201,38 @@ $$
 {}\\
 \text{Growth Rate of CSE} = \frac{\text{Change in CSE}}{\text{Beginning CSE}} = \frac{\text{Net Transactions with Shareholders}+\text{Comprehensive Income}}{\text{Beginning CSE}}
 $$
+
+
+## Conceptual questions
+
+
+***Losses on Convertible Securities, The market value method or the book value method ?***
+
+Existing shareholders lose when shares are issued to new shareholders at less than the market price. The accounting treatment (the “market value method”) that records the issue of the shares in the conversion at market value, along with a loss on conversion, reflects the effect on existing shareholders’ wealth.
+
+***Do share issues from the exercise of employee stock options cause dilution?***
+
+Yes. Issuing shares at less than the market price dilutes the per-share value of the existing
+shares
+
+***Do share repurchases reverse dilution?***
+
+No. Repurchasing shares at market value has no effect on the per-share value of existing
+shares. 
+
+***Why would Microsoft feel that repurchasing shares is "too expensive"?***
+
+If Microsoft felt its shares were overvalued in the market it would feel they are too expensive.
+
+***The recognition of the expense?***
+
+It should be matched to revenue over a service period during which the employees worked for the compensation rather than recognized at exercise date.
+
+***Why might Microsoft pay for the acquisition with its own stock rath er than in cash?***
+
+Microsoft might think its own shares are overvalued in the market. So it uses them
+as “currency” to get a “cheap buy.” Buy when price is less than value. 
+
 
 
 
