@@ -228,7 +228,7 @@ If Microsoft felt its shares were overvalued in the market it would feel they ar
 
 It should be matched to revenue over a service period during which the employees worked for the compensation rather than recognized at exercise date.
 
-***Why might Microsoft pay for the acquisition with its own stock rath er than in cash?***
+***Why might Microsoft pay for the acquisition with its own stock rather than in cash?***
 
 Microsoft might think its own shares are overvalued in the market. So it uses them
 as “currency” to get a “cheap buy.” Buy when price is less than value. 

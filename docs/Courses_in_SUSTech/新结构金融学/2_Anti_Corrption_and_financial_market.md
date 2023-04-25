@@ -1,10 +1,13 @@
+# Anti-Corruption and Financial Market – I
+
+## Reference
 - China’s Anti-Corruption Campaign and Credit Reallocation to from SOEs to Non-SOEs, Bo Li, Zhengwei Wang, and Hao Zhou, Tsinghua University PBC School of Finance, 2022.
 
 - The Impacts of Political Uncertainty on Asset Prices: Evidence from the Bo Scandal in China, Laura Xiaolei Liu, Haibing Shu, and K.C. John Wei, ***Journal of Financial Economics***, 2017.
 
 - Busting the ‘Princelings’: The Campaign against Corruption in China’s Primary Land Market, Ting Chen and James Kai-sing Kung, ***Quarterly Journal of Economics***, 2019.
 
-# China’s Anticorruption Campaign and Credit Reallocation From SOEs to Non-SOEs
+## China’s Anticorruption Campaign and Credit Reallocation From SOEs to Non-SOEs
 Bo Li, Zhengwei Wang, and Hao Zhou, working paper.
 1. *all PBC School of Finance, Tsinghua University*
    
@@ -12,7 +15,7 @@ Bo Li, Zhengwei Wang, and Hao Zhou, working paper.
 
 > ***2012会是历史性的一年***
 
-## 【资本】国进民退 or 无序扩张？
+### 【资本】国进民退 or 无序扩张？
 <div align = 'center'>
 
 ![](../image/20230221CF1.png)
@@ -26,7 +29,7 @@ Bo Li, Zhengwei Wang, and Hao Zhou, working paper.
 
 左图反应**长期**以来市场SOE与non-SOE信贷资源的巨大剪刀差。右图是中纪委宣布查处重要官员后，与之相关联的行业中，民营企业随后得到的贷款增加，然而，五个季度后就不显著了【**短期**】。
 
-## Hypothesis
+### Hypothesis
 <div align = 'center'>
 
 ![](../image/20230221CF5.png)
@@ -34,7 +37,7 @@ Bo Li, Zhengwei Wang, and Hao Zhou, working paper.
 
 腐败也许是润滑剂？但并不一定dominate
 
-## Literature
+### Literature
 - Economic cost of corruption or "grabbing the hand"(腐败到底是好是坏)
   - Shleifer and Vishny (1993); Shleifer and Vishny (1994); Mauro (1995); Fisman (2001); Fisman and Svensson (2007)
 - Effectiveness of audit programs in curbing corruption(announcement effect)
@@ -50,7 +53,7 @@ Cong, Gao, Ponticelli, and Yang(2019) 指出，四万亿进一步加剧了信贷
 > [!NOTE|label:Idea]
 > 新冠疫情对于信贷影响?
 
-## High profile investigation <!-- {docsify-ignore} -->
+### High profile investigation <!-- {docsify-ignore} -->
 
 <div align = 'center'>
 
@@ -65,7 +68,7 @@ Cong, Gao, Ponticelli, and Yang(2019) 指出，四万亿进一步加剧了信贷
 2012年之前，并不立即公开谁被抓起来了,一般是审着审着才会公开，12年之后改变为【**immediate information disclosures**】。
 
 
-## High profile case: oil and gas <!-- {docsify-ignore} -->
+### High profile case: oil and gas <!-- {docsify-ignore} -->
 
 <div align = 'center'>
 
@@ -87,7 +90,7 @@ Cong, Gao, Ponticelli, and Yang(2019) 指出，四万亿进一步加剧了信贷
 ![](../image/20230228CF2.png)
 </div>
 
-## Conclusion
+### Conclusion
 <div align = 'center'>
 
 ![](../image/20230221CF8.png)
@@ -98,7 +101,7 @@ Cong, Gao, Ponticelli, and Yang(2019) 指出，四万亿进一步加剧了信贷
 
 
 
-# The impacts of political uncertainty on asset prices: Evidence from the Bo scandal in China
+## The impacts of political uncertainty on asset prices: Evidence from the Bo scandal in China
 
 Laura Xiaolei Liu<sup>1</sup>, Haibing Shu<sup>2</sup>, and K.C. John Wei<sup>3</sup>, ***Journal of Financial Economics***, 2017
 1. *Guanghua School of Management, Peking University*
@@ -109,9 +112,9 @@ Laura Xiaolei Liu<sup>1</sup>, Haibing Shu<sup>2</sup>, and K.C. John Wei<sup>3<
 
 [Week 1 Review Report](Week1_RR.md)
 
-## [Background](http://en.wikipedia.org/wiki/Bo_Xilai)
+### [Background](http://en.wikipedia.org/wiki/Bo_Xilai)
 
-## Proxy
+### Proxy
 构建指标衡量暴露在政治风险中的程度：
 
 （1） The first one is related to ***monetary policies*** and is the average of the absolute returns of a firm around the time when the People’s Bank of China (China’s central bank) announced its plans to adjust the reserve requirement ratio (RRR)
@@ -129,7 +132,7 @@ Laura Xiaolei Liu<sup>1</sup>, Haibing Shu<sup>2</sup>, and K.C. John Wei<sup>3<
 
 
 
-## Hypothesis
+### Hypothesis
 
 依据三个proxy，文章提出三个假设，进而开展随后的实证部分来test这些假设。
 
@@ -142,7 +145,7 @@ Laura Xiaolei Liu<sup>1</sup>, Haibing Shu<sup>2</sup>, and K.C. John Wei<sup>3<
 （3）除却政治不确定性之外，**政治关联（political connection）的减少**也会导致公司价值的下跌。
 在这种情况下，公司价格是一种确定性的方式下跌，在一段时间内股票价格不会发生剧烈波动（可以理解为单向下跌），而如果是由政治风险引致的不确定性，在一段时间内来看则会导致波动性的提升（上蹿下跳）。文章以**波动性**作为衡量指标。
 
-## Results
+### Results
 
 在事件前后的三个工作日的窗口期内，构造累计异常收益指标（CAR），控制变量后发现回归结果显著，通过假设1
 

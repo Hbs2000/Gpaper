@@ -325,7 +325,7 @@ $$
 
 </div>
 
-***A reduction in the advertising expense ra tio increases return on common equity and share value. Correct?***
+***A reduction in the advertising expense ratio increases return on common equity and share value. Correct?***
 
 The first part of the statement is correct: A drop in the advertising expense ratio
 increases current ROCE because, all else constant, it increases the profit margin. But a drop in

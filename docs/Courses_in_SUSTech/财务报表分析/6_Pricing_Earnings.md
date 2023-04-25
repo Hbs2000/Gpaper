@@ -271,27 +271,30 @@ if there is AEG, the price must be higher than the market price
 
 ## Conceptual Questions
 
-***The historical earnings growth rate for the S&P 500 companies has been about 8.5 percent. Yet the required growth rat e for equity investors is considered to be about 10 percent. Can you explain the in consistency?***
+***The historical earnings growth rate for the S&P 500 companies has been about 8.5 percent. Yet the required growth rate for equity investors is considered to be about 10 percent. Can you explain the in consistency?***
 
-The historical 8.5% growth rate that is often quoted is the ex-dividend growth rate. It
+The historical 8.5% growth rate that is often quoted is the **ex-dividend growth rate**. It
 ignores the fact that earnings were also earned by investors from reinvesting dividends (in the
 S&P 500 stocks, for example) that were typically 40% of earnings. The cum-dividend rate is
 about 13%.
 
 ***Why the following equation leads to error?***
 
+$$
+\text{Value of equity} = {\text{Earn}_1 \over r-g}
+$$
+
 - This formula capitalizes earnings at the ex-dividend earnings growth rate, g. This ignores growth that comes from reinvesting dividends. 
 - Further, if earnings are expected to grow at a rate equal to the required return, r, then the growth should not be valued , and forward earnings should be capitalized at the rate, r, not r – g. Only growth in excess on the required rate should be recognized.
 - The formula also has mathematical problems. If g = r, then the denominator is zero and the value is infinite. If g is greater than r (which is necessary for growth to have value), the denominator is negative.
 
-***A firm's earnings are expected to grow at a rate equal to the required rate ofretum for its equity, 12 percent. What is the trailing PIE ratio? What is the forward PIE ratio?***
+***A firm's earnings are expected to grow at a rate equal to the required rate of return for its equity, 12 percent. What is the trailing PIE ratio? What is the forward PIE ratio?***
 
 Trailing P/E = 1.12/0.12 = 9.33, Forward PE = 1/0.12 = 8.33
 
 ***The normal forward P/E and the normal trailing P/E always differ by 1.0. Explain why***
 
-The difference is that, for the trailing P/E, one more years of earnings are involved (the
-current year). The trailing P/E can be interpreted as paying for the value of forward earnings (at
+The difference is that, for the trailing P/E, one more years of earnings are involved (**the current year**). The trailing P/E can be interpreted as paying for the value of forward earnings (at
 the multiple for forward earnings) plus a dollar for every dollar of current earnings
 
 ***Abnormal earnings growth is always equal to growth of (change in) residual earnings. Correct?***
@@ -306,13 +309,13 @@ is greater than that for a stock. But P/E also values abnormal earnings growth. 
 deliver abnormal earnings growth, so the P/E ratio for a growth stock might well be greater than
 that for a bond.
 
-***Why might an analyst refer to a leading (forward) PIE ratio rather than a trailing PIE ratio?***
+***Why might an analyst refer to a leading (forward) P/E ratio rather than a trailing PIE ratio?***
 
-The trailing P/E, based on current earnings, is affected by transitory (one-time) earnings.
+The trailing P/E, based on current earnings, is affected by **transitory** (one-time) earnings.
 The forward P/E based on next years' forecasted earnings is less likely to be so affected, and so
 is a better base for growth.
 
-***P/E ratios were quite low in 2008- 2012 (about 11- 12 on average), even though interest rates were also very low (with 10-year Treasury yields below 3.5 percent). Explain how this could be.***
+***Can a firm increase its earnings growth yet not affect the value of its equity?***
 
 Yes; eps growth can be increased with investment, but the investment may earn only the
 required return, and thus not add value. A firm can also increase its expected earnings growth

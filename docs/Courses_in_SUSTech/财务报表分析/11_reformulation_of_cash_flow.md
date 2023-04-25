@@ -141,18 +141,18 @@ However, the analyst might forecast cash flows for two reasons:
 1. 【**Liquidity analysis**】To carry out a credit analysis to see **if the firm can pay its debts**. If not, the firm could be transferred to the debtholders, with the shareholders losing value.
 2. 【**Financial planning**】Sometimes an equity investor must ensure that cash is available in the future to settle claims. In a leveraged buyout, where investors take on a lot of debt, they wish to understand if the firm can generate the cash to pay own that debt. In private equity investing, the private equity firm may look for cash to pay off investors who wish to redeem at a certain date. 
 
-***By investing in short-term securities to a bsorb excess cash, a firm reduces its cash flow after investing activities in its publis hed cash flow statement. What is wrong with this picture? ***
+***By investing in short-term securities to absorb excess cash, a firm reduces its cash flow after investing activities in its published cash flow statement. What is wrong with this picture?***
 
 Excess cash can result from operations generating cash. Yet the GAAP statement
 presentation reduces net cash from operations (free cash flow) by the amount of the excess cash
 that operations generate. The generation and disposition of free cash flow are confused;
 investment in short-term securities is a disposition of free cash flow, not part of its generation.
 
-***Do you consider the direct method to be more informative than the indirect method of presenting cash flow from operations? ***
+***Do you consider the direct method to be more informative than the indirect method of presenting cash flow from operations?***
 
 The direct method gives considerably more detail on the sources of cash from operations. But the indirect method gives the accruals for the period.
 
-***GAAP cash flow statements treat intere t capitalized during constrnction as investment in plant. Do you agree with this practice?***
+***GAAP cash flow statements treat interet capitalized during constrnction as investment in plant. Do you agree with this practice?***
 
 No. This interest is a cost of financing construction, not investment in the construction. It should be in the financing section of the statement, not the investing section
 
