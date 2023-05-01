@@ -257,6 +257,7 @@ mark {
 .alert.flat.note {
   background-color: #b0d9df !important;
   border-color: #b0d9df !important;
+  font-size: 30px !important;
 }
 
 .alert.flat.tip {

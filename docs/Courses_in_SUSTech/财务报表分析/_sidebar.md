@@ -8,6 +8,7 @@
 - [9_The reformulation of Owner's Equity](/Courses_in_SUSTech/财务报表分析/9_reformulated_equity.md)
 - [10_The reformulation of Balance and Income](/Courses_in_SUSTech/财务报表分析/10_reformulation_of_balance_and_income.md)
 - [11_The reformulation of Cash Flow](/Courses_in_SUSTech/财务报表分析/11_reformulation_of_cash_flow.md)
-- [12_The reformulation of Profitablity](/Courses_in_SUSTech/财务报表分析/12_reformulation_of_profitability.md)
+- [12_Analysis of Profitablity](/Courses_in_SUSTech/财务报表分析/12_analysis_of_profitability.md)
+- [案例分析：以岭药业](/Courses_in_SUSTech/财务报表分析/以岭药业/README.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)
 

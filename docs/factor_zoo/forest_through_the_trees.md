@@ -112,6 +112,9 @@ PCA是这一类文献中最常用的方法，但由于这些方法是在已有�
 
 根据Garlappi, Uppal, and Wang (2007)的框架，可以证明这个问题**等价**于：面临期望收益、波动率、以及投资机会夏普比率的联合不确定性的条件下，求解模糊厌恶的投资者的最优投资组合。而Kozak, Nagel, and Santosh (2020)仅仅是这一框架下的一个特例。
 
+> *This problem is equivalent to finding an optimal portfolio allocation of an ambiguity-averse investor who is facing a joint uncertainty in expected returns, volatilities, and Sharpe ratios of investment opportunities. As a result, the special case of Kozak, Nagel, and Santosh (2020) can be improved upon.*
+
+
 
 ## Test Assets, Sorting, and Trees
 
@@ -217,11 +220,15 @@ $$
 
 **利用第一步得到的权重数据在前沿上寻找能够最大化验证集夏普比率的点**。
 
-根据不同的 $\mu_0$，由不同的收缩力度，**每个 $\mu_0$ 都对应着一个前沿**。
+这意味着在每一个收缩力度下，组合内的权重会被调整，进而得到一个新的夏普比率最优解。最优解也就意味着是切点，说明此时曲线被改变了。
+
+也就是说，根据不同的 $\mu_0$，由不同的收缩力度，**每个 $\mu_0$ 都对应着一个前沿**。
+
+> When there is no risk-free assets, the tangency portfolio refers to the intersection of the tangent line starting from (0, 0) to the minimal-variance frontier.
 
 3. 利用测试集数据测试结果
 
-<mark> **这种两步法的估计流程有三种不同的统计解释。** </mark>
+<mark> **这种两步法的估计流程有三种不同的统计解释。** </mark> 而在三种解释下，都存在**one-to-one mapping**。
 
 ### Proposition 1 Target Return and Shrinkage to the Mean
 
@@ -235,11 +242,14 @@ $$
 \hat{w}_{robust} = \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1}(\hat{\mu}+\lambda_0 \bm{1})
 $$
 
+
+[【基础知识：均值方差优化】](/factor_zoo/toolkit/mean_var_opt.md)
+
 <hr>
 
 当不对SDF组合权重施加任何Shrinkage，最终的解为： $\hat{w}_{naive} = \hat{\Sigma}^{-1}\hat{\mu} $。
 
-当仅考虑ridge正则项【为方便得到解析解，先不考虑Lasso】时，即 $\lambda_1 = 0$：
+当仅考虑ridge正则项时【为方便得到解析解，先不考虑Lasso】，即 $\lambda_1 = 0$：
 $$
 \underset{w}{min} \ w^T \hat{\Sigma}w+\lambda_2 ||w||_2^2 \qquad s.t. \ w^T \hat{\mu} = \mu_0 \ \text{and} \ w^T \bf{1} = 1
 $$
@@ -306,6 +316,7 @@ $$
 (\Sigma+\lambda_2 I_N)\hat{w}_{robust,i} = \hat{\mu}_i + \lambda_0  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 
+[【基础知识：Lasso 推导】](/factor_zoo/toolkit/lasso_derivation.md)
 
 <hr>
 
@@ -318,31 +329,50 @@ $$
 \hat{w} = arg \underset{w}{min} \ \ {1\over2} \left( \hat{\mu}-\hat{\Sigma}w \right)^T \hat{\Sigma}^{-1} \left( \hat{\mu}-\hat{\Sigma}w \right)+\lambda_1 ||w||+{1\over2}\lambda_2 ||w||^2_2
 $$
 
-当协方差矩阵为对角阵，记为 $\hat{D}$，此时概念上也就类似于 PCA space，有以下解：
+> [!TIP|label:Closed-form solution]
+> 将目标函数展开，并固定资产 $i$ 得到：
 $$
-\hat{w} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu}-\lambda_1 \bm{1})_+, \qquad (x) = max(x,0)
+-w_i^T\mu + {1\over2}w_i^TD_iw_i+\lambda_1||w_i||_1+\lambda_2 ||w_i||_2^2
+$$
+>
+> 按照**Lasso 推导**中同样的分析逻辑：当 $\mu_i>0$，应有 $w_i>0$，而当 $\mu_i<0$，则有 $w_i<0$。进一步对其求导得；
+$$
+\begin{aligned}
+\text{if} \ w_i>0 &,\quad (D_i+\lambda_2I_N)w_i = \mu_i -\lambda_1\bm{1} \Longrightarrow \mu_i > \lambda_1\bm{1} \\
+\Longrightarrow \ &w_i = (D_i+\lambda_2I_N)^{-1} sign(w) (|\mu_i| -\lambda_1\bm{1})_+ \\
+\text{if} \ w_i<0 &,\quad (D_i+\lambda_2I_N)w_i = \mu_i+\lambda_1\bm{1}   \Longrightarrow \mu_i <- \lambda_1\bm{1} \\
+\Longrightarrow \ &w_i = (D_i+\lambda_2I_N)^{-1}sign(w)(|\mu_i| +\lambda_1\bm{1})_+ \\
+\end{aligned}
+$$
+>
+> 由于本文要求*long-only*，$w>0,\ \mu_i > \lambda_1\bm{1}$，则进一步简化为：
+$$
+w_i = (D_i+\lambda_2I_N)^{-1}(\mu_i -\lambda_1\bm{1})_+
+$$
+> 
+
+当协方差矩阵为对角阵【这就代表**资产收益率之间并不相关**】，记为 $\hat{D}$，此时概念上也就类似于 PCA space，有以下解析解：
+$$
+\hat{w} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu}-\lambda_1 \bm{1})_+, \qquad (x)_+ = max(x,0)
 $$
 而本文给出的解为：
 $$
 \hat{w}_{robust} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu}+\gamma \bm{1}-\lambda_1 \bm{1})_+
 $$
+
 求解过程如下：
 $$
 L = {1\over2}w^T \hat{D} w + {1\over2}\lambda_2 ||w||_2^2 + \lambda_1 ||w||_1 - \tilde{\gamma}_1 \left( w^T \hat{\mu}-\mu_0 \right)- \tilde{\gamma}_2 \left( w^T \bm{1}-1 \right)
 $$
 
-一阶导为，【active set意为 $w$ 非零】：
+求导有：
 $$
-(D+\lambda_2 I_N)\hat{w}_{robust,i} = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+\hat{w}_{robust,i} = \left( \hat{D}_i+\lambda_2 I_N \right)^{-1}(\tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2 \bm{1} - \lambda_1 \bm{1})_+
 $$
-因此：
-$$
-\hat{w}_{robust,i} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2 \bm{1} - \lambda_1 \bm{1})_+
-$$
-同样地，放松权重假设，可以得到：
+由于两个超参数都和 $\mu_0$ 有关，同样地，放松权重假设，可以得到：
 
 $$
-\hat{w}_{robust,i} = \left( \hat{D}+\lambda_2 I_N \right)^{-1}(\hat{\mu}_i + \lambda_0 \bm{1} - \tilde{\lambda}_1 \bm{1})_+
+\hat{w}_{robust,i} = \left( \hat{D}_i+\lambda_2 I_N \right)^{-1}(\hat{\mu}_i + \lambda_0 \bm{1} - \tilde{\lambda}_1 \bm{1})_+
 $$
 
 其中，
@@ -350,32 +380,32 @@ $$
 \lambda_0 = {\tilde{\gamma}_2 \over \tilde{\gamma}_1}, \qquad \tilde{\lambda}_1 = {\lambda_1\over \tilde{\gamma}_1}
 $$
 
-因此，当对均值收缩程度 $\lambda_0$ 为0时，二者等价。
+可以看出，当对均值收缩程度 $\lambda_0$ 为0时，二者等价，因此，说本文是generalization。
+
+当 $\lambda_0 = 0$，说明 $ \tilde{\gamma}_2 = 0 $，也就代表**放弃**权重限制，而非**放松**权重限制。
 
 #### Non-diagonal covariance matrix <!-- {docsify-ignore} -->
 
-在非对角阵的情况下，并不能分离出ridge和lasso的影响，因此，lasso惩罚项并不能包括均值收缩。【？】
 
-> *In the general case of a non-diagonal sample covariance matrix, however, the impacts of ridge and lasso penalties cannot be separated, and, hence, the lasso penalization cannot subsume the mean shrinkage.*
 
-因此，需要求解以下最优化问题：
+在非对角阵的情况下，需要求解以下最优化问题：
 $$
 L = {1\over2}w^T \hat{\Sigma} w + {1\over2}\lambda_2 ||w||_2^2 + \lambda_1 ||w||_1 - \tilde{\gamma}_1 \left( w^T \hat{\mu}-\mu_0 \right)- \tilde{\gamma}_2 \left( w^T \bm{1}-1 \right)
 $$
 
 相应地，导函数变为：
 $$
-(\Sigma+\lambda_2 I_N)\hat{w}_{robust,i} = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+\left[(\Sigma+\lambda_2 I_N)\hat{w}_{robust}\right]_i = \tilde{\gamma}_1 \hat{\mu}_i + \tilde{\gamma}_2  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 
 放松权重假设为：
 $$
-(\Sigma+\lambda_2 I_N)\hat{w}_{robust,i} = \hat{\mu}_i + \lambda_0  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+\left[(\Sigma+\lambda_2 I_N)\hat{w}_{robust}\right]_i = \hat{\mu}_i + \lambda_0  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 
 对应在 Kozak et al.(2020) 中的导函数为：
 $$
-(\Sigma+\lambda_2 I_N)\hat{w}_{i} = \hat{\mu}_i  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+\left[(\Sigma+\lambda_2 I_N)\hat{w}\right]_{i} = \hat{\mu}_i  - \tilde{\lambda}_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 
 因此，当 Kozak et al.(2020) 使用 $\hat{\mu}+\lambda_0\bm{1}$ 代替 $\hat{\mu}$ 时，二者等价。
@@ -384,10 +414,22 @@ $$
 
 综上，在协方差矩阵的两种情况下，本文都属于对Kozak et al.(2020)的扩展。
 
+然而，此时协方差矩阵不为对角阵，会带来其他变量的影响。因此，对于任意单个资产来说，并不能分离出ridge和lasso的影响，所以也无法将均值收缩纳入lasso惩罚项内。
+
+> *In the general case of a non-diagonal sample covariance matrix, however, the impacts of ridge and lasso penalties cannot be separated, and, hence, the lasso penalization cannot subsume the mean shrinkage.*
+
+
+
+
 
 ### Proposition 3 General Robust Estimation Perspective
 
-本文的估计也**等价于**在不确定最大的情况下【包括均值不确定性，方差不确定性和夏普比率不确定性】求解均值方差优化问题。
+本文的估计也**等价于**在不确定最大【因此称之为稳健估计】的情况下【包括均值不确定性，方差不确定性和夏普比率不确定性】求解均值方差优化问题。
+
+$$
+\underset{w}{min} \ \underset{\mu,\Sigma \in S_{SR}\cap S_{\Sigma} \cap S_{\mu}}{max} \ w^T\Sigma w \qquad s.t.\ w^T\bm{1} = 1, \ w^T\hat{\mu} = \mu_0
+$$
+
 
 每一种收缩都对应着一类不确定性。
 
@@ -399,6 +441,8 @@ estimation.*
 >
 > 因此，在不确定性下，我们给出的是一个区间估计，而非点估计。
 
+[【推荐阅读：RFS2007, Portfolio Selection with Parameter and Model Uncertainty】](/factor_zoo/portfolio_selection_with_parameter_model_uncertainty.md)
+
 <hr>
 
 首先考虑均值和协方差的不确定性。
@@ -408,7 +452,7 @@ S_{\mu} &= \left\{ \mu: \mu_i = \hat{\mu}_i + e_i^{\mu}; |e_i^{\mu}| \leq \mathc
 \end{aligned}
 $$
 
-参数 $\mathcal{k}_{\mu}, \mathcal{k}_{\sigma}$ 分别捕捉了均值和协方差估计量中的不确定性，
+参数 $\mathcal{k}_{\mu}, \mathcal{k}_{\sigma}$ 分别捕捉了均值和协方差估计量中的不确定性。
 
 稳健的投资组合最优化等价于在不确定性最大的情况下求解：
 
@@ -419,28 +463,41 @@ $$
 将 $S_{\mu}$ 代入：
 $$\begin{aligned}
 & \underset{w}{min} \ \underset{\Sigma \in S_{\Sigma}}{max} \ {1\over2}w^T \Sigma w -\tilde{\gamma}_1 \sum_{i=1}^N \left( w_i [ \hat{\mu}_i - \mathcal{k}_{\mu} sign(w_i) ] - \mu_0 \right) - \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right) \\
-= &\underset{w}{min} \ \underset{\Sigma \in S_{\Sigma}}{max} \ {1\over2}w^T \Sigma w -\tilde{\gamma}_1 \left( w^T \mu - \mu_0 \right)+\tilde{\gamma}_1 \sum_{i=1}^N \mathcal{k}_{\mu} |w_i|- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
+= &\underset{w}{min} \ \underset{\Sigma \in S_{\Sigma}}{max} \ {1\over2}w^T \Sigma w -\tilde{\gamma}_1 \left( w^T \hat{\mu} - \mu_0 \right)+\tilde{\gamma}_1 \sum_{i=1}^N \mathcal{k}_{\mu} |w_i|- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
 \end{aligned} 
 $$
 
+> [!TIP|label:The worst case]
+> The worst case指的就是内层最优化。
+> 
+> 在max最优化中，我们需要在 $\mu, \Sigma$ 的不确定性下最大化目标函数。对于 $\mu$ 来说，因为目标函数中是减号，所以需要 $\mu$ 越小越好，因此应带入 $e_i^{\mu}=-\mathcal{k}_{\mu}, \mu_i = \hat{\mu}_i -\mathcal{k}_{\mu}$。但由于 $w_i$ 正负不定，所以加入符号函数 $sign$，当 $w_i$ 为正数时为 $\mu_i = \hat{\mu}_i -\mathcal{k}_{\mu}$，当 $w_i$ 为负数时为 $\mu_i = \hat{\mu}_i + \mathcal{k}_{\mu}$。
+>
+> 下文 $\Sigma$ 不确定性处理思路相同。
+
 再将 $S_{\Sigma}$ 代入：
 $$
-\underset{w}{min} \ {1\over2} tr \left( w^T \Sigma w \right)+ \mathcal{k}_{\sigma}w^T w -\tilde{\gamma}_1 \left( w^T \mu - \mu_0 \right)+\tilde{\gamma}_1 \sum_{i=1}^N \mathcal{k}_{\mu} |w_i|- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
+\underset{w}{min} \ {1\over2} tr \left( w^T \hat{\Sigma} w \right)+ \mathcal{k}_{\sigma}w^T w -\tilde{\gamma}_1 \left( w^T \hat{\mu} - \mu_0 \right)+\tilde{\gamma}_1 \sum_{i=1}^N \mathcal{k}_{\mu} |w_i|- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
 $$
 
 最终，令 $ \lambda_1 = \tilde{\gamma}_1 \mathcal{k}_{\mu} \text{ and } \lambda_2 = \mathcal{k}_{\sigma} $，即可得到我们熟悉的式子：
+
+> why trace?
+>
+> ambiguity aversion and ambiguity?
+
 $$
-\underset{w}{min} \ {1\over2} tr \left( w^T \Sigma w \right)+ \lambda_2 ||w||^2_2 +\lambda_1 ||w||_1 -\tilde{\gamma}_1 \left( w^T \mu - \mu_0 \right)- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
+\underset{w}{min} \ {1\over2} tr \left( w^T \hat{\Sigma} w \right)+ \lambda_2 ||w||^2_2 +\lambda_1 ||w||_1 -\tilde{\gamma}_1 \left( w^T \hat{\mu} - \mu_0 \right)- \tilde{\gamma}_2 \left( w^T \bm{1} - 1 \right)
 $$
 
 因此，**lasso shrinkage $\lambda_1$ 代表了均值的不确定性，而ridge shrinkage $\lambda_2$ 代表了方差的不确定性**。
 
-因此，在考虑了两种不确定性的情况下，能够得到关于整个均值方差前沿的稳健估计，那么第二步就是找到切点组合。
+因此，在考虑了两种不确定性的情况下，能够得到关于整个均值方差前沿的稳健估计，那么第二步就是找到样本外切点组合。
 
 <hr>
 
-均值收缩能够与切点组合夏普比率的不确定性联系起来，从最一般的情况【即不带任何收缩】考虑：
+***均值收缩能够与切点组合夏普比率的不确定性联系起来***。
 
+为了展示这一性质，考虑拥有风险厌恶系数为 $\gamma$ 的投资者的均值方差优化问题，先从最一般的情况【即不带任何收缩】入手：
 
 $$
 \underset{w}{max} \  \ w^T \hat{\mu} -  { \gamma \over2}w^T \Sigma w - {\gamma}_1 \left(1- w^T \bm{1} \right)
@@ -454,13 +511,12 @@ $$
 \underset{w}{max} \  \ w^T \left(\delta \hat{\mu} + (1-\delta)\bar{\mu}\bm{1}  \right)-  { \gamma \over2}w^T \Sigma w - {\gamma}_1 \left(1- w^T \bm{1} \right)
 $$
 
-此时，其解变为： $ w^* = \alpha_{\delta} \hat{w}_{naive}+(1-\alpha_{\delta} )\hat{w}_{var} \ \text{with} \ \alpha_{\gamma} = { \delta \over \gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu} $。
+此时，其解变为： $ w^* = \alpha_{\delta} \hat{w}_{naive}+(1-\alpha_{\delta} )\hat{w}_{var} \ \text{with} \ \textcolor{#d22778}{\bm{\alpha_{\delta}}} = { \delta \over \gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu} $。
 
 $\delta$ 的取值范围为0 ~ 1，当为 1 时，代表不收缩，而为 0 时，代表完全收缩到均值，因此这一写法称之为向截面均值的收缩。也正是因为 $\delta$ 的取值范围，实际上**均值收缩代表着更高程度的风险厌恶**，【见 $\alpha_{\gamma}$】。
 
-<hr>
 
-接下来从夏普比率的不确定性来看均值收缩这一问题：
+接下来从夏普比率的不确定性来看均值收缩这一问题，不确定性集合为：
 
 $$
 S_{SR} = \left\{ \mu : (\mu-\hat{\mu})^T \Sigma^{-1}  (\mu-\hat{\mu}) \leq \mathcal{k}_{SR} ; \ \mathcal{k}_{SR} \geq 0  \right\}
@@ -469,7 +525,7 @@ $$
 > [!NOTE]
 > 尽管是夏普比率的不确定性，但此时 $\Sigma$ 并没有带有不确定性，因此，不确定性的来源还是 $\mu$
 
-同样，最优化不确定性：
+与上述稍有不同的是，夏普比率不确定性直接作为一个拉格朗日条件出现：
 
 $$
 \underset{w}{max} \ \underset{\mu \in S_{SR}}{min} \ w^T \mu -{1\over2}w^T \Sigma w-\gamma_2 \left(\mathcal{k}_{SR}- (\mu-\hat{\mu})^T \Sigma^{-1}  (\mu-\hat{\mu}) \right) -\gamma_1 \left(1- w^T \bm{1}  \right)
@@ -478,13 +534,24 @@ $$
 此时解为：
 $$\begin{aligned}
 w^* &= \alpha_{\mathcal{k}_{SR}} \hat{w}_{naive}+(1-\alpha_{\mathcal{k}_{SR}} )\hat{w}_{var} \\
-\alpha_{\mathcal{k}_{SR}} &= { 1 \over {\mathcal{k}_{SR} \over \sigma_p}+\gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu}
+\textcolor{#d22778}{\bm{\alpha_{\mathcal{k}_{SR}}}} &= { 1 \over {\mathcal{k}_{SR} \over \sigma_p}+\gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu}
 \end{aligned}
+$$
+
+与均值收缩一样，**夏普比率的不确定性也代表了更高程度的风险厌恶**【系数更小】。
+
+
+对比均值收缩和夏普比率不确定性的 $\alpha$，可以发现二者都存在一对一的mapping，因此，**二者可以通过不同的取值来表征同样程度的风险厌恶**。
+
+$$
+\bm{\alpha_{\delta}} = {\delta \over \gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu}, \quad {\bm{\alpha_{\mathcal{k}_{SR}}}} = { 1 \over {\mathcal{k}_{SR} \over \sigma_p}+\gamma} \bm{1}^T \hat{\Sigma}^{-1}\hat{\mu}
 $$
 
 
 
+至此，已经解释了为什么说每一类收缩都对应着一种不确定性。
 
+<hr>
 
 
 
