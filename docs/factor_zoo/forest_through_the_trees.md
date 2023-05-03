@@ -907,16 +907,57 @@ Following Kozak, Nagel, and Santosh (2020)，直接筛选出市值大于总市�
 
 ## AP-trees in Large Dimension
 
+在以往的文献中，构建测试资产的方法往往是将许多cross section堆叠（stack）起来，例如将许多double sort放在一起作为测试资产。随着异象数量越来越多，测试资产的数量也在不断增加。
+
+但是，这种处理方式背后有很大问题。例如，不断对于同样的投资域double sort，最终的结果是一只股票会**重复**的出现在每一次的double sort portfolio中，并且也没有考虑某些股票是否反映了double sort变量所代表的**特定风险**。而AP-tree则很好地解决了这些问题。
+
+下文通过以下几种方法，基于10个特征构建了测试资产：
+
+- Sets of 10 *quintile* portfolios, *uniformly* sorted by characteristics (50 assets altogether)
+- sets of 10 *decile*-sorted portfolios (100 assets)
+- a combination of *six double-sorted* portfolios, with each based on *size and some other characteristic* (54 assets)
+- a combination of 25 *double-sorted* portfolios, with each based on *size and some other characteristic* (225 assets)
+- Tree-based portfolios are constructed based on combining selected assets (10/40 portfolios) from each of the 36 cross-section (starting from 360 and 1,440 assets, correspondingly)
+
+这些资产的表现如下：
+
+<div align = 'center'>
+
+![](image/20230503PP1.png)
+</div>
+
+从quantile到decile可以大幅度提高夏普比率，在传统的测试资产框架中，$25 \times 9$ 的double sort 取得了最好的效果，样本外月频夏普比率达到了0.4-45。
+
+值得注意的是，大多数的表现在组合数为20-30就已经实现了，这也暗示着在**大量的测试资产组合中存在着极大程度的冗余**。
 
 
-  
+### Evaluating Asset Pricing Models
 
+正如文章开篇提到的，在测试资产定价模型时，**测试资产的选择**也很重要。
 
+本节通过资产定价文献中常见的horse race试图说明两点：
 
+- popular empirical metrics for model evaluation and comparison depend on the *choice of tests assets*
+  - 最优的模型不仅要有良好的模型表现，还要张成SDF，但是对于传统模型来说，尽管无法张成SDF，但是在特定的模型评价指标中还是能有很好的表现【例如 $\alpha$】
+- popular measures of model performance used in larger cross-sections suffer from *redundancy caused by asset repackaging*
+  - 受到大量重复组合的影响，许多传统指标如 $\alpha$，$\text{XS-R}^2$ 都严重失真了。因此关注SDF alpha 可能是更好的选择
 
+<div align = 'center'>
 
+![](image/20230503PP2.png)
+</div>
 
+horse race结果如上。horse race的目标并不是找到最优的组合，而是想说明这些指标的局限性。
 
+特别是 $\alpha$ 很具有误导性，因为其忽略了组合的重复问题，100 deciles and 225 double-sorted portfolios当中，有许多组合基本都差不多，因为这些组合能够被解释的很好，因此最终的平均 $\alpha$ 就会很小，进而不具有显著性。
 
+GLS可以回避这个问题，因为GLS考虑了组合之间的相关性。
+
+从下图可以看出组合之间明显的相似性：
+
+<div align = 'center'>
+
+![](image/20230503PP3.png)
+</div>
 
   
