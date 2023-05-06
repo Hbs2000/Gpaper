@@ -205,9 +205,9 @@ AP-Pruning的问题在于 **bias-variance trade-off**。节点位置越高，股
 
 本文估计流程为：
 
-1. 对于每一个目标收益率 $\mu_0$，都可以找到对应的最小方差权重 $\hat{w}_{robust}$，进而得到有效前沿。此时，$\mu_0$ 与 lasso参数 $\lambda_1$，ridge参数 $\lambda_2$ 一样都被视为**超参数**。
+1. For a given **set** of values of tuning parameters 样本外预期收益率 $\mu_0$，lasso参数 $\lambda_1$，ridge参数 $\lambda_2$，当fix $\lambda_1, \lambda_2$，多个 $\mu_0$ 才**能得到前沿**；而当 $\lambda_1, \lambda_2$ 变化时，则会形成**不同的前沿**。当fix $\mu_0$，则只能够得到**一个权重数据点**。
 
-这一阶段给出不同的 $\mu_0$ 是为了求出有效前沿，**此时仅存在一个前沿**。
+在此过程中，$\mu_0$ 与 $\lambda_1, \lambda_2$  一样都被视为**超参数**。
 
 优化问题如下：
 
@@ -218,15 +218,19 @@ $$
 
 2. 利用验证集数据选择超参数 $\mu_0$，$\lambda_1$，$\lambda_2$
 
-**利用第一步得到的权重数据在前沿上寻找能够最大化验证集夏普比率的点**。
+**利用第一步得到的权重数据代入验证集，寻找能够最大化验证集夏普比率的权重数据，并选择该权重对应的超参数**。
 
-这意味着在每一个收缩力度下，组合内的权重会被调整，进而得到一个新的夏普比率最优解。最优解也就意味着是切点，说明此时曲线被改变了。
-
-也就是说，根据不同的 $\mu_0$，由不同的收缩力度，**每个 $\mu_0$ 都对应着一个前沿**。
 
 > When there is no risk-free assets, the tangency portfolio refers to the intersection of the tangent line starting from (0, 0) to the minimal-variance frontier.
 
 3. 利用测试集数据测试结果
+
+> [!NOTE|label:创新点]
+> 在训练流程上，与常见的训练方法**并无区别**。
+>
+> 但是相对于之前的最优化步骤，本流程最大的创新点是**将 $\mu_0$ 作为超参数**，从而规避了样本内最优化带来的**过拟合**问题。
+
+
 
 <mark> **这种两步法的估计流程有三种不同的统计解释。** </mark> 而在三种解释下，都存在**one-to-one mapping**。
 
@@ -241,6 +245,7 @@ $$
 $$
 \hat{w}_{robust} = \Big( \hat{\Sigma}+\lambda_2 I_N \Big)^{-1}(\hat{\mu}+\lambda_0 \bm{1})
 $$
+
 
 
 [【基础知识：均值方差优化】](/factor_zoo/toolkit/mean_var_opt.md)
@@ -603,6 +608,8 @@ $$
 $$
 
 正是因为考虑到了后续标准化的需求，才对 $\mu_1$ 做了带有根号的reweight，得到 $\hat{\mu}_1$。当得到了 $\hat{\mu}_1$，那么 $\hat{\Sigma}_1$ 也会随之调整，因此reweight后的均值和协方差都已经部分排除了噪音的影响，从而适合进一步用于回归。
+
+相当于调整了节点的权重。
 
 > [!NOTE|label:注意]
 > 此时的分母并不代表细分节点的协方差和parent node的协方差精确的函数关系，仅仅是用以说明二者之间定性的关系。
