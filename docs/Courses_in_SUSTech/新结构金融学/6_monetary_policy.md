@@ -1,8 +1,10 @@
 # Monetary policy
 ## Reference 
-1. Redistribution Channel of Monetary Policy: Evidence from Bank Lending, Yi Huang, Bing Lu, and Hao Zhou, Working Paper.
-2. The Collateral Channel of Monetary Policy: Evidence from China, Hanming Fang, Yongqing Wang, and Xian Wu, Working Paper, 2021.
-3. Monetary Policy Transmission with Heterogeneous Banks and Firms: The Case of China, Guofeng Sun, Ji Zhang, and Xiaodong Zhu, Working Paper, 2021.
+1. Redistribution Channel of Monetary Policy: Evidence from Bank Lending, Yi Huang, Bing Lu, and Hao Zhou, ***Working Paper***.
+   
+2. The Collateral Channel of Monetary Policy: Evidence from China, Hanming Fang, Yongqing Wang, and Xian Wu, ***Working Paper***, 2021.
+   
+3. Monetary Policy Transmission with Heterogeneous Banks and Firms: The Case of China, Guofeng Sun, Ji Zhang, and Xiaodong Zhu, ***Working Paper***, 2021.
 
 量化宽松下，赚到钱的都是有钱人？
 

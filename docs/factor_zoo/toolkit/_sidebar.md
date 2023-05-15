@@ -1,3 +1,5 @@
+- [Stochastic Discount Factor](/factor_zoo/toolkit/SDF.md)
+- [Factor Models](/factor_zoo/toolkit/factor_model.md)
 - [Mean Variance Optimization](/factor_zoo/toolkit/mean_var_opt.md)
 - [Lasso Derivation](/factor_zoo/toolkit/lasso_derivation.md)
 - [R Square](/factor_zoo/toolkit/r_square.md)

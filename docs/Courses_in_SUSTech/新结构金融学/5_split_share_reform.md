@@ -7,8 +7,11 @@
 
 ## Reference
 1. 【TOP】China’s Secondary Privatization: Perspectives from the Split-Share Structure Reform, Li Liao, Bibo Liu, and Hao Wang, ***Journal of Financial Economics***, 2014.
+   
 2. Privatization and Risk Sharing: Evidence from the Split Share Structure Reform in China, Kai Li, Tan Wang, Yan-Leung Cheung, and Ping Jiang, ***Review of Financial Studies***, 2011.
+   
 3. Profiting from Government Stakes in a Command Economy: Evidence from Chinese Asset Sales, Charles W. Calomiris, Raymond Fisman, and Yongxiang Wang, ***Journal of Financial Economics***, 2010.
+   
 4. China Share Issue Privatization: The Extent of Its Success, Qian Sun and Wilson Tong, ***Journal of Financial Economics***, 2003.
 
 ## 【TOP】China’s Secondary Privatization: Perspectives from the Split-Share Structure Reform 

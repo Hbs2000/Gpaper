@@ -2,7 +2,10 @@
 
 ## Reference 
 1. Local Crowding Out in China, Yi Huang, Ugo Panizza, and Marco Pagano, Graduate Institute Geneva, ***Journal of Finance***, 2020. 
+   
 2. The Financing of Local Government in China: Stimulus Loan Wanes and Shadow Banking Waxes, Zhuo Chen, Zhiguo He, and Chun Liu, ***Journal of Financial Economics***, 2020
+   
+3. Local Government Implicit Debt and the Pricing of LGFV Bonds, Laura Xiaolei Liu<sup>1</sup>, Yuanzhen Lyu<sup>2</sup>, and Fan Yu<sup>3</sup>, ***Journal of Financial Research (in Chinese)***, 2021
 
 ## The Great Wall of Debt: Real Estate, Political Risk, and Chinese Local Government Financing Cost
 
@@ -60,7 +63,7 @@
 
 金融危机之前城投债是很少的
 
-4万亿中国家财政和信贷只有1.1万亿，剩下的靠地方自己解决，只是国家放松了管制，允许搞项目和扩大投资，因此地方不得不通过其他手段融资。
+4万亿中中央政府的财政和信贷只提供1.1万亿，剩下的靠地方自己解决，只是国家放松了管制，允许搞项目和扩大投资，因此地方不得不通过其他手段融资。
 <div align = 'center'>
 
 ![](../image/20230307CF5.png)

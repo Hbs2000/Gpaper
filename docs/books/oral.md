@@ -244,7 +244,70 @@
 
 > It's gonna be tempting to use AI as a weapon.
 
+## Part 18
 
+1. **drive me crazy**
+
+    也可以表述为 drive me nuts
+
+2. **fuel**
+
+    加燃料，推动
+
+> My desire for a better life is fueling me to work harder.
+
+3. **pump the breaks**
+
+    踩下刹车，喊停
+
+> Some people are going to pumps the breaks.
+
+4. **cyborg**
+
+    赛博格，半机器半人
+
+> It's a combination of electronics and biology.
+
+5. **limbic resonance**
+
+    互联网做出的产品越能让人大脑共振，则越会让人沉迷。
+
+    limibic system 大脑系统
+
+> the more limibic resonance, the more engagement
+
+6. **see sth coming**
+
+    想到会发生
+
+> I didn't see that coming. 我没想到这件事情会真的发生
+>
+> I didn't see you coming. 我没想到你会来
+> 
+> A lot of people didn't see Twitter coming. 许多人当初不觉得推特能火
+
+7. **One picture says a thousand words**
+
+8. **futile**
+
+    徒劳的
+
+> I try to convince people to slow down AI, but that was futile.
+
+9. **regulation process**
+
+    Normally the way that regulations work, it's very slow, it's very slow indeed. 
+
+    Usually it'll be something, some new technology, it will cause damage or death, it will be an outcry, there will be investigation, years will pass, there will be some sort of insight committee, there will be rule making, then there will be oversight, eventually regulations.
+
+    This all takes many years, this is the normal course of things, if you look at say automotives regulations, how long did it take for seat belts to be implemented to be required
+
+
+10. **spooky**
+
+    吓人的
+    
+> It's getting spooky over here.
 
 
 
