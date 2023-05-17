@@ -6,6 +6,137 @@
 
 2. Pledgeability and Asset Prices: Evidence from the Chinese Corporate Bond Markets, Hui Chen, Zhuo Chen, Zhiguo He, Jinyu Liu, and Rengming Xie, ***Journal of Finance*** forthcoming, 2022.
 
+## The Impact of Municipal Corporate Bond on China’s Corporate Debt Market
+
+Keqi Chen, Yi Huang, Kathy Yuan, Hao Zhou
+
+从Panel B来看，中国的债市比股市发展得好，基于股市的比较有趣的研究都属于行为金融方面的研究。
+
+<div align = 'center'>
+
+![](../image/20230516CF1.png)
+</div>
+
+之前债券都是在交易所交易，96-97年股市暴涨，当时大家把债券当作融资来炒股，因此成立银行间市场，当时主要是为了防止银行在交易所不断抵押去炒股。最开始是上市公司才能发债券，其中一半国企一半民企，后续债券发行标准下降，差不多的企业都可以发债，标准比上市要宽松很多，因此债券市场快速发展。
+
+银行间市场的主要参与者中不包括城商行，这是因为其在城市竞争不过四大行，因此是银行间市场中资金的借入方
+
+<div align = 'center'>
+
+![](../image/20230516CF2.png)
+</div>
+
+
+
+由于流动性不足，所以国债的价格发现功能实际上是有缺陷的。一般认为政策性银行发行的债券（policy bank bonds）等同于国债，同时由于其流动性好【turnover高】，所以可以用来画利率曲线。
+
+<div align = 'center'>
+
+![](../image/20230516CF3.png)
+</div>
+
+<div align = 'center'>
+
+![](../image/20230516CF4.png)
+</div>
+
+在交易所的散户交易次数多，但是银行间市场交易额是占据了**绝对多数**。
+
+<div align = 'center'>
+
+![](../image/20230516CF5.png)
+</div>
+
+
+
+本文主要关注MCB债券【城投债】。
+
+*城投债作为一种新的资产，同时具有企业债和公司债的特性，是如何影响债券市场的呢？*
+
+<div align = 'center'>
+
+![](../image/20230516CF6.png)
+</div>
+
+***Main findings***
+
+<div align = 'center'>
+
+![](../image/20230516CF7.png)
+</div>
+
+
+国企央企发行的企业债yield最低，而城投债和公司债的利率差不多，但城投债实际上既享有隐性担保，因此被众多机构投资者追捧。
+
+<div align = 'center'>
+
+![](../image/20230516CF8.png)
+</div>
+
+#### Price impact <!-- {docsify-ignore} -->
+
+过往的研究结论有以下两种【*其看似相互矛盾，实则可能同时存在*】：
+
+1. **crowd out**：过多的政府发债，占据了更多流动性，企业债买的人就少了
+
+2. **crowd in**：假如发行能够完善国债的利率曲线，那么公司债定价更好，反而会促进公司债的发行
+
+> [!TIP]
+> 当国债流动性好，定价比较准确，那么公司债就是国债基础上加上违约风险，因此公司债的定价能力也会得到提升。
+
+当选用bank loan作为data，则得到挤出效应，用债券则是crowd in。这是因为债券价格由交易得出，价格发现功能更加完善。
+
+<div align = 'center'>
+
+![](../image/20230516CF9.png)
+</div>
+
+
+#### 期限结构  <!-- {docsify-ignore} -->
+
+国企发的债都很长，而民企短很多
+
+<div align = 'center'>
+
+![](../image/20230516CF10.png)
+</div>
+
+> [!NOTE|label:Insight]
+> 债券期限越长，越能为保险公司提供reference。英国国债都是五十年、一百年，而中国现在是五年、十年。
+
+国企发长期债，对其他公司发长期债券也会有帮助。
+
+<div align = 'center'>
+
+![](../image/20230516CF11.png)
+</div>
+
+具体来看，城投债长期存量会促进公司债发长期债，然而特别好的公司或国企并不需要城投债提供的crowd in effects【系数为负】。
+
+<div align = 'center'>
+
+![](../image/20230516CF12.png)
+</div>
+
+进一步将lower rating 和non-SOE单独拿出来看：
+
+<div align = 'center'>
+
+![](../image/20230516CF13.png)
+</div>
+
+**Conclusion**
+
+<div align = 'center'>
+
+![](../image/20230516CF14.png)
+</div>
+
+
+
+
+
+
 
 ## Issuance Overpricing of China’s Corporate Debt Securities
 Yi Ding<sup>1</sup>, Wei Xiong<sup>2</sup>, and Jingfan Zhang<sup>1</sup>, ***Journal of Financial Economics***, 2022.
@@ -194,7 +325,7 @@ Hui Chen<sup>1</sup>, Zhuo Chen<sup>2</sup>, Zhiguo He<sup>3</sup>, Jinyu Liu<su
 
 中国存在两个债券交易市场，商业银行只能在银行间市场交易，散户只能在交易所市场，而其他的机构（non-bank financial institutions，NBFIs）如共同基金、保险公司等则**在两侧都可以交易**。截至2014年底，NBFIs在交易所市场和银行间市场的企业债持仓占比分别为76%和57%，相比之下，retail investor只持有0.6%【交易所】而商业银行持有银行间市场的35%。
 
-文章主要研究在两个市场双重上市（dual-list）的**企业债**（enterprise bonds）。企业债一般是由非上市国企发行，由发改委监管。*企业债在2014年政策冲击发生时大概占了公司债的25%*。
+文章主要研究在两个市场双重上市（dual-list）的**企业债**（enterprise bonds）。企业债一般是由非上市国企发行，由发改委监管。*企业债在2014年政策冲击发生时大概占了公司债的25%* 。
 
 这两个市场在回购规则上有很大差别。银行间市场回购（interbank repos）与美国的三方回购系统（tri party repo system）类似，关键的交易细则如抵押物，haircut，以及repo rate都由买卖双方协商确定；而交易所则充当了中央清算方（central clearing counterparty）的功能，给所有的买方和卖方都确定了可抵押债券列表以及对应的haircut，而这些细则的确定很大程度上是根据债券评级来决定的。
 
