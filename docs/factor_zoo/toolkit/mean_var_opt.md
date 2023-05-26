@@ -20,7 +20,7 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
-解得：
+代入约束条件解得：
 $$\begin{aligned}
 \lambda = {\bm{1}^T\Sigma^{-1}\bm{1} \mu_0 - \hat{\mu}^T \Sigma^{-1}\bm{1} \over \bm{1}^T\Sigma^{-1}\bm{1} \hat{\mu}^T\Sigma^{-1}\mu - (\hat{\mu}^T \Sigma^{-1}\bm{1})^2 } \\
 \gamma = {\hat{\mu}^T\Sigma^{-1}\hat{\mu} - \hat{\mu}^T \Sigma^{-1}\bm{1} \mu_0 \over \bm{1}^T\Sigma^{-1}\bm{1} \hat{\mu}^T\Sigma^{-1}\hat{\mu} - (\hat{\mu}^T \Sigma^{-1}\bm{1})^2 }
@@ -39,14 +39,14 @@ $$
 w_{var} = {\Sigma^{-1}\bm{1} \over \bm{1}^T \Sigma^{-1}\bm{1} }
 $$
 
-定义切点组合：
+**定义**切点组合：
 $$
 w_{tan} = {\Sigma^{-1}\hat{\mu} \over \bm{1}^T \Sigma^{-1}\hat{\mu} }
 $$
 
 <hr>
 
-<div  class = 'cpart'>
+<div  class = 'centerwords'>
 
 **变形1**
 </div>
@@ -89,7 +89,7 @@ $$
 
 <hr>
 
-<div  class = 'cpart'>
+<div  class = 'centerwords'>
 
 变形2
 </div>

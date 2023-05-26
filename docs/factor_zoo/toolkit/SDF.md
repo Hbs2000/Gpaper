@@ -46,7 +46,7 @@ $$
 $$
 
 
-<div class = 'cpart'>
+<div class = 'centerwords'>
 
 Projections and Regressions
 </div>
@@ -123,7 +123,7 @@ $$
 实际上，上述公式**很少用到**，只需要知道其代表的性质就够了：**存在一个唯一的SDF，并且该SDF代表一个组合的payoff**。
 
 
-<div class = 'cpart'>
+<div class = 'centerwords'>
 
 Projections That Include a Constant
 
@@ -179,7 +179,7 @@ A+B\tilde{X} = \overline{Y}+\operatorname{Cov}(\tilde{Y},\tilde{X})\operatorname
 \end{align}
 $$
 
-$\tilde{Y} \ \text{and} B\tilde{X}$ 都是列向量，并且有着一一对应的关系，$\tilde{y}_i$ 是 $\tilde{X}$ 的线性组合，并且每一个线性组合都与对应的 $\tilde{y}_i$ 有最大的相关系数，证明如下：
+$\tilde{Y} \ \text{and } B, \tilde{X}$ 都是列向量，并且有着一一对应的关系，$\tilde{y}_i$ 是 $\tilde{X}$ 的线性组合，并且每一个线性组合都与对应的 $\tilde{y}_i$ 有最大的相关系数，证明如下：
 
 
 $$

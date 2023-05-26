@@ -47,23 +47,23 @@ E[\tilde{R}]-R_z = -R_z cov(\tilde{m},\tilde{R})
 
 
 
+## 6.2 General Factor Models 
+
+在绝大多数情况下，我们使用的因子模型中的因子都是收益率，例如 CAPM 或 Fama-French 模型，有时候也会使用宏观变量作为因子，例如 GDP 的变化幅度。事实上，使用宏观变量而非收益率作为因子更加符合直觉，但接下来我们会看到，用收益率作为因子并不失一般性，因为我们可以**把其他因子投影到由收益率张成的空间中**，并把这些投影当作因子，这也就意味着，其他因子也可由收益率表征。。
+
+使用收益率作为因子有一个好处就是可以很方便地确定风险价格，对于收益率来说，其风险价格就是**收益率的均值**，但是对于宏观变量等 general factor，其风险价格 **is not determined by theory**。
+
+因子模型与 SDF 渊源颇深。对于任一因子模型，并且 $R_z \neq 0$，该模型因子的 affine function 就是 SDF，反之同理，如果 SDF 是一些随机变量的 affine function，并且均值不为 0，那么就存在一个以这些随机变量为因子的因子模型。因此，**找因子模型也就等价于在找 SDF 和 affine function**。
+
+因子模型与 mean-variance analysis 也有着密不可分的关系。
+
+> There is a factor model with a single return as the factor **if and only if** the return is on the mean-variance frontier (and not equal to the risk-free return if there is a risk-free asset or to the GMV return if there is no risk-free asset)
 
 
+<div class = 'centerwords'>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Factor Models Are Equivalent to SDFs
+</div>
 
 
 

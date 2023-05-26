@@ -20,41 +20,59 @@ Svetlana Bryzgalova, Markus Pelger, Jason Zhu, Working paper, 2021
 1. 除非选取的测试资产可以张成（span）SDF，否则即使能够解释这些测试资产，也不能说明模型的可靠性
 2. 测试资产不仅可以用于检验模型，还可以用来构建交易组合（building blocks for constructing tradebale risk factors）
 
-因此，mis-specified test asset 不仅影响了SDF的构造，也影响了其评价模型的能力。
+因此，**mis-specified test asset** 不仅影响了SDF的构造，也影响了其评价模型的能力。
+
+> Few studies, in fact, go beyond checking whether a model correctly prices 10-25 stock portfolios and a few bond portfolios. **Implicitly**, one feels that the chosen payoffs do a pretty good job of spanning the set of available risk-loadings (mean returns) and hence that adding additional assets will not affect the results.
+>
+> ......
+>
+> the use of a few portfolios means that a tremendous number of potential asset payoffs are left out in an ad-hoc manner.
+>
+> *Cochrane J. Asset pricing: Revised edition[M]. Princeton university press, 2009.*
+
 
 ### GAP 
 
-过往文献最常使用的特征排序组合无法张成SDF，因此基于这些方法做出的model evaluation实际上也是不可靠的。这些截面排序的组合并不能反映出众多特征的联合影响——**受限于维度灾难以及对交互作用的忽略**。
+过往文献中构造test assets最常使用的方法是特征排序组合【double or triple sort】，这种方法受限于：
 
-通常的做法是将许多排序形成的组合堆在一起，而这并不能解决上述问题，并且会引起新的麻烦：因为这些组合都是基于同一个投资域选取的，所以存在**大量的重复组合**以及对于同一种风险的重复构造。
+1. **维度灾难**，triple sort的因子组合数量已经非常多了【$5 \times 5 \times 5$】，组合内部股票数量已经非常稀疏了
+2. 忽略了特征之间的**交互影响**，最多捕捉三个特征之间的交互关系
+
+因而该类test assets**无法张成SDF**，因此基于这些方法做出的model evaluation实际上也是不可靠的。
+
+出于以上两种考量，通常的做法是将许多排序形成的组合堆（stack）在一起，而这本质上并不能解决上述问题，并且会引起新的麻烦：因为这些组合都是基于同一个投资域选取的，所以存在**大量的重复组合**【同一支股票频繁的出现在不同组合中】以及对于同一种风险的**重复构造**【$5 \times 5 $ 组合里有许多组合极为相似】。
 
 出于对这三种问题的考虑：
-1. 交互作用（complex interactions）
-2. 维度灾难（curse of dimensionality）【triple sort or above】
-3. 组合重复（repackaging and duplication）
+- 交互作用（complex interactions）
+- 维度灾难（curse of dimensionality）【triple sort or above】
+- 组合重复（repackaging and duplication）
 
 文章提出了AP tree model（Asset Pricing Trees）。
 
 ### AP trees
 
-AP trees解决了上述问题，并且具有很好的可解释性，构造出的组合充分分散化，最重要的是，最终AP trees组合能够张成SDF。
+AP trees解决了上述问题，构造出了 <u>可解释性强、组合充分分散，能够张成SDF</u> 的Test assets。
 
 **Two key elements of AP trees：**
 1. 类似于条件排序构造组合
 2. **根据SDF的限制条件剪枝（pruning）**
 
-当构造出树结构后，再根据限制条件进行剪枝。但此处的剪枝与机器学习方法中的剪枝有**本质区别**：机器学习方法中根据local information（如mean impurity decrease），即仅对比父节点和子节点之间的信息，而本文则是在均值方差优化的框架下，考虑所有的节点，因为这些节点都是投资组合，来观察哪些节点组合在一起能够得到最高的夏普比率。
+当构造出树结构后，再根据限制条件进行剪枝。但此处的剪枝与机器学习方法中的剪枝有**本质区别**：机器学习方法中根据local information（如mean impurity decrease），即仅对比父节点和子节点之间的信息，而本文则是在均值方差优化的框架下，考虑整个树的结构，在本文的框架下，所有的节点都是投资组合，本文会选取能够得到最高夏普比率的节点组合。
 
-最后，为例避免过拟合，文章还实现了**对方差和均值的收缩**。因此也算是generalization of Kozak, Nagel, and Santosh (2020)。
+<div align = 'center'>
+
+![](image/20230326PP1.png)
+</div>
+
+最后，为例避免过拟合，在常规penalty之上，文章还实现了**对均值的收缩**。因此也算是generalization of Kozak, Nagel, and Santosh (2020)。
+
 
 ### Evaluation metrics <!-- {docsify-ignore} -->
 
-由于重复资产的存在，传统评价指标如absolute pricing errors往往会夸大模型的表现。
 
-双重排序后的组合中，许多极为类似，定价这些组合本质上也等价于仅定价了一个组合，而因为这些重复资产的定价误差小，将那些定价误差大的组合平均掉了。
+双重排序后的组合中，许多极为类似并且不含有太多的定价信息，定价这些组合本质上也等价于仅定价了一个组合，而因为这些重复资产的定价误差小，将那些定价误差大的组合【真正含有定价信息的组合】平均掉了。正是由于重复资产的存在，传统评价指标如absolute pricing errors往往会夸大模型的表现。
 
-
-本文提出使用样本外解释SDF的能力来评价模型，得到更为准确的结果。
+本文提出最好使的评价指标是：**样本外解释SDF的能力**【样本外SDF具有最高的夏普比率】，基于这个指标能够得到更为准确的结果。
 
 
 ### The role of Machine Learning <!-- {docsify-ignore} -->
@@ -88,7 +106,7 @@ Factor zoo实际上是基于统计和经济学模型找一些可以张成SDF的�
 - Fan, Liao, and Wang (2016) 
 - Kozak, Nagel, and Santosh (2020) 
 
-PCA是这一类文献中最常用的方法，但由于这些方法是在已有的投资组合中提取信息，就会存在上述提及的问题。而本文是在全新的投资组合中提取信息，这些组合有更多的信息量。
+PCA是这一类文献中最常用的方法，但由于这些方法是在已有的特征排序投资组合中提取信息，就会存在上述提及的问题。而本文提出了**新的构建投资组合的方法，扩充了投资组合的范围**。这些全新的投资组合仍然可以作为传统方法【如PCA】的输入，在这些的投资组合中提取定价信息，自然能够得到更多的信息量。
 
 2. **仅提取特征和收益率之间的关联，而不假设风险模型或无套利限制**
 
@@ -98,15 +116,15 @@ PCA是这一类文献中最常用的方法，但由于这些方法是在已有�
 - Moritz and Zimmerman (2016) 
 - Rossi (2018) 
 
-本文不仅着眼于收益率，而是从SDF入手。
+像之前提到的，本文不仅着眼于收益率，而是从能够张成有效前沿的角度入手。
 
-3. **在不假设股票和特征之间关系的前提下 (Nonparametric)估计条件SDF**
+3. **在不假设股票和特征之间关系的前提下 (Nonparametric)估计条件SDF**【emerging】
 
 
 - Chen, Pelger, and Zhu (2022)
 - Gu, Kelly, and Xiu (2020a)
 
-本文在基于特征估计条件SDF的同时，保证了模型的**可解释性**。
+通常来说非参方法可解释性会差一些，而本文在基于特征估计条件SDF的同时，保证了模型的**可解释性**。
 
 特别地，对于Kozak, Nagel, and Santosh (2020)，其仅仅对协方差矩阵进行了收缩，然而本文在此基础上，对收益率均值也施加了收缩。这一收缩有极大的意义，**因为样本均值中包含了大量的估计误差，而尽管其绝对数值很大，但其中有很大一部分是由噪声导致的，而不是数据的本质特征**。
 
@@ -120,6 +138,10 @@ PCA是这一类文献中最常用的方法，但由于这些方法是在已有�
 
 ### Test Assets and SDF
 
+> ***我们需要什么样的 test asset？***
+
+**Conditional** on a set of characteristics $C_t$, a valid SDF $M_t$ is constructed by its **projection** on the space of individual stock return $R_t$ as follows:
+
 $$
 M_t = 1-\sum_{i=1}^N b_{t-1,i}R_{t,i} \quad \text{with} \ b_{t-1,i} = f(C_{t-1,i})
 $$
@@ -132,9 +154,15 @@ $$\begin{equation}
 M_t = 1 - \sum_{j=1}^J w_j R_{t,j}^{\text{managed}} \quad  R_{t,j}^{\text{managed}} = \sum_{i=1}^N f_j (C_{t-1,i})R_{t,i} 
 \end{equation}$$
 
-通过这种方式，可以将conditional model表达为unconditional model，并且维度从individual stock level降至portfolio level。
+
+通过这种方式，可以将conditional model表达为unconditional model【时变的部分转移到了 $R_{t,j}^{\text{managed}}$ 】，并且维度从individual stock level降至portfolio level。
 
 因为SDF由这些managed portfolio张成，因此，寻找SDF也就等价于定价这些managed portfolio。因此，问题就此转化为**寻找并定价能够张成SDF的managed portfolio**。【找managed portfolio也就是在找基础函数】
+
+> [!NOTE|label:Basis function]
+> **IPCA** consider **linear basis functions** resulting in $R_{t}^{\text{managed}}$ being standard long-short factors, and conventional risk factors rely on quantile-based indicators, while **Shrinking** employ **polynomial functions**.
+
+> 如果这么说的话，那么如何更好的构造managed portfolio是不是也算一个问题呢？
 
 但是，如果找到的managed portfolio并不能张成SDF，那么即使定价了这些managed portfolio，也不能说明找到了真正的SDF。甚至在某些情况下，能够解释某些managed portfolio的模型，并不比不能解释这些managed portfolio距离真实的SDF更近。
 
@@ -148,58 +176,83 @@ M_t = 1 - \sum_{j=1}^J w_j R_{t,j}^{\text{managed}} \quad  R_{t,j}^{\text{manage
 In summary，最终能够张成SDF的最优managed portfolio应该符合以下几个性质
 
 1. 同时反映众多特征的影响【reflect the impact of multiple characteristics at the same time】
-2. 能够在样本外实现最高的夏普比率
+2. 能够张成 SDF，即在样本外实现最高的夏普比率
 3. 考虑非线性和交互影响
-4. 数量较少、充分分散、可投资的【small number, well-diversified, feasible for investor】
+4. a relatively small number of well-diversified managed portfolios feasible for investors【传统sort 方法的缺点】
 5. 解释性强【interpretable link to fundamentals】
 
 
 ### Conditional and Unconditional Sorting
 
-***conditional有没有必要？***
+> ***Conditional有没有必要？***
 
-传统的排序组合仅限于triple，再多就会引起维度灾难，组合内的股票数量急剧减少，不能实现分散化。因此，唯一的处理方式是使用多个双重排序，这种做法的普遍使用快速的提高了因子数量，但并没有明确的理论支撑，忽视了特征之间的交互作用，并且众多因子基于同样的投资域构造，存在大量不必要的重复。
+传统排序方法中用的最多的是single or double sort，而不能同时考虑多个特征之间的交互关系。例如 unconditional $5\times5$ Fama-French portfolio 形成25个投资组合，而当这两个排序变量之间存在相关性时，会导致对角线上股票数量较多而非对角线股票数量很少，在triple sort下，$5\times5\times5$ 的125个投资组合中股票的分散程度更差，甚至会出现 empty portfolio。而三个变量进行排序已经是这种方法的极限了。
 
-AP tree作为传统排序方法的延申，能够很好地处理上述问题。
-<div align = 'center'>
+这一问题的通用解决办法就是 *stack a set of double-sorted cross-sections against each other*。
 
-![](image/20230326PP1.png)
-</div>
+而这一做法猛烈地提高了test asset的数量，但却没有提供任何理论依据，并且会引起 unnecessary duplication and repackaging of the same underlying securities。更为重要的是，即使不考虑这种方法形成的测试资产规模，这些测试资产能否张成 SDF 仍然是未知数。
 
-如果特征之间是独立的，那么排序顺序并不影响结果，但实际上，从左图可以看出特征之间并不独立，面板十分不平衡，这种情况下进行双重排序，结果是失真的。并且这种不独立带来的影响是不可忽视的，单独来看value effect对于smallest stock来说尤其强烈，the impact of accrual对于large stock来说影响是一致的，但是联合来看却呈现出奇妙的倒U形【右图】。因此，特征之间的交互影响需要被纳入考量。
+> [!NOTE|label:Cross-sections]
+> 当选取排序变量A, B对投资域进行排序分组【conditional or unconditional】形成测试资产时，就可以理解为对这一截面形成了排序组合，这两个排序变量的分组结果就称之为一个cross-section。如果选取A, C则是另一个cross-section。
+>
+> 对于AP tree来说，排序变量A, B可以形成很多排序分组，因此统称为一个 cross-section，也就是说，**一个排序变量组合就是一个cross-section**。
+
+如果特征之间是独立的，那么Conditonal or Unconditional并不影响结果，但实际上，从左图可以看出特征之间并不独立，面板十分不平衡，在这种情况下，**排序变量顺序**的选择【condition】都会影响结果。
+
+并且这种不独立带来的影响还呈现出复杂的**非线性关系**。单独来看value effect对于smallest stock来说尤其强烈，the impact of accrual对于large stock来说影响是一致的，但是联合来看却呈现出奇妙的倒U形【右图】。因此，特征之间的交互影响需要被纳入考量。
+
 <div align = 'center'>
 
 ![](image/20230326PP2.png)
 </div>
 
-用 $d$ 来代表the depth of tree，排序变量的数量为 $M$，那么最终能够得到 $M^d \times 2^d$ 个投资组合，每个投资组合的股票数量为 ${N\over 2^d}$，因此，这些组合最多可以捕捉 $d$ 种交互影响。【？】
+基于以上种种考量，构造了AP tree。
 
+用 $d$ 来代表the depth of tree，排序变量的数量为 $M$，那么最终能够得到 $M^d \times 2^d$ 个投资组合，每个投资组合的股票数量为 ${N\over 2^d}$。
+
+<div align = 'center'>
+
+![](image/20230326PP1.png)
+</div>
+
+这一做法规避了duplication and repackaging，并且很好地限制了test asset的数量，同时考虑了排序变量的顺序，最重要的是能够张成SDF。
 
 ### Recursive Portfolios and Split Choice
 
-下图为单变量排序的例子。目标节点包括**子节点和中间节点**，只要没有信息增益，就会将这个节点去除。
-
-这一点也与传统的树方法不同，因为经典的树方法中只包括子节点而无中间节点。
+与传统的树方法仅包括子节点不同，AP tree**既包括中间节点也包括子节点**。
 
 <div align = 'center'>
 
 ![](image/20230326PP3.png)
 </div>
 
-这种不断split的方式能够很好地捕捉特征分布中两侧的尾部结构，选取其中有价值的部分。并且AP-Trees portfolio is **long-only**。
+AP tree的一大特点就是 **recursive overlapping structure**，recursive指的是子节点不能提供价值，则会被merge成父母结点，overlapping指的是最终选取的不同组合中会有重复的股票。
 
-AP-Pruning的问题在于 **bias-variance trade-off**。节点位置越高，股票数量越多，同时也越分散化，对于其均值估计的方差也会变小；而尽管不断对节点进行划分能够捕捉特征间更加复杂的关系，但同样地方差也会不断增加。因此，在评估子节点是否应该保留是，应该**综合考虑其带来的资产定价信息增益与方差不断增加带来的损失**。
+如果不同的股票组合代表了不同的underlying risk，那么理应存在重复的部分。例如parent nodes包括了**全部的股票**，属于市场组合，经过不断的细分，intermediate nodes和final nodes会形成不同的投资组合，表征不同的risk，在最终pruning后，将不能提供信息增益的节点删除即可。
 
-由于其recursive structure，AP-Trees最终选择少量组合的稀疏性与一般意义上的特设稀疏性假设（ad hoc sparsity）不同。AP-Trees是在经济学约束下对tree进行pruning形成的，如果子节点不能提供价值，则会被merge成父母结点，这一递归结构导致的特性与人为假设的稀疏性有很大区别。
+由于其recursive structure，AP-Trees最终选择少量组合的稀疏性与一般意义上的特设稀疏性假设（ad hoc sparsity）不同。AP-Trees是在经济学约束下对tree进行pruning形成的，这一递归结构导致的稀疏性与人为假设的稀疏性有很大区别。
+
+<div align = 'center'>
+
+![](image/20230526PP1.png)
+</div>
+
+
+在AP tree中，节点位置越高，股票数量越多，交互信息和非线性越少，因此结构更加简单；而节点位置越低，股票数量越少，背后的特征结构更加复杂。
+
+因此，AP tree的portfolio selection problem 也对应了 bias-variance trade-off，选择higher-level nodes代表着reduces the variance，反之选择lower-level nodes代表着reduces the bias。
+
+因此，在评估子节点是否应该保留时，应该**综合考虑其带来的资产定价信息增益与方差不断增加带来的损失**。
+
+> [!TIP|label:Bias-variance trade-off]
+> **Bias** in machine learning refers to the difference between a model’s predictions and the actual distribution of the value it tries to predict, which is evaluated by the performance of a model on a **training** dataset such as MSE. Models with high bias **oversimplify** the data distribution rule/function
+>
+> **Variance** stands in contrast to bias; it measures how much a distribution on several sets of data values differs from each other. A model with a high level of variance depends heavily on the training data and, consequently, has a limited ability to generalize to new, unseen figures.
+
 
 ## Pruning AP-Trees and portfolio selection
 
-在对AP-Trees进行pruning时，也就是在进行portfolio selection，但是现行对tree的 pruning criteria仅作用于局部pruning，不能考虑整体节点。而当我们想要通过Tree来构造投资组合时，必须要关注所有结点的收益和方差协方差关系，因此，对于AP-Trees构建投资组合，需要特别设定一个目标函数。
-
-根据我们的目标函数，能够找到最大夏普比率的切线组合，在金融学理论中，这也等同于张成了SDF。
-
-
-另外，由于节点太多带来的高维度问题，还需要通过Shrinkage来避免过拟合问题，构造可靠、稳健的投资组合。
+AP pruning 等同于 portfolio selection problem。基于金融学理论，找到 SDF 也就相当于找具有最高夏普比率的 tangency portfolio。不同于仅仅寻找与收益率最相关的predictor，本文在优化中同时考虑了**收益率和协方差**的关系，类似于 mean-variance optimization problem。另外，由于节点太多【两个变量能形成好几棵树】带来的高维度问题，还需要通过**Shrinkage**来避免过拟合问题，构造可靠、稳健的投资组合。
 
 设定均值估计量和协方差估计量分别为 $\hat{\mu}$ ,  $\hat{\Sigma}$，当不对SDF组合权重施加任何Shrinkage，最终的解为： $\hat{w}_{naive} = \hat{\Sigma}^{-1}\hat{\mu} $，然而这种解面临严重的过拟合问题。
 
@@ -318,7 +371,7 @@ $$
 
 在**非对角**情况下：
 $$
-(\Sigma+\lambda_2 I_N)\hat{w}_{robust,i} = \hat{\mu}_i + \lambda_0  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
+[(\Sigma+\lambda_2 I_N)\hat{w}_{robust}]_{i} = \hat{\mu}_i + \lambda_0  - \lambda_1 sign(\hat{w}_{robust,i}) \quad \text{for } i \text{ in the active set}
 $$
 
 [【基础知识：Lasso 推导】](/factor_zoo/toolkit/lasso_derivation.md)
@@ -561,13 +614,15 @@ $$
 
 ### AP-Pruning
 
-由于不断地细分，树中更深的节点往往会捕捉特征收益率分布中一侧的信息，因此相比于浅层节点，有更大的概率得到更高的收益率，但代价是更大的估计误差和噪音。
+由于不断地细分，相比于浅层节点，树中更深的节点能够捕捉更复杂的结构，但同时收益率的方差也更高了。因此相比于浅层节点，有更大的概率得到更高的收益率，但代价是更大的估计误差和噪音。
 
 因此，在进行均值方差优化之前，考虑到这种bias-variance trade-off，每个节点的**收益率**都要乘上 ${1\over \sqrt{2^{d_i}}}$，
 
 这种re-weighting与 Kozak, Nagel, and Santosh (2020) 中的PCA因子处理方法相似，只不过在shrinking中，每一个因子乘的是 *协方差矩阵的特征向量*。
 
 该方法在reweight方面与PCA有同样的特点，但比PCA更加具有可解释性。
+
+文章reweight部分主要参考 [weighting scheme of GLS](/factor_zoo/toolkit/GLS.md)
 
 正文部分的介绍仅限于此，但实际上仍然有两个问题需要关注：
 
@@ -678,6 +733,7 @@ Literature baseline 为 32 ($2\times4\times4$, single split on size) and 64 ($4\
     $$
     
     Note that we use *the uncentered version* of $R^2$ to ensure that it captures pricing errors that are not only *relative* to the other assets but also *specific* to the overall cross-section of securities, reflecting both common and asset-specific levels of mispricing.
+
 
 ## Empirical results
 
@@ -851,7 +907,7 @@ Economic theory suggests that finding an optimal set of portfolios combines the 
 > [!TIP|label:Portfolio ID]
 > Portfolio ID包括两部分，用以分类的变量序号以及分类方向（low/high）。举例来说，组合6的ID是 (1221.1111)，就代表，先经过特征1（size）split，并且属于low的一侧（小市值），再经过特征2（investment） split，还是属于low的一侧，余下同理。
 
-此外，我们还可以看看AP-tree选出的最猛的资产组合。
+对比来看，传统方法选出的最猛的资产组合则非常偏向于小市值。
 
 <div align = 'center'>
 
@@ -863,9 +919,9 @@ Economic theory suggests that finding an optimal set of portfolios combines the 
 - **特征极为相似**：小市值，中等偏下的盈利以及高投资
 - 包含**数量极少**
 
-因为AP-tree不仅考虑划分特征，还考虑了节点的深度，因此这些节点都没有被选择。
+而AP-tree不仅考虑划分特征，还考虑了节点的深度，因此类似于这些的节点都没有被选择。
 
-但是对于Triple sorts形成的组合来说，这种过度细分带来的影响则并没有被纳入考虑。在其中会存在一类组合，这些组合由一类风险因子所张成，并且并不具有风险溢价，因此**这些组合并不代表投资机会和定价信息**，但却可以被准确定价。然而，这些组合的存在大幅提高截面上的定价质量，进而使得一些评价指标例如 $R^2$ 严重失真。**这就是为什么GLS的 $R^2$ 往往低于OLS的 $R^2$**。
+但是对于Triple sorts形成的组合来说，这种过度细分带来的影响则并没有被纳入考虑。在其中会存在一类组合，这些组合由一类风险因子所张成，并且并不具有风险溢价，因此**这些组合并不代表投资机会和定价信息**，但却可以被准确定价。然而，这些组合的存在大幅提高截面上的定价质量，进而使得一些评价指标例如 $R^2$ 严重失真。 **这就是为什么GLS的 $R^2$ 往往低于OLS的 $R^2$** 。
 
 尽管存在过度细分的影响，但是AP-tree的深度仍然需要保证。
 

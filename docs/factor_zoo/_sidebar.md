@@ -1,4 +1,5 @@
 - [[Book] Regularization, Bayes and Shrinkage](/factor_zoo/Shrinkage.md)
+- [[JPE1991]Implications of security market data for models of dynamic economies](/factor_zoo/HJ_bound.md)
 - [[JF2023] Principal Portfolios](/factor_zoo/principal_portfolios.md)
 - [[RFS2007] Portfolio Selection with Parameter and Model Uncertainty: A Multi-Prior Approach](/factor_zoo/portfolio_selection_with_parameter_model_uncertainty.md)
 - [[JE2022] Factor Investing, A hierarchical approach](/factor_zoo/A_Bayesian_hierarchical_approach.md)

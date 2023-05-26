@@ -179,7 +179,7 @@ As a legacy of China's credit plan，银行一直是根据PBC公布的利率放�
 
 银行间市场有四方参与者，the issuer，the underwriter，the investor，and the regulator。
 
-<div class = 'cpart'>
+<div class = 'centerwords'>
 
 Issuer
 </div>
@@ -195,7 +195,7 @@ Issuer
 在全球范围内来说，债券的二级交易市场流动性都很差，交易成本高并且交易频率很低。中国同样如此，因此在中国，industrial report中衡量企业融资成本时，通常采用issuance yield而不是yield from secondary market trading。
 
 
-<div class='cpart'>
+<div class='centerwords'>
 
 Underwriter
 </div>
@@ -219,7 +219,7 @@ underwriter可以向那些出价低于intended issuance price的参与者提供�
 > 
 > Furthermore, the syndicate assumes the obligation to stabilize the issuance in the secondary market should demand prove to be weaker than expected
 
-<div class='cpart'>
+<div class='centerwords'>
 
 Investor
 </div>
@@ -228,7 +228,7 @@ Investor
 
 
 
-<div class='cpart'>
+<div class='centerwords'>
 
 Regulator
 </div>

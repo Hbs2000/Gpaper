@@ -224,14 +224,14 @@ strong {
   font-size: 26px !important;
 }
 
-.cpart {
+.centerwords {
   font-weight: bolder;
   color: #067283;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial';
   text-align: center;
 }
 
-.cpart p {
+.centerwords p {
   font-size: 30px !important;
 }
 
