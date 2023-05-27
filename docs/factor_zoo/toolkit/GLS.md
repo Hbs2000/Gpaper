@@ -109,7 +109,7 @@ $$
 此时估计量变为：
 
 $$
-\hat{\beta}_{WLS} =\left(X^\top W^{-1}X\right)^{-1}X^\top W^{-1}y
+\hat{\beta}_{WLS} =\left(X^\top WX\right)^{-1}X^\top Wy
 $$
 
 权重是残差方差的倒数，这反映了对应observation的信息。如果observation的方差小，就代表含有更多的信息，因此权重更大，反之亦然。

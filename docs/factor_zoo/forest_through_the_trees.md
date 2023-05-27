@@ -353,9 +353,11 @@ $$
 $$
 
 > [!NOTE]
-> 在这种表达下，$\lambda_0$ 的取值范围也代表我们并不认为 $\mu_0$ 会超过切点组合收益率。
->
-> 因为一旦 $\lambda_0$ 为负，就不再是收缩的作用，而是**会极化权重**。
+> 二者一一对应的关系有两种理解。
+> 
+> （1）之所以是由 $\lambda_0$ 的取值范围推出 $\mu_0$ 的取值范围，是因为当 $\lambda_0$ 的取值小于 0 时，就不会起到收缩的效果，而是**会极化权重**【使得小权重趋于零】，因此，也就可以理解为，当 $\mu_0$ 的取值范围如上时，才有收缩的作用。
+> 
+> （2）在变形2这种表达下，$\lambda_0$ 的取值范围也代表我们并不认为 $\mu_0$ 会超过切点组合收益率。因为从夏普比率的角度来看，切点组合就是最优夏普比率，已经代表了最严重的过拟合，样本外的夏普比率不会高于这一点。
 
 ### Proposition 2 Robust SDF Discovery
 
@@ -609,65 +611,20 @@ $$
 
 至此，已经解释了为什么说每一类收缩都对应着一种不确定性。
 
-<hr>
 
 
 ### AP-Pruning
 
-由于不断地细分，相比于浅层节点，树中更深的节点能够捕捉更复杂的结构，但同时收益率的方差也更高了。因此相比于浅层节点，有更大的概率得到更高的收益率，但代价是更大的估计误差和噪音。
+考虑到上文所说的 bia-variance trade-off：【AP tree的portfolio selection problem 也对应了 bias-variance trade-off，选择higher-level nodes代表着reduces the variance，反之选择lower-level nodes代表着reduces the bias】，因此直接进行均值方差优化是不恰当的，需要进行reweight。
 
-因此，在进行均值方差优化之前，考虑到这种bias-variance trade-off，每个节点的**收益率**都要乘上 ${1\over \sqrt{2^{d_i}}}$，
+考虑到**high variance**带来的影响，同时每个节点分散程度由节点内的股票数量的倒数 $1\over N_i$ 决定，那么用 $ \sqrt{N_i} $ 作为权重也未尝不可。但是每个月股票数量都在变化，如果选用 $\sqrt{N_i}$ 来做权重，那么每个月都要调整，比较不便。
 
-这种re-weighting与 Kozak, Nagel, and Santosh (2020) 中的PCA因子处理方法相似，只不过在shrinking中，每一个因子乘的是 *协方差矩阵的特征向量*。
+同时参考 GLS 中的reweighting方法，最终reweight的算法是将每个节点的**收益率**乘上 ${1\over \sqrt{2^{d_i}}}$，$d_i$ 为节点深度。
 
-该方法在reweight方面与PCA有同样的特点，但比PCA更加具有可解释性。
+[【基础知识：weighting scheme of GLS】](/factor_zoo/toolkit/GLS.md)
 
-文章reweight部分主要参考 [weighting scheme of GLS](/factor_zoo/toolkit/GLS.md)
 
-正文部分的介绍仅限于此，但实际上仍然有两个问题需要关注：
-
-#### Time Invariant <!-- {docsify-ignore} -->
-
-从idiosyncratic risk的角度来说，每个节点分散程度由节点内的股票数量的倒数 $1\over N_i$ 决定，那么用 $ \sqrt{N_i} $ 作为权重也未尝不可。
-
-但是每个月股票数量都在变化，如果选用 $\sqrt{N_i}$ 来做权重，那么每个月都要调整，比较不便。因此选用**时不变**的 ${1\over \sqrt{2^{d_i}}}$ 作为权重，$d_i$ 为节点深度。
-
-#### Why sqrt <!-- {docsify-ignore} -->
-
-那么这个根号又是哪来的呢？
-
-在Internet Appendix 1.4中，在reweight后，计算协方差矩阵 $\hat{\Sigma}$ 和均值向量 $\hat{\mu}$ 的估计值。但在计算的过程中，与shrinkage做了同样的处理，将标准化后的均值回归到协方差上：
-
-$$
-\tilde{\Sigma} = \hat{\Sigma}^{1\over2} \quad \tilde{\mu} = \hat{\Sigma}^{-{1\over2}}(\hat{\mu}+\lambda_0 \bar{\mu}\bm{1})
-$$
-
-最终目标函数为：
-
-$$
-\hat{w}_{robust} = arg \underset{w}{min} \ \left(\tilde{\mu}-\tilde{\Sigma}w  \right)^T\left(\tilde{\mu}-\tilde{\Sigma}w  \right)+\lambda_2 ||w||_2^2 + \lambda_1 ||w||_1
-$$
-
-在这个过程中，出现了根号，如果简化来看：
-
-$$
-\tilde{\mu} = \hat{\Sigma}^{-{1\over2}} \hat{\mu}
-$$
-
-当树节点不断细分，$\mu$ 会变大，但对应的，$\Sigma$ 也会变，因此二者如果直接做标准化，得到的结果中包含了太多噪音。因此在标准化之前，必须要进行reweight。
-
-如果记最初的parent node 为 $\hat{\mu}_0$，$\hat{\Sigma}_0$，细分节点为 $\mu_1$，$\Sigma_1$。则在上述两种不同权重的reweight中，有：
-
-$$
-\hat{\mu}_1 \approx {\mu_1 \over \sqrt{{1\over N_i}\Sigma_0}} = { \sqrt{N_i} \mu_1 \over \sqrt{\Sigma_0}}\qquad \text{or} \qquad \hat{\mu}_1 \approx {\mu_1 \over \sqrt{2^{d_i} \Sigma_0}} = { {1\over \sqrt{2^{d_i}}} \mu_1 \over \sqrt{ \Sigma_0}}
-$$
-
-正是因为考虑到了后续标准化的需求，才对 $\mu_1$ 做了带有根号的reweight，得到 $\hat{\mu}_1$。当得到了 $\hat{\mu}_1$，那么 $\hat{\Sigma}_1$ 也会随之调整，因此reweight后的均值和协方差都已经部分排除了噪音的影响，从而适合进一步用于回归。
-
-相当于调整了节点的权重。
-
-> [!NOTE|label:注意]
-> 此时的分母并不代表细分节点的协方差和parent node的协方差精确的函数关系，仅仅是用以说明二者之间定性的关系。
+这种re-weighting与 Kozak, Nagel, and Santosh (2020) 中的PCA因子处理方法相似，只不过在shrinking中，每一个因子乘的是 *协方差矩阵的特征向量*。在PCA中，第一个PC通常为等权市场组合，乘上 $\sqrt{N}$，因为其在构造过程中影响了 N 个资产。对于只在一半的股票上有loading的PCs来说，需要乘上 $\sqrt{N\over2}$。这实际上说明了，higher-order nodes 与higher-order PCs 一样：尽管能够实现更高的收益，但同时也带来了更大的估计误差和噪音。但与PC不同的是，AP tree portfolios 属于 **long-only**，因此具有更好的解释性。
 
 ## Experiment design
 
@@ -718,8 +675,8 @@ Literature baseline 为 32 ($2\times4\times4$, single split on size) and 64 ($4\
 实证中涉及的模型包括：
 - FF3
 - FF5
-- XSF: cross-section-specific model with market and three long-short portfolios, corresponding to the three characteristics used in the cross-section.
-- FF11: An 11-factor model, consisting of the market factor and all 10 long-short portfolios, based on the full set of 10 characteristics.
+- XSF: cross-section-specific model with market and three **long-short** portfolios, corresponding to the three characteristics used in the cross-section.
+- FF11: An 11-factor model, consisting of the market factor and all 10 **long-short** portfolios, based on the full set of 10 characteristics.
 
 
 对于任意的特征组合，都有以下指标：
@@ -753,7 +710,7 @@ AP-trees 显著高于其余模型的样本外夏普比率，并且相差明显�
 不过 one or two splits in the size dimension (32 or 64 triple-sorted portfolios) 看起来影响不大。
 
 
-并且这种夏普比率的差别并不能简单地由风险因子上的暴露多少所解释，下图可以看出基本无法解释AP-tree的组合，并且这种趋势与上图相同。
+并且这种夏普比率的差别并不能简单地由风险因子上的暴露多少所解释，下图可以看出FF5基本无法解释AP-tree的组合，并且这种趋势与上图相同。
 
 距离来说，ID为2的因子组合为：size，value，and profitability，以FF5来解释，triple sort 32和64中并不存在 $\alpha$，但对于AP-trees，$\alpha$ t值为8，非常显著。这也说明了AP-trees 包含了更多的定价信息。
 
@@ -771,7 +728,16 @@ AP-trees 显著高于其余模型的样本外夏普比率，并且相差明显�
 
 以上检验与benchmark 模型选取无关，更多测试详见附录。
 
-此外，借鉴 Barillas and Shanken (2016)的检验方法（spanning test）, 作者还做了张成检验：沿用 Lettau and Pelger (2020) RP-PCA的思路，作者从AP-tree和triple-sort的组合中提取了5个主成分并用以互相检验。
+此外，借鉴 Barillas and Shanken (2016)的检验方法（spanning test）, 作者还做了张成检验：沿用 Lettau and Pelger (2020) RP-PCA的思路，作者从AP-tree和triple-sort的组合中**提取了5个主成分**并用以互相检验。
+
+> [!TIP|label:Spanning test]
+> Barillas F, Shanken J. Which alpha?[J]. ***The Review of Financial Studies***, 2017, 30(4): 1316-1338.
+>
+> *Our central insight in this context is a simple one — that models should be compared in terms of their ability to price all returns, both test assets and traded factors.*
+>
+> [【石川 Toward a better factor model】](https://zhuanlan.zhihu.com/p/360857923)
+
+简单来说就是定价因子之间应该相互解释。
 
 结果发现，利用AP-tree张成的SDF作为被解释变量（图b），三种5 latent factor作为定价因子，结果显示：
 
@@ -807,16 +773,16 @@ AP-trees 显著高于其余模型的样本外夏普比率，并且相差明显�
 
 ### Nonlinearities and Characteristic Interactions
 
-从前面的测试中已经知道**非线性**是 important driver of performance，但并不确定非线性的来源。
-
 AP-tree有个好处就是能够能轻松的施加任何限制，因为它可以在pruning之前随意移除节点。
 
-特征的非线性是最近研究的重点，如下面这篇论文。
+特征的非线性也逐渐成为研究的重点，如下面这篇论文是其中一篇代表作。
 
 > [!NOTE|label:Nonlinearity]
 > Freyberger J, Neuhierl A, Weber M. Dissecting characteristics nonparametrically[J]. ***The Review of Financial Studies***, 2020, 33(5): 2326-2377.
 
-但是非线性来自于两个维度：
+从前面的测试中已经知道**非线性**是 important driver of performance，但并不确定非线性的来源。
+
+非线性来自于两个维度：
 
 - **单一特征的非线性影响**
 - **不同特征之间交互影响**
@@ -847,7 +813,7 @@ AP-tree有个好处就是能够能轻松的施加任何限制，因为它可以�
 
 ### Importance of Economic Objective Function
 
-AP-tree表现这么好的另一个原因是它的economic objective function。
+AP-tree表现这么好的另一个原因是它的**economic objective function**。
 
 仅仅依靠特征和投资组合之间清晰的可解释性是不足以提供良好的样本外表现的，而以下两点才是使得AP-tree区别于其他的降维方法的特点：
 
@@ -905,9 +871,11 @@ Economic theory suggests that finding an optimal set of portfolios combines the 
 这些组合不仅在统计上有显著性，在经济学上也具有显著性【$\alpha$ 大】，例如组合8。值得注意的是，尽管组合8分类上属于小市值，但是经过市值加权后，市场规模占比仍然接近 **50%** ，因此*其收益率绝不是由于小市值驱动的*。
 
 > [!TIP|label:Portfolio ID]
-> Portfolio ID包括两部分，用以分类的变量序号以及分类方向（low/high）。举例来说，组合6的ID是 (1221.1111)，就代表，先经过特征1（size）split，并且属于low的一侧（小市值），再经过特征2（investment） split，还是属于low的一侧，余下同理。
+> Portfolio ID包括两部分，用以分类的变量序号以及分类方向（low/high）。举例来说，组合6的ID是 (1221.1111)，就代表，先经过两次特征2（investment）split，并且属于low的一侧（低投资），再经过特征1（size） split，还是属于low的一侧。
+>
+> 注意：小数点前，如果没有split，则标记为1；小数点后第一位默认为1。
 
-对比来看，传统方法选出的最猛的资产组合则非常偏向于小市值。
+对比来看，传统方法选出的最猛的资产组合则**非常偏向于小市值**。
 
 <div align = 'center'>
 
@@ -982,7 +950,7 @@ Following Kozak, Nagel, and Santosh (2020)，直接筛选出市值大于总市�
 - a combination of 25 *double-sorted* portfolios, with each based on *size and some other characteristic* (225 assets)
 - Tree-based portfolios are constructed based on combining selected assets (10/40 portfolios) from each of the 36 cross-section (starting from 360 and 1,440 assets, correspondingly)
 
-这些资产的表现如下：
+对这些资产施加shrinkage，最后选取组合的表现如下：
 
 <div align = 'center'>
 
@@ -1010,7 +978,7 @@ Following Kozak, Nagel, and Santosh (2020)，直接筛选出市值大于总市�
 ![](image/20230503PP2.png)
 </div>
 
-horse race结果如上。horse race的目标并不是找到最优的组合，而是想说明这些指标的局限性。
+horse race结果如上。horse race的目标并不是找到最优的组合，而是想**说明这些指标的局限性**。
 
 特别是 $\alpha$ 很具有误导性，因为其忽略了组合的重复问题，100 deciles and 225 double-sorted portfolios当中，有许多组合基本都差不多，因为这些组合能够被解释的很好，因此最终的平均 $\alpha$ 就会很小，进而不具有显著性。
 
