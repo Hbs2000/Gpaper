@@ -11,5 +11,7 @@
 - [12_Analysis of Profitablity](/Courses_in_SUSTech/财务报表分析/12_analysis_of_profitability.md)
 - [13_Analysis of Growth](/Courses_in_SUSTech/财务报表分析/13_Analysis_of_growth.md)
 - [案例分析：以岭药业](/Courses_in_SUSTech/财务报表分析/以岭药业/README.md)
+- [14_The Value of Operations and the Evaluation of Enterprise](/Courses_in_SUSTech/财务报表分析/14_PB_PE.md)
+- [15_Anchoring on the Financial Statements](/Courses_in_SUSTech/财务报表分析/15_anchoring.md)
 - [16_Full Information Froecasting](/Courses_in_SUSTech/财务报表分析/16_full_information_forecast.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)

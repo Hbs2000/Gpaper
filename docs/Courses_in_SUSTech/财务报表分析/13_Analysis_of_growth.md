@@ -207,3 +207,106 @@ PB 和 PE之间不具有必然的联系，当 PB 高时，PE可能高也可能�
 
 
 
+#### Exercise <!-- {docsify-ignore} -->
+
+***Analyzing a Change in Core Operating Profitability***
+
+<div align = 'center'>
+
+![](../image/20230607FS1.jpg)
+</div>
+
+<div align = 'center'>
+
+![](../image/20230607FS2.png)
+</div>
+
+***Analyzing a Change in Return on Common Equity***
+
+<div align = 'center'>
+
+![](../image/20230607FS3.png)
+</div>
+
+<div align = 'center'>
+
+![](../image/20230607FS4.png)
+</div>
+
+***Analyzing the Growth in Shareholders' Equity***
+
+<div align = 'center'>
+
+![](../image/20230607FS5.png)
+</div>
+
+<div align = 'center'>
+
+![](../image/20230607FS6.png)
+</div>
+
+#### conceptual questions <!-- {docsify-ignore} -->
+
+***What is a growth firm?***
+
+A growth firm is one that is expected to grow residual earnings or one that can generate abnormal earnings growth.
+
+***What features in financial statements would you look for to identify a firm as a growth company?***
+
+An ROCE greater than the cost of capital or Increasing residual earnings due to Sales growth, increasing profit margins, increasing asset turnover, or growing net investment producing these features.
+
+A growth company is one that is expected to have these attributes in the future. It is
+possible that a firm may have had these attributes in the past but is not expected to
+have them in the future. And it is possible that a firm may not have these features
+currently (a start-up, for example), but is expected to have them in the future.
+
+
+***Why would an analyst wish to distinguish the part of earnings that is sustainable?***
+
+Sustainable matters in the future, so when an analyst wants to predict the future statements, she has to identify sustainable parts.
+
+***What are transitory earnings? Give some examples***
+
+Transitory earnings are aspects of current earnings that have no bearing on future earnings. For instance, a one-time contract, a one-time uninsured loss of property.
+
+***Are unrealized gains and losses on financial assets persistent or transitory income?***
+
+In one sense, these gains and losses are persistent because they occur every period.
+ But a gain or loss in the current period gives no indication of whether there will be a gain
+or loss in the future. That is, the expected future gain or loss is zero, irrespective of the
+current gain or loss. So these gains and losses are treated as transitory
+
+***Distinguish operating leverage from operating liability leverage.***
+
+Operating leverage is the proportion of fixed and variable costs in a firm's cost
+structure; it is an income statement concept.  Operating liability leverage is the proportion of operating liabilities in net operating  assets; it is a balance sheet concept.
+
+Both create leverage. Operating leverage levers the operating income from sales.
+Operating liability leverage levers operating income from net operating assets (RNOA)
+
+***The higher a firm's contribution margin ratio, the more leverage it gets from increasing sales. Correct?***
+
+This is correct. A higher contribution margin means lower variable costs. So more
+of each dollar of sales "goes to the bottom line
+
+***Would you see a high profit margin of, say, 6 percent for a grocery retailer as sustainable?***
+
+Profit margins in retailing tend to be low because the business is very competitive.
+
+***A firm can have a high trailing PE ratio, yet have a low expected earnings growth rate in the future. Is this so?***
+
+Yes, this is correct. A trailing P/E can be high because current earnings are temporarily low.
+
+***Can a firm have a high PIE ratio yet a low PIB ratio? How would you characterize the growth expectations for this firm?***
+
+Yes. See the cell analysis of the chapter. A firm with a high P/E and a low P/B is one where residual earnings are expected to increase from their current level but are expected to be lower than zero.
+
+***Firms with high unsustainable earnings s hould have low trailing P/E ratios. Is this correct?***
+
+Yes, correct. Temporarily high earnings are expected to decline, so should have a low P/E ratio
+
+
+
+
+
+

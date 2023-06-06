@@ -992,3 +992,11 @@ GLS可以回避这个问题，因为GLS考虑了组合之间的相关性。
 </div>
 
   
+
+市场指数与市场组合
+
+bias variance trade off
+
+PCA reweight
+
+

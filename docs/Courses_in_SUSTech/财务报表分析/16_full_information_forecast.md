@@ -48,56 +48,98 @@ drivers通常会呈现出均值回复的特征，因为一个行业总会呈现�
 
 这就与资产定价中的long-short不符，书中的解释是：
 
-> The contrarians have these change patterns in mind but believe that **the market does not**. They beli eve that the market gets too excited about high sales and profit growth and thinks growth will continue rather than fade; and they believe the market does not understand t
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> hat drops in sales and profits are often temporary
+> The contrarians have these change patterns in mind but believe that **the market does not**. They beli eve that the market gets too excited about high sales and profit growth and thinks growth will continue rather than fade; and they believe the market does not understand that drops in sales and profits are often temporary
 
 > [!TIP|label:Common fallacy]
 > "*the rate of return must decline to the required return in the long run*"
+>
+> 由于会计方法的保守性，部分资产常常不计入会计报表中，因此会造成：即使公司只获得了 required return，但是由于分母因为漏记资产而变小，使得RNOA大于required return。例如制药企业的研发成本，可口可乐的品牌价值等等。
+
+
+#### Exercise <!-- {docsify-ignore} -->
+
+***One-Stop Residual Operating Income Calculation: Coca-Cola***
+
+The Coca-Cola Company reported an after-tax profit margin of 20% on its sales of \$24,088 million in 2006. It also reported $102 million of other core income, mainly from equity investments in its bottling companies. Further analysis of the financial statements reveals an asset turnover (on net operating assets) of 1.32. Coke uses a hurdle of 9% for its investment in operations.
+
+a. What was Coke's residual operating income for 2006?
+
+b. What would Coke's residual operating income be if the asset turnover increased to 1. 7?
+
+> [!TIP]
+$$\begin{aligned}
+\operatorname{ReOI}_t=\operatorname{OI}_t-\left(\rho_F-1\right)\mathrm{NOA}_{t-1}&=\left[\operatorname{RNOA}_t-\left(\rho_F-1\right)\right]\mathrm{NOA}_{t-1} \\
+\text{RNOA} = \text{PM} \times \text{ATO} \quad &\text{NOA} = \text{Sales} \times {1\over\text{ATO}}
+\end{aligned}
+$$
+> 
 
 
 
+<div align = 'center'>
+
+![](../image/20230606FS1.png)
+</div>
 
 
+***Integrity of Pro Formas***
+
+<div align = 'center'>
+
+![](../image/20230606FS2.png)
+</div>
+
+<div align = 'center'>
+
+![](../image/20230606FS3.png)
+</div>
 
 
+#### Conceptual questions <!-- {docsify-ignore} -->
 
+***Why is it important to understand the "business concept" before valuing a firm?***
 
+To forecast future financial statements, the analyst must know where the business is going. And the key drivers which determine future financial statements are determined by business concpet.
 
+***Explain why a fade diagram is helpful for forecasting.***
 
-Sales forecasting is the starting point
+Fade diagram gives a typical patterns of changes in drivers over time. The forecaster takes these patterns as a starting point and asks how the individual firms in question might be different from the average firm.
 
+***What factors determine the rate at which high operational profitability declines over time?***
 
+Competition is the primary determinant. But the ability of a firm to challenge the competition slows the fade rate. A slow fade rate indicates durable competitive advantage.
 
+***What is meant by the "integrity" of a proforma?***
 
+The various part tie together according to the accounting relations that govern the statements.
 
+***Forecasted dividends affect forecasted shareholders' equity but do not affect the value calculated from forecasted financial statements. Why?***
 
+Values are calculated from forecasts of operations, and dividends do not affect operations. Dividends, rather, are a disposition of the free cash flow from operations.
 
+***What is a red-flag indicator?***
 
+A red flag indicator is a feature within or outside the financial statements that indicates
+deterioration in profitability in the future.
 
+***What is an unarticulated strategy?***
 
+An unarticulated strategy is a business idea that is not developed enough to quantify it
+into pro forma statements
 
+***Why must the effect of a merger or acquisition on shareholder value be calculated on a per-share basis?***
 
+When shares are issued in a merger or acquisition, the analyst must be concerned with
+the division of the value of the merged company between the shareholders of the two firms in the
+merger. That division is determined by the terms under which shares are issued in the merger
 
+***When might management of a firm consider a leveraged buyout?***
 
+A firm generates value for shareholders when it buys the firm’s shares at less than intrinsic value. If management considers the shares to be undervalued in the market, buying them generates value.
+
+***Why might the shares of the acquiring firm in an acquisition decline on announcement of the acquisition?***
+
+The acquirer’s shares will decline if the market thinks the acquirer is overpaying for the
+acquisition
 
 
