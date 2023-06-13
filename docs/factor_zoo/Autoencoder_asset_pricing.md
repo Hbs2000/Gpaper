@@ -7,6 +7,16 @@ Shihao Gu<sup>1</sup>, Bryan Kelly <sup>2</sup>,Dacheng Xiu<sup>1</sup>, ***Jour
 
 部分资产文献认为，characteristic-based asset return prediction属于一种异象（anomaly），然而，Kelly, Pruitt, and Su (KPS, 2019) 提出了IPCA，证明了这些特征实际上**proxy for unobservable and time-varying exposures to risk factors**，一旦这种factor exposure被纳入考量，这些特征也就不再产生 $\alpha$。
 
+> KPS 的 implication 实际上在说没有 $\alpha$，全是 risk-based $\beta$。
+>
+> 但是也有相当一部分文献结论是 $\alpha$ significant，如
+>
+> Kim S, Korajczyk R A, Neuhierl A. Arbitrage portfolios[J]. ***The Review of Financial Studies***, 2021, 34(6): 2813-2856.
+>
+> 二者的区别在于：在IPCA的框架下，特征和收益率之间的结构不发生变化，仅仅是特征本身取值在不断变化。 而在KKN框架下，在每一个时间区间内【论文中为1年】，特征和收益率之间的结构和特征取值都不会发生变化，而在不同时间区间之间，取值和结构都会变化。
+>
+> 不同的框架会引致不一样的结论。
+
 KPS的定价框架如下：
 
 $$
@@ -23,7 +33,7 @@ $$\begin{equation}
 
 因此本文在此基础上将其提升为非线性。
 
-更广泛的来说，本文提出了**一个运用非参数方法估计SDF的模型，并且施加了经济学意义上无套利的限制**。
+总得来说，本文提出了**一个运用非参数方法估计SDF的模型，并且施加了经济学意义上无套利的限制**。
 
 ## Methodology
 
@@ -58,7 +68,7 @@ $$
 R = \beta F + U
 $$
 
-记 $\bar{R}$ 是 $R$ 的 demean 表达，对 $\bar{R}$ 做SVD分解，则可以直接得到对于因子和因子载荷的估计，
+记 $\bar{R}$ 是 $R$ 的 **demean** 表达，对 $\bar{R}$ 做SVD分解，则可以直接得到对于因子和因子载荷的估计，
 
 $$
 \begin{equation}
@@ -227,16 +237,24 @@ Comparison set包括：
 
 **Total $R^2$**
 
+一个好的资产定价模型应该能够衡量**收益率的共同变化**（common variation in realized return）。当模型能够衡量各个资产时序上的变化，此时就相当于描述了**系统性风险**， $\widehat{f}_t$ 就称之为common risk factor。
+
 > The total $R^2$ quantifies the **explanatory power of contemporaneous factor realizations**, and thus assesses the model’s description of riskiness
 
 $$\begin{equation}
 R_{\text{total}}^2=1-\frac{\sum_{(i,t)\in\text{OOS}}(r_{i,t}-\widehat{\beta}'_{i,t-1}\widehat{f}_t)^2}{\sum_{(i,t)\in\text{OOS}}r_{i,t}^2}
 \end{equation}$$
 
-
+Total $R^2$ 意在衡量由同期因子值（contemporaneous factor realization） $\widehat{\beta}'_{i,t-1}$ 和时变因子载荷 $\widehat{f}_t$ 所解释的 $r_{i,t}$ 的变化程度，也即方差（the fraction of variance）。
 
 
 **Predictive $R^2$**
+
+Total $R^2$ 中，资产的共同变化我们称之为风险【波动】，除此之外，一个好的资产定价模型还应该能够从风险补偿（risk compensation）的角度解释收益率。
+
+这一视角其实就是证券市场线（security market line，SML）的角度，风险溢价是所有资产的斜率，当在这一因子上的暴露越多，那么收益率就应该越高。当因子选择的越好【也即模型越好】，$R^2$ 就应该越高。
+
+站在投资人的视角，在 t-1 时刻，已知信息是因子的风险溢价和对应的因子暴露【二者的乘积也就是条件预期收益率】，那么就会认为 t 时刻因子暴露高的资产收益率会更高。
 
 > The predictive $R^2$ assesses the accuracy of model-based predictions of future excess returns. This quantifies a model’s ability to explain **panel variation in risk compensation**.
 
@@ -246,13 +264,21 @@ R _{\mathrm{pred}}^{2}=1-\frac{\sum_{(i,t)\in OOS}(r_{i,t}-\widehat{\beta}'_{i,t
 \end{equation}
 $$
 
-其中 $\widehat{\lambda}_{t-1}$ is the prevailing sample average of $\widehat{f}$ up to month $t-1$。
+其中 $\widehat{\lambda}_{t-1}$ is the prevailing sample average of $\widehat{f}$ up to month $t-1$。当 $\widehat{f}_t$ 是tradable factor，average后就是**risk premium or risk price**。
+
+
+> [!NOTE|label: R square]
+> 按照这种理解，Total $R^2$ 解释的是收益率的二阶矩，而 Predictive $R^2$ 解释的是一阶矩，一个好的资产定价模型应该在两个维度都有不错的表现，这一点与其他几篇文献有相通之处。
+
+
 
 <hr>
 
-<div class ='cpart'>
+
+<div class ='centerwords'>
 
 R square
+
 </div>
 
 
@@ -276,7 +302,7 @@ FF对个股的解释力度很差，这是因为个股的特征变化很快，而
 </div>
 
 
-<div class ='cpart'>
+<div class ='centerwords'>
 
 Economic performance evaluation
 </div>
@@ -302,7 +328,7 @@ Economic performance evaluation
 
 需要说明的是，这一步的目的并不是为了实现交易策略，也就是说，其结果并没有考虑交易成本等现实因素。但是这并不妨碍这一指标作为能够量化模型之间差异的指标。
 
-<div class ='cpart'>
+<div class ='centerwords'>
 
 Risk premia vs. mispricing
 </div>
@@ -342,7 +368,7 @@ $$
 </div>
 
 
-<div class ='cpart'>
+<div class ='centerwords'>
 
 Characteristics importance
 </div>
@@ -375,12 +401,13 @@ Characteristics importance
 
 <hr>
 
+
 > Todo list
 
-1. managed portfolio与其他不同
+1. managed portfolio构造方式与其他文献略有不同
 2. 在训练网络时，使用的都是 $x_t$，而在解释时，既可以使用 $x_t$ 也可以使用 $r_t$
 3. $R^2$ 的理解
-4. Risk premium和mispricing的理解。
+4. Risk premium和mispricing的理解，predict for mispricing？
 
 
 
