@@ -23,8 +23,132 @@
 3.9 Notes and References
 
 
+## 3.2 Arbitrage, the Law of One Price, and Existence of SDFs 
+
+无套利，一价定律，与 SDF 三者关系如下：
+
+<div align = 'center'>
+
+![](../image/20230616PP1.jpg)
+</div>
+
+如果不存在套利机会，那么一价定律一定成立：反过来说，如果一价定律不成立，那么一定存在套利机会。因此，无套利的假设强于一价定律。
+
+一价定律和无套利原理能够使得我们在不假设任何有关效用函数，aggregation，完备市场的情况下得到有关 SDF 的性质。
+
+本节的所有讨论在未来状态有限和无限时均成立。为了便利起见，此处仅给出有限状态下的证明。
+
+<div class = 'centerwords'>
+
+LOOP is equivalent to the existence of an SDF 
+</div>
+
+当存在 SDF 时，易得一价定律成立：
+
+$$
+\text{If payoff } x = y+z, \text{ then price } E(mx) = E[m(y+z)]
+$$
+
+接下来证明当一价定律成立，则 SDF 存在：
+
+当一价定律成立，此时存在唯一 state-price vector q，满足以下公式：
+
+$$
+\begin{pmatrix}
+x_{11}&\cdots&x_{1k}\\ \vdots&\vdots&\vdots\\ x_{n1}&\cdots&x_{nk}\end{pmatrix}
+\begin{pmatrix}q_1\\ \vdots\\ q_k\end{pmatrix} = 
+\begin{pmatrix}p_1\\ \vdots\\ p_n
+\end{pmatrix}
+$$
+
+x 是资产 payoff，q 是 Arrow security 的价格，而 p 是资产价格。此时并没有假定 n 与 k 之间的数量关系，k 可以大于、等于或小于n。
+
+以矩阵表示为：
+
+$$
+\begin{equation}
+X q = p
+\end{equation}
+$$
+
+在 Arrow security 中，存在定价公式【不基于一价定律】：
+
+$$
+\tilde{m}(\omega_j)=q_j/\text{prob}_j.
+$$
+
+因此，逻辑是：**只有一价定律成立，才能得到唯一的 q，进而基于 Arrow security 得到 SDF 的公式**。
+
+$$
+\begin{aligned}
+p_{i}=\sum_{j=1}^k x_{i j}q_{j}=\sum_{j=1}^k x_{i j}m_{j}\mathrm{prob}_{j}\stackrel{\mathrm{def}}{=}\mathsf{E}[\tilde{x}_{i}\tilde{m}]. 
+\end{aligned}
+$$
 
 
+#### Cochrane's view <!-- {docsify-ignore} -->
+
+**唯一的state price vector q，实际上就是 $x^*$。**
+
+<div align = 'center'>
+
+![](../image/20230616PP2.png)
+</div>
+
+
+对于 payoff 一样的资产，当前 price 应该一样，反之亦然，**当 price 一样，那么未来 payoff 应该也一样**，否则同样意味着套利机会。
+
+也就是说，price=1 这条直线代表了一个随机变量，这一直线上的不同点代表着这一随机变量在不同 state 下分别的 payoff 略有区别，但整体【联合各状态下 payoff】来看还是等价的。因此，满足一价定律时，也就意味着存在 $x^*$，此时 $x^*$ 也就是 SDF。
+
+因为 $x^*$ 存在于 payoff 空间中，其也可以由 x 线性表示，$x^* = c'x$，因此有：
+
+$$
+\begin{aligned}
+& p = E(x*x) = E(xx'c) \\
+& \Rightarrow c = E(x'x)^{-1}p \\
+& \Rightarrow x^* = p'E(xx')^{-1}x
+\end{aligned}
+$$
+
+
+<div class = 'centerwords'>
+
+No arbitrage means a strictly positive SDF
+</div>
+
+一价定律能够推出 SDF 存在，但并不能得到严格为正的 SDF。
+
+无套利能够推出严格为正的 SDF，**反之同样成立**，严格为正的 SDF 也意味着无套利。
+
+如果此时不存在套利机会，则意味着零向量是 M 中唯一的非负向量。根据 *Tucker's Complementarity Theorem*，此时存在一个严格为正且与 M 正交的向量 $\bm{v}$，满足 $v'Y\theta = 0 \text{ for all } \theta \in \mathcal{R}^n $。
+
+因此，展开有：
+$$
+-v_1p'\theta+(v_2\cdots v_{k+1})X'\theta=0
+$$
+
+which implies that：
+
+$$\begin{aligned}
+q'X'\theta &= p' \theta \\
+p &= Xq
+\end{aligned}$$
+
+因此，得到了严格为正的 state price vector q。
+
+#### Cochrane's view <!-- {docsify-ignore} -->
+
+此处讨论的套利与一般意义上人们常说的套利是不同的。通常来说，套利表示对一价定律的违反，而在本节，无套利代表 you can’t get for free a portfolio that might pay off positively, but will certainly never cost you anything.
+
+当 $m>0$，易得无套利。当 $m>0$，而 payoff 非负并且在某些 state 下大于0，则代表在某些状态下 $mx>0$，在另外一些状态下 $mx=0$，因此 $E(mx)=p>0$。
+
+接下来从无套利推出 $m>0$。
+
+在完备市场中，通过反证法可得出。无套利可推出一价定律，因此有 $p=E(x^*x)$，此时只存在一个 SDF。假设在某些 states 下 $x^*<0$，此时存在 Arrow security 在该 state 下 payoff为1，其余状态下为0，那么 $ \sum \pi(s)x^*(s)$ 为负，违反无套利，因此 $m>0$。
+
+当市场不完备时，存在许多 SDF，$m = x* + \varepsilon \text{ with } E(\varepsilon x)=0$。此时我们需要说明**至少一个 SDF 为正**，但这个 SDF 可能不是 $x*$，即可能不在 payoff 空间中。此时有另外的证明方法，在此不具体列出。
+
+无套利原理说明了存在一个严格为正的 SDF，但并没有说 SDF **唯一**，只有当市场为完备市场时，SDF 才是唯一的。
 
 
 ## 3.5 Orthogonal Projections of SDFs onto the Asset Span

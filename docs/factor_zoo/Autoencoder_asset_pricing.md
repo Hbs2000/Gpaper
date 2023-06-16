@@ -174,7 +174,7 @@ x_t=(Z_{t-1}'Z_{t-1})^{-1}Z_{t-1}r_t
 $$
 
 > [!NOTE|label:Difference]
-> 此处的managed portfolio与IPCA和shrinking中的有所不同。
+> 此处的managed portfolio与IPCA和shrinking中的有所不同，有的标准化到（-0.5，0.5），有的是（-1，1）。
 
 $r_t^{(0)} = x_t$ 这一改动可谓是**一石三鸟**：
 
