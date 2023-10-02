@@ -1,0 +1,2 @@
+- [[JFE2008] How Common are Common factors across the NYSE and Nasdaq](/group_structure/common_factors_are_common.md)
+- [Back to Homepage](README.md)

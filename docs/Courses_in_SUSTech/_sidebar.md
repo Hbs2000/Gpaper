@@ -2,4 +2,5 @@
 - [机器学习](/Courses_in_SUSTech/机器学习/README.md)
 - [财务报表分析](/Courses_in_SUSTech/财务报表分析/README.md)
 - [金融学术](/Courses_in_SUSTech/金融学术/README.md)
+- [最优化基础](/Courses_in_SUSTech/最优化基础/README.md)
 - [Back to Homepage](README.md)

@@ -1,5 +1,5 @@
 # Forest through the Trees: Building Cross-Sections of Stock Returns
-Svetlana Bryzgalova, Markus Pelger, Jason Zhu, Working paper, 2021
+Svetlana Bryzgalova<sup>1</sup>, Markus Pelger<sup>2</sup>, Jason Zhu<sup>3</sup>, Working paper, 2021
 1. *London Business School, Department of Finance*
 2. *Stanford University, Department of Management Science and Engineering*
 3. *Stanford University, Department of Management Science and Engineering*
