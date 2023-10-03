@@ -99,7 +99,7 @@ Orthogonality 也恰恰体现于此，$\varepsilon$ 与 $\beta$ 正交，并且�
 ### IPCA
 
 $$\begin{equation}
-r_{t+1}=Z_{t}\Gamma_{\alpha}+Z_{t}\Gamma_{\beta}f_{t+1}+\varepsilon_{t+1},\quad t=1,\ldots,T.
+r_{t+1}=Z_{t}\Gamma_{\alpha}+Z_{t}\Gamma_{\beta}f_{t+1}+\varepsilon_{t+1},\quad t=1,\ldots,T. \label{2}
 \end{equation}
 $$
 
@@ -129,8 +129,8 @@ why is there $\alpha$ and $\epsilon$ at the same time?
 **New specification**
 
 $$\begin{equation}
-r_{t+1}= \underbrace{P_{ot}\delta_o+P_{it}\delta_i}_{\boldsymbol{\alpha}} +\underbrace{(Z_t+1_n\psi')\Gamma}_{\boldsymbol{\beta}} f_{t+1}+\varepsilon_{t+1},\quad t=1,\ldots,T 
-\end{equation}$$
+r_{t+1}= \underbrace{P_{ot}\delta_o+P_{it}\delta_i}_{\boldsymbol{\alpha}} +\underbrace{(Z_t+1_n\psi')\Gamma}_{\boldsymbol{\beta}} f_{t+1}+\varepsilon_{t+1},\quad t=1,\ldots,T  \label{3}
+\end{equation}$$ 
 
 - $r_{t+1}$ is an $n$-vector of asset returns in excess of the risk-free rate from $t$ to $t+1$
 - $Z_t$ is $n\times l$ firm characteristics at $t$ with $n \geq l$, $1_n$ is an $n$-vector of ones 
@@ -141,7 +141,7 @@ r_{t+1}= \underbrace{P_{ot}\delta_o+P_{it}\delta_i}_{\boldsymbol{\alpha}} +\unde
 
 - $\delta=(\delta_0^{\prime},\delta_i^{\prime})^{\prime}$ is an $(n-k)$-vector of constants in which the dimension of $\delta_0$ and $\delta_i$ are $n-l$ and $l-k$ respectively
 - $f_{t+1}$ is a $k$-vector of latent systematic factors realized at $t+1$ with mean $\mu_f$ and variance $\Omega_f$
-- $P_t = (P_{ot},P_{it}) $ is an $n \times (n-k) $ **orthonormal basis** that is orthogonal to $(Z_t+1_n\psi')\Gamma$, $P_{ot}$ is $n\times (n-l)$ if $n>l$, orthogonal to the subspace spanned by $Z_{t}^{*}=Z_{t}+1_{n}\psi^{\prime}$, $P_{it}$ is $n\times (l-k)$ if $l>k$ within the subspace spanned by $Z_{t}^{*}$ but orthogonal to the subspace spanned by $Z_{t}^{*} \Gamma$
+- the $P_t = (P_{ot},P_{it}) $ is an $n \times (n-k) $ **orthonormal basis** that is orthogonal to $(Z_t+1_n\psi')\Gamma$, $P_{ot}$ is $n\times (n-l)$ if $n>l$, orthogonal to the subspace spanned by $Z_{t}^{*}=Z_{t}+1_{n}\psi^{\prime}$, $P_{it}$ is $n\times (l-k)$ if $l>k$ within the subspace spanned by $Z_{t}^{*}$ but orthogonal to the subspace spanned by $Z_{t}^{*} \Gamma$
 
 $P_t \delta$ satisfying $B_{t}^{\prime}\alpha_{t}=[(Z_{t}+1_n{\psi^{\prime}})\Gamma]^{\prime}(P_t\delta)=0_k$
 
@@ -187,12 +187,16 @@ so when $b$ is zero scalars, affine transformation is equal to linear transforma
 
 #### Inside pricing error <!-- {docsify-ignore} -->
 
+$$
+r_{t+1}= P_{ot}\delta_o+\underbrace{P_{it}\delta_i}_{\boldsymbol{[n \times (l-k)]\times [(l-k)\times 1]}} +\underbrace{(Z_t+1_n\psi')\Gamma}_{\boldsymbol{n \times k}} \underbrace{f_{t+1}}_{\boldsymbol{k \times 1}} +\varepsilon_{t+1},\quad t=1,\ldots,T 
+$$ 
+
+
 **核心含义**：whether the predictive power of a given set of firm characteristics can be rationalized by considering them as the base of the beta with respect to latent factors (usually less than characteristics)
 
-> 因为要检验 $l$ 个公司特征能否由 $k$ 个因子解释，那么按照 APT 理论，这一部分的 $\alpha$ 就应该与 $k$ 个因子的 $\beta$ 正交。
+- the $P_{it}$ is within the subspace spanned by $ \underbrace{Z_t+1_n\psi'}_{\boldsymbol{n \times l}} $ but **orthogonal** to $ \underbrace{(Z_t+1_n\psi') \Gamma}_{\boldsymbol{n \times k}}  $  when $l>k$
 
-
-- the $P_{it}$ is within the subspace spanned by $Z^*_t$ but **orthogonal** to $Z^*_t \Gamma$ when $l>k$
+> 检验 $l$ 个公司特征能否由从中提取出的 $k$ 个因子解释。如果此时存在 $\alpha$，则说明这 $k$ 个因子所张成的空间并不足以解释 $l$ 个公司特征所张成的空间。
 
 - the $P_{it}\delta_i$ can be viewed as **correct version** of IPCA to replace the term $Z_t \Gamma_{\alpha}$
   
@@ -207,37 +211,287 @@ so when $b$ is zero scalars, affine transformation is equal to linear transforma
 
 #### Outside pricing error [Beyond IPCA] <!-- {docsify-ignore} -->
 
+$$
+r_{t+1}= \underbrace{P_{ot}\delta_o}_{\boldsymbol{[n \times (n-l)]\times [(n-l)\times 1]}} +P_{it}\delta_i +\underbrace{(Z_t+1_n\psi')}_{\boldsymbol{n \times l}} \underbrace{\Gamma f_{t+1}}_{\boldsymbol{l \times 1}} +\varepsilon_{t+1},\quad t=1,\ldots,T 
+$$ 
 
 
+**核心含义**：whether test assets can be explained by a given set of firm characteristics(usually less than test assets) *[considering inside pricing error = 0]*
 
-<hr>
-
-
-
-## Technical details
+- $P_{ot}$ is $n\times (n-l)$ if $n>l$, orthogonal to the subspace spanned by $Z_{t}^{*}=Z_{t}+1_{n}\psi^{\prime}$
 
 
+- Three sources of outside pricing error
 
+  1.  The first source is the pricing errors against the linear beta pricing theory, rising from nonlinear rational asset pricing models. Certain consumption and investment-based asset pricing models are outside the linear beta-pricing framework
+  2.  The second source is *investors’ behavioral biases*. 投资者的行为偏差可以通过公司特征来捕捉，但由于其通常不被认为是 base of betas，因而此类公司特征不以affine function之类的形式出现。即使将其视为base of betas，由于 first source，行为偏差因素可能仍然会产生 outside pricing error.
+  3.  The third source of the outside-model pricing error is the *omission* of return-predictive firm characteristics other than the chosen $Z_t$ or the omission of observed macroeconomic or market-wide factors
+
+
+> [!NOTE]
+> 在IPCA中，从36个公司特征 managed portfolio中提取因子，1-6个不等，看这些因子能否解释对应的公司特征组合收益率。这在本文的框架下，相当于 $n=l=36, k = 1~6$。也就是说，这些得到的因子并不能够解释这36个特征之外其他的managed portfolio。
+>
+> 在本文的框架下，IPCA 的这一框架通过 Inside pricing error实现，除此之外，还可以加入更多的 test asset，例如，通过 BETA, SIZE, BM 得到的因子，能否检验 STD, MOM？ 这一问题是 IPCA 所不能回答的。 
+>
+> 理想中的情况是 inside 和 outside 都很小，这代表提取出的因子能够解释特征的变化【inside】，同时这些特征的变化也可以解释收益率的变化【outside】。
+
+> [!TIP]
+> 还有一个问题是，凭什么就能说哪个是 inside，哪个是outside？
+>
+> 首先可以从其维度方面来看，例如对于 $P_{i,t}$ 其维度为 $n\times (l-k)$ 可以看出是特征与因子之间的差，其次，是其与谁 orthogonal， $P_{i,t}$ 与 $\underbrace{(Z_t+1_n\psi') \Gamma}_{\boldsymbol{n \times k}}$ 正交，也可以说明是 $k$ 个因子所不能解释的部分。
+
+
+## More details
+
+### The difference between new model and IPCA <!-- {docsify-ignore} -->
+
+实际上，IPCA完整公式如下：
+
+$$\begin{aligned}
+& r_{t+1} = \alpha_t + \beta_{t}f_{t+1}+\varepsilon_{t+1} \\
+\alpha_{t}=&Z_{t}\Gamma_{\alpha}+\nu_{\alpha t}, \quad \beta_{t}=Z_{t}\Gamma_{\beta}+\nu_{\beta t}
+\end{aligned}$$
+
+$$\begin{equation}
+r_{t+1}=Z_{t}\Gamma_{\alpha}+Z_{t}\Gamma_{\beta}f_{t+1}+\varepsilon_{t+1}^{*} 
+\end{equation}
+$$
+
+where $\varepsilon_{t+1}^{*}=\varepsilon_{t+1}+\nu_{\alpha t}+\nu_{\beta t}f_{t+1}$ is called composite error.
+
+该式与式 $(\ref{2})$ 唯一的区别在于 error term，但是这并没有什么帮助，因为实证结果并不会告诉我们 error term 中哪些来自于 $\nu_{\alpha t}$，哪些来自于 $\nu_{\beta t}$。
+
+但是尽管没有什么帮助，其实也没什么坏处。IPCA包括这些项的原因只是用于说明：$\alpha_{t}$ 和 $\beta_{t}$ 可能来自于除了 $Z_t$ 之外的变量。但是不同于 IPCA 仅仅考虑而不 test，式($\ref{3}$) 通过 outside pricing error直接 test 了这一类变量的存在，而非将其放在 error term里。
+
+
+### Estimation problem  <!-- {docsify-ignore} -->
+
+估计中存在的一个问题就是：对于给定的 $B_t = Z^*_t \Gamma$, its orthonormal basis $P_t$ is not unique。某些情况下，$P_{ot}$ 与 $P_{ot}^{*}$ 的不一致不会带来问题，如果 $P_{ot}^{*}=P_{ot}A$，其中 $A$ is orthonormal basis。因为 $\delta_{o}^{*}=A^{\prime}\delta_{o} \quad \mathrm{with} \quad ||\delta_{o}^{*}||^{2}=||\delta_{o}||^{2}$。
+
+但是当其不满足时，就会对估计结果产生影响，文章分为 rejecting the true 以及 accepting the false。
+
+**accepting the false**
+
+<div align='center'>
+
+![](image/20231002PP1.png)
+</div>
+
+**rejecting the true**
+
+这一方面则没有什么影响，因为如果二者相乘为0，那么无论 $P$ 怎么变化 pricing error 都为0。
+
+> If a researcher has a **good sense** of whether the pricing error may lie, a carefully chosen $P_t$ can enhance the power of the test. This obviously depends on specific issues to be examined in the model. However, **if the null is true**, the choice of $P_t$ is less crucial because $P_t \delta$ is a zero vector irrespective of the choice of $P_t$
+
+
+### balanced panel requirement <!-- {docsify-ignore} -->
+
+在估计式($\ref{3}$)时，要求 **test asset 必须是 balanced**，也即在整个样本期内个数保持不变，否则 $\underbrace{P}_{\boldsymbol{n \times (n-k)}}$ 的维度就会发生变化，使得估计量 $\delta$ 也随之变化。
+常见的处理方法则是将test asset转为portfolio，本文同样使用此方法。
+
+虽然式($\ref{3}$)只能用于组合，而IPCA可以适用于个股以及组合，但是实证结果显示：在个股上使用 PCA 得到的结果要远远逊于组合，所以不考虑个股也没什么关系（Zhang chu, 2009a）。
+
+
+## Estimation and Hypothesis Testing
+
+
+### Iteration
+
+Rewrite
+
+$$
+r_{t+1}= P_{ot}\delta_o+P_{it}\delta_i +(Z_t+1_n\psi')\Gamma f_{t+1}+\varepsilon_{t+1},\quad t=1,\ldots,T 
+$$ 
+
+as
+
+$$
+r_{t+1}=P_{t}\delta+\mathbf{Z}_{t}\Gamma f_{t+1}+\epsilon_{t+1}
+$$
+
+where $\mathbf{Z}_{t}=(Z_{t},1_{n}) \ \mathrm{and} \ \boldsymbol{\Gamma}=(\Gamma^{\prime},\theta)^{\prime}, \theta = \Gamma' \psi$
+
+The system is **bilinear**, which means it is linear for each variable and non-linear for the whole system，所以需要通过**迭代**的方式求解
+
+
+Initial guess  $\boldsymbol{\hat{\Gamma}}$ (*Rayleigh quotient*): 
+
+$$
+\frac{\frac{1}{T}\sum_{t=1}^{T}\mathbf{Z}_{t}^{\prime}r_{t+1}r_{t+1}^{\prime}\mathbf{Z}_{t}}{\frac{1}{T}\sum_{t=1}^{T}\mathbf{Z}_{t}^{\prime}\mathbf{Z}_{t}}
+$$
+
+Iteration for $t = 1,2,\cdots,T$
+
+$$
+\begin{align}
+&\hat{\psi}=\hat{\Gamma}(\hat{\Gamma}'\hat{\Gamma})^{-1}\hat{\theta},\quad\hat{Z}_{t}^{*}=Z_{t}+1_{n}\hat{\psi}^{\prime}, \\
+&S_{1t}\left. = \left[I_n-\hat{Z}_t^*(\hat{Z}_t^{*'}\hat{Z}_t^*)^{-1}\hat{Z}_t^{*'}\right]\left(\begin{matrix}I_{n-l}\\O_{l\times(n-l)}\end{matrix}\right.\right) \\
+&\hat{P}_{ot}=S_{1t}(S'_{1t}S_{1t})^{-1/2}, \\
+&S_{2t}=\left[\hat{Z}_{t}^{*}(\hat{Z}_{t}^{*'}\hat{Z}_{t}^{*})^{-1}\hat{Z}_{t}^{*'}-\hat{Z}_{t}^{*}\hat{\Gamma}(\hat{\Gamma}'\hat{Z}_{t}^{*'}\hat{Z}_{t}^{*}\hat{\Gamma})^{-1}\hat{\Gamma}'\hat{Z}_{t}^{*'}\right] \binom{I_{l-k}}{O_{(n-l+k)\times(l-k)}} \\
+&\hat{P}_{it}=S_{2t}(S'_{2t}S_{2t})^{-1/2} \\
+& \hat{f}_{t+1}=\begin{bmatrix}(\mathbf{Z}_t\boldsymbol{\hat{\Gamma}})'(\mathbf{Z}_t\boldsymbol{\hat{\Gamma}})\end{bmatrix}^{-1}(\mathbf{Z}_t\boldsymbol{\hat{\Gamma}})'r_{t+1} 
+\end{align}
+$$
+
+
+得到时间序列数据后，利用整个时间序列计算统计量 $\delta$ 与更新 $\boldsymbol{\hat{\Gamma}}$
+
+$$
+\begin{align}
+&\hat{\delta}_o=\left(\sum_{t=1}^T\hat{P}'_{ot}\hat{P}_{ot}\right)^{-1}\sum_{t=1}^T\hat{P}'_{ot}r_{t+1}=\frac{1}{T}\sum_{t=1}^T\hat{P}'_{ot}r_{t+1}\\ 
+&\hat{\delta}_{i}=\left(\sum_{t=1}^{T}\hat{P}'_{it}\hat{P}_{it}\right)^{-1}\sum_{t=1}^{T}\hat{P}'_{it}r_{t+1}=\frac{1}{T}\sum_{t=1}^{T}\hat{P}'_{it}r_{t+1} \\
+&\begin{aligned}\operatorname{vec}(\boldsymbol{\hat{\Gamma}}')&=\left(\sum_{t=1}^T(\mathbf{Z'}_t\otimes\hat{f}_{t+1})(\mathbf{Z}_t\otimes\hat{f'}_{t+1})\right)^{-1}\\&\sum_{t=1}^T\left(\mathbf{Z'}_t\otimes\hat{f}_{t+1}\right)(r_{t+1}-\hat{P}_{ot}\hat{\delta}_o-\hat{P}_{it}\hat{\delta}_i),\end{aligned}
+\end{align}
+$$
+
+Starts with some initial estimates and then iterates the set of first order conditions of minimizing $\sum_{t=1}^{T}\varepsilon_{t+1}^{\prime}\varepsilon_{t+1}$ until convergence 
+
+It is easy to verify that the chosen $\hat{P}_{ot}$ is orthogonal to $\hat{Z}_t^*$ and $\hat{P}_{it}$ is in the subspace spanned by $\hat{Z}_t^*$ but is orthogonal to $\hat{Z}_t^*$
+
+### Bootstrap
+
+但是这样得出的统计量 $\delta$ 最终只有一个值，而无法得到分布。而对于 $f_{t+1}$ 来说，即使可以得到分布，其分布也并不 asymptotic，
+
+> Zhang (2009b) provides an example in which, even for models with constant betas, the asymptotic distribution of a test statistic is nonstandard when latent factors are extracted from returns.
+
+Suppose the estimated parameters from the actual data are $\hat{\delta}_{o},\hat{\delta}_{i},\hat{\psi},\hat{\Gamma},\hat{P}_{ot},\hat{P}_{it},\hat{f}_{t+1},\mathrm{and} \ \hat{\varepsilon}_{t+1}.$
+
+For instance, if the null hypothesis is $\delta=0_{n-k}$, then generated return series is $\hat{r}_{t+1} = (Z_{t}+1_{n}\hat{\psi}^{'})\hat{\Gamma}\hat{f}_{t+1}+\tilde{\varepsilon}_{t+1}$, where $ \tilde{\epsilon}$ is resampled from the set $\hat{\epsilon}$ (**only resample variable**).
+
+From bootstrap return $\{\hat{r}_{t+1}\}_{t=1}^{T}$ and $\{Z_{t}\}_{t=1}^{T}$, the model can be **reestimated**, and let $\tilde{\delta}_i$ and $\tilde{\delta}_0$ be the reestimated $\delta_i$ and $\delta_0$. 
+
+Such bootstrap can be replicated a number of times to generate the empirical distribution of $\tilde{\delta}_i$ and $\tilde{\delta}_0$, then calculate p-value of $\|\hat{\delta}\|^2,\|\hat{\delta}_0\|^2\mathrm{~and~}\|\hat{\delta}_i\|^2$
 
 
 ## Empirical results
 
+组合的公司特征：例如对于 size，将其五等分后，做标准化处理，然后将portfolio内的所有组合等权计算任意公司特征，可以是 size，也可以是mom。
+
+标准化方法：
+$$
+z_{j,m,t}=-0.5+q_{j,m,t}/n_{t}
+$$
+
+其中 $q_{j,m,t}$ is rank of firm characteristics.
+
+<div class = 'centerwords'>
+
+n = 15, l = 3
+</div>
+
+Bootstrap Tests of the Zero Pricing Error Hypothesis:  Z = (**BETA**, **LME**, **LBM**) and Returns on **Quintile** Portfolios Sorted by (BETA, LME, LBM)
+
+> [!NOTE]
+> 因为 pricing error的维度是 $n \times 1$，因此可以给出**每一项 test asset 对应的 pricing error**。
+
+<div align='center'>
+
+![](image/20231002PP2.png)
+</div>
+
+<div align='center'>
+
+![](image/20231002PP3.png)
+</div>
+
+
+<div class = 'centerwords'>
+
+n = 25, l = 3
+</div>
+
+Bootstrap Tests of the Zero Pricing Error Hypothesis: Z = (**BETA**, **LME**, **LBM**) and Returns 
+on **Quintile** Portfolios Sorted by (BETA, LME, LBM, **INV**, **PROF**)
+
+<div align='center'>
+
+![](image/20231002PP4.png)
+</div>
+
+<div align='center'>
+
+![](image/20231002PP5.png)
+</div>
+
+> [!WARNING|label:Confusion]
+> 这里就产生了一个非常容易 confused 的点，上面不是说 $k$ 个因子解释的是 $l$ 个特征吗，为什么inside pricing error出现了 $l$ 个特征 (BETA, LME, LBM) 之外的 (INV,PROF) 呢？
+> 
+> 这是因为panel D 和 E 中的特征，指的并不是用于提取因子的特征 $l$，而只是用于构造 test asset 的特征，因此，这里的特征，指的是**资产**。例如根据 INV sort构造的 5 个 portfolio，每个portfolio都会有 size，LME，和LBM，这就是模型中的 $n \times l$ 维的特征矩阵 $Z_t$ 
+ 
+
+<div class = 'centerwords'>
+
+Behavior bias
+
+</div>
+
+Z = (**BETA**, **LME**, **LBM**, **INV**, **PROF**) and Returns on Quintile Portfolios Sorted by (BETA, LME, LBM, INV, PROF, **NSI**, **CEI**, **MAX**)
+
+<div align='center'>
+
+![](image/20231003PP1.png)
+</div>
 
 
 
-panel的问题
+<div align='center'>
+
+![](image/20231003PP2.png)
+</div>
+
+结果发现这三个行为偏差特征的pricing error非常大，代表这五个特征并不能张成收益率空间。那么接下来将这三个特征也加入beta构造，看是否有帮助。
+
+Z = (**BETA**, **LME**, **LBM**, **INV**, **PROF**, **NSI**, **CEI**, **MAX**) and Returns on Quintile Portfolios Sorted by (BETA, LME, LBM, INV, PROF, NSI, CEI, MAX)
 
 
-inside error 是因为你知道是啥，是由模型内部决定的，但outside error不知道是啥
+<div align='center'>
 
-为什么k越大，inside error就越小，二者有什么关系？除了l-k的关系
+![](image/20231003PP3.png)
+</div>
 
-是啥ijis
+<div align='center'>
 
-两个error之间的关系，有没有可能inside为0而outside不为0，或者反之
+![](image/20231003PP4.png)
+</div>
 
-为什么要有panel AB 和 CD 两种检验方法，CD相当于对AB的拆解
+<div align='center'>
 
-PCA那块没怎么看懂，哪来的20个因子，因子不是估计出来的吗？
+![](image/20231003PP5.png)
+</div>
+
+结果仍然没有好转，那就说明行为偏差并不能由 base of beta 所解释。
+
+<div align='centerwords'>
+
+Comparison with IPCA
+</div>
+
+IPCA 的结论是：当latent factor的个数为6时，$\alpha = 0$ 的假设不能被拒绝。
+
+然而前文提过，IPCA 并不能保持 $\alpha$ 与 $\beta$ 的正交关系，因而本文接下来检测加上这条限制后，结论会发生什么样的变化。
+
+$$
+\begin{aligned}
+&\Lambda_{k} =\frac{1}{T}\sum_{t=1}^{T}\frac{\sum_{m=1}^{k}\lambda_{mt}}{\sum_{m=1}^{l}\lambda_{mt}},  \\
+&\Lambda_{k}^{*} =\frac{\sum_{m=1}^k\lambda_m}{\sum_{m=1}^l\lambda_m}, 
+\end{aligned}
+$$
+
+where $\lambda_{mt}$ is the $m$th largest eigenvalue of $Z_t^{\prime}Z_t$ and $\lambda_{m}$ is the $m$th largest eigenvalue of $\frac{1}{T}\sum_{t=1}^{T}Z_{t}^{\prime}Z_{t}$ for $m=1,2,\ldots,l.$
+
+结果显示，即使 $k$ 取到20，也不能拒绝 $\alpha = 0$ 的假设。
+
+这里看似也十分难以理解，明明 orthogonality constraint 使得估计出的 $\alpha_t$ 更小了，为什么还是拒绝了呢？
+
+这是因为 KPS 和 本文，都使用的bootstrap来得到empirical distribution，进而计算 p 值。而如果没有constraint，bootstrap得到的distribution，其均值和方差都会更大，因而不会被拒绝，这也说明了本文提出的方法更加严格。
+
+<div align='center'>
+
+![](image/20231003PP6.png)
+</div>
+
+
+
+
 
 
