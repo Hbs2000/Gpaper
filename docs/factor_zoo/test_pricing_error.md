@@ -461,9 +461,10 @@ Z = (**BETA**, **LME**, **LBM**, **INV**, **PROF**, **NSI**, **CEI**, **MAX**) a
 
 结果仍然没有好转，那就说明行为偏差并不能由 base of beta 所解释。
 
-<div align='centerwords'>
+<div class='centerwords'>
 
 Comparison with IPCA
+
 </div>
 
 IPCA 的结论是：当latent factor的个数为6时，$\alpha = 0$ 的假设不能被拒绝。
