@@ -1,10 +1,8 @@
 # Testing Pricing Errors of Models with Latent Factors and Firm Characteristics as Covariances
 
-Zhang Chu<sup>1</sup>. ***Management Science***, 2023
+Chu Zhang<sup>1</sup>. ***Management Science***, 2023
 
 1. *Hong Kong University of Science and Technology, Hong Kong*
-
-
 
 研究问题：$\alpha \text{ and } \beta $ 
 
@@ -35,8 +33,8 @@ $$
 Construct an arbitrage portfolio:
 
 - zero cost: $\boldsymbol{w}'\boldsymbol{e}=0$
-- the arbitrage portfolio's return $R_a=\boldsymbol{\omega}'\boldsymbol{R}=\boldsymbol{\omega}'\boldsymbol{\mu}+\boldsymbol{\omega}'\boldsymbol{\beta}f+\boldsymbol{\omega}'\boldsymbol{\varepsilon}$
 - the a-portfolio has no exposure to risk factor: $\boldsymbol{w}'\beta = 0$
+- the arbitrage portfolio's return $R_a=\boldsymbol{\omega}'\boldsymbol{R}=\boldsymbol{\omega}'\boldsymbol{\mu}+\boldsymbol{\omega}'\boldsymbol{\beta}f+\boldsymbol{\omega}'\boldsymbol{\varepsilon}$
 
 **Step three**
 
@@ -88,40 +86,62 @@ $$
 
 Orthogonality 也恰恰体现于此，$\varepsilon$ 与 $\beta$ 正交，并且残差满足 $\boldsymbol{1}'\boldsymbol{\varepsilon} = 0$。
 
-> 按理说intercept是coefficient中的一部分，二者不可能做到正交，所以只有是residual才能实现
+> 按理说intercept是coefficient中的一部分，二者很难做到正交，所以只有是residual才能实现
 
 > [!NOTE|label:In a nutshell]
 > the orthogonality conditon $B'_t \alpha_t = 0_k$, which *is the heart of APT*, and is important in order to obtain an ***unambiguous interpretation*** of the term as a pricing error
 
 > [!WARNING|label:Time series regression]
 > 在时序回归中并非如此。
+$$
+R^e_{it} = \alpha_i + \beta_i^{\prime} \boldsymbol{\lambda}_t + \varepsilon_{it} \quad t = 1,2,\cdots,T
+$$
+> 其中 $\boldsymbol{\lambda}_t$ 为 $t$ 期因子收益率向量，$R^e_{it}$ 为资产 $i$ 在 $t$ 期的超额收益率。
+>
+> 得到估计量 $\hat{\alpha}_i$ 和 $\hat{\beta}_i$ 后，在时序上取均值可得：
+$$
+E_T[R^e_i] = \hat{\alpha}_i + \hat{\beta}_i^{\prime} \hat{\boldsymbol{\lambda}} \quad i=1,2,\cdots,T
+$$
+> 在此，不同之处就在于，时序回归中没有将 residual 作为 pricing error，而是将 intercept 作为 pricing error。这里一方面是因为 residual 一取均值就没了，另一方面是因为这样更符合资产定价理论：我们用资产收益率的均值和因子收益率的均值来分别表示**资产预期收益率**和**因子预期收益率**。当因子暴露为零，即 $\beta_i$ 为零时，资产预期收益率应该为 zero-beta return，$\alpha_i$ 表示了每个资产实际收益率和定价收益率的差别，当差距过大即说明定价不准。
+>
+> 然而，此处最大的问题就是：根据APT理论，时序回归出的 $\alpha$ 并不满足 **zero-cost** 以及 **zero-exposure**。
+> 
+> 此外，另一结构上的差异为：时序回归是以最小化残差为目的而估计的，只跟每个资产本身有关。而在截面回归中，是以最小化 $\hat{\alpha}_i$ 的平方和估计出的。因为截面回归同时利用了所有资产的数据，因此从某种意义上来说，截面回归更加合理。
+
+> [!TIP|label:Which is right]
+> 通过截面回归得到的因子预期收益率估计量为：
+$$
+\hat{\boldsymbol{\lambda}} = (\hat{\beta}^{\prime}\hat{\beta}^{\prime})^{-1} \hat{\beta}^{\prime} E_T[\boldsymbol{R}^e]
+$$
+> $\hat{\beta}$ 是 $N\times K$ 维因子暴露矩阵，因此 $(\hat{\beta}^{\prime}\hat{\beta}^{\prime})^{-1} \hat{\beta}^{\prime}$ 是一个 $K \times N$ 维矩阵，每一行对应一个因子，每一列对应一个资产。
+>
+> 将该矩阵与因子暴露矩阵相乘，有：
+$$
+(\hat{\beta}^{\prime}\hat{\beta}^{\prime})^{-1} \hat{\beta}^{\prime} \hat{\beta} = I
+$$
+> 令 $\Omega = (\hat{\beta}^{\prime}\hat{\beta}^{\prime})^{-1} \hat{\beta}^{\prime}$ 表示权重矩阵，该权重在对应因子上暴露为1，在其他因子上暴露为0，因此最后得到的因子收益率更加准确。
+
 
 ### IPCA
+
+当定价视角从 unconditional 转为 conditional 时，新的问题出现了，下式为经典条件定价公式 IPCA：
 
 $$\begin{equation}
 r_{t+1}=Z_{t}\Gamma_{\alpha}+Z_{t}\Gamma_{\beta}f_{t+1}+\varepsilon_{t+1},\quad t=1,\ldots,T. \label{2}
 \end{equation}
 $$
 
+既然我们已经知道了 $\alpha$ 需要满足 zero cost 以及 zero exposure 条件，那么在 conditional asset pricing model 中，应该将 residual 作为 pricing error 才更为合理，而非 intercept，为什么上式并非如此呢？
 
-**Restriction**
+1. 因为上式中含有**时序**的成分，在时序取均值后 residual 为零，无法作为定价误差。
 
-In IPCA, $B_t^{\prime}\alpha_t=\Gamma_\beta^{\prime}Z_t^{\prime}Z_t\Gamma_\alpha=0_k$, which is **impossible** for any constant $\Gamma_\alpha$ and $\Gamma_\beta$ when $Z_t$ is time-varying.
+2. 更为重要的，是对定价公式的理解。尽管 **时序回归** 和 **截面回归** 性质上有一定的差异，但其内核都是一样的，都是 risk-based compensation。因此，如果我们**人为添加 zero-cost 和 zero exposure 的限制，抹除掉性质上的差异，那么就能使得时序回归成为** ***正确的定价公式***。
 
-Instead, due to under-identified caused by the overwhelming number of parameters, IPCA imposes an orthogonality condition $\Gamma_{\beta}'\Gamma_{\alpha}=0$.
+因此，IPCA 也施加了这两种限制。
 
-**From unconditional to conditional**
+- 对于zero cost，因为其使用的均为超额收益率，因此估计出的 $\alpha$ 满足zero cost
 
-why is there $\alpha$ and $\epsilon$ at the same time?
-
-为什么在做时序回归时，我们认为intercept是pricing error，但是在截面回归时我们认为residual是pricing error
-
-> 截面回归是没有截距项的，epsilon就代表了定价误差，因为在多因子模型的假设中，截面收益率差异仅由common factor和specific beta决定。然而时序回归不是为了最小化alpha，而是为了拟合收益率序列，也即R square最大，因此收益率存在intercept。而当截面模型加入了时序的成分，也就是conditional model
-
-为什么IPCA中截距项是pricing error，Autoencoder里residual是pricing error
-
-
-<hr>
+- 对于zero exposure，IPCA imposes an orthogonality condition $\Gamma_{\beta}'\Gamma_{\alpha}=0$。但这实际上并非真正的 orthogonality 条件，真正的条件应该是：$B_t^{\prime}\alpha_t=\Gamma_\beta^{\prime}Z_t^{\prime}Z_t\Gamma_\alpha=0_k$, which is **impossible** for any constant $\Gamma_\alpha$ and $\Gamma_\beta$ when $Z_t$ is time-varying.
 
 
 ## Dissecting the orthogonality
@@ -143,11 +163,7 @@ r_{t+1}= \underbrace{P_{ot}\delta_o+P_{it}\delta_i}_{\boldsymbol{\alpha}} +\unde
 - $f_{t+1}$ is a $k$-vector of latent systematic factors realized at $t+1$ with mean $\mu_f$ and variance $\Omega_f$
 - the $P_t = (P_{ot},P_{it}) $ is an $n \times (n-k) $ **orthonormal basis** that is orthogonal to $(Z_t+1_n\psi')\Gamma$, $P_{ot}$ is $n\times (n-l)$ if $n>l$, orthogonal to the subspace spanned by $Z_{t}^{*}=Z_{t}+1_{n}\psi^{\prime}$, $P_{it}$ is $n\times (l-k)$ if $l>k$ within the subspace spanned by $Z_{t}^{*}$ but orthogonal to the subspace spanned by $Z_{t}^{*} \Gamma$
 
-$P_t \delta$ satisfying $B_{t}^{\prime}\alpha_{t}=[(Z_{t}+1_n{\psi^{\prime}})\Gamma]^{\prime}(P_t\delta)=0_k$
-
-> **The inside-model pricing error** in the case of $l> k$ is within the $l$-dimensional subspace spanned by the affine-transformed firm characteristics but orthogonal to the $k$-dimensional subspace of the factor beta. 
-> 
-> **The outside-model pricing error** in the case of $n>l$ is orthogonal to the $l$-dimensional subspace spanned by the affine-transformed firm characteristics.
+> $P_t \delta$ satisfying $B_{t}^{\prime}\alpha_{t}=[(Z_{t}+1_n{\psi^{\prime}})\Gamma]^{\prime}(P_t\delta)=0_k$
 
 - $\epsilon_{t+1}$ is an $n$-vector of idiosyncratic returns with mean zero and variance $\Omega_{\epsilon}$
 
@@ -162,6 +178,8 @@ Therefore, further restrictions on the parameters are needed in estimation.
 This under-identification is well-known in the literature of principal component analysis–based methods of constructing factor-mimicking portfolios, IPCA also has to apply some constraints. 
 
 It is worth noting that this does not apply to **affine transformations**. If $Z_t \Gamma$ is affine-transformed to $Z_{t}\Gamma^{*}=Z_{t}\Gamma A+C_{t}$, then, in general, there is no $f^*_{t+1}$ such that $Z_t\Gamma f_{t+1}= Z_t\Gamma^*f_{t+1}^*$
+
+> 这里告诉我们，通过线性方法 (**PCA**) 估计出的 $\beta$ 和因子并不唯一【under-identified】，而通过 affine transformation 估计出的系数则不受这一影响。
 
 ### Why affine instead of linear transformation
 
@@ -184,6 +202,10 @@ so when $b$ is zero scalars, affine transformation is equal to linear transforma
 2. the test of the zero pricing error hypothesis can be conducted *meaningfully*
 
 ### Two types of pricing errors
+
+> **The inside-model pricing error** in the case of $l> k$ is within the $l$-dimensional subspace spanned by the affine-transformed firm characteristics but orthogonal to the $k$-dimensional subspace of the factor beta. 
+> 
+> **The outside-model pricing error** in the case of $n>l$ is orthogonal to the $l$-dimensional subspace spanned by the affine-transformed firm characteristics.
 
 #### Inside pricing error <!-- {docsify-ignore} -->
 
@@ -236,9 +258,11 @@ $$
 > 理想中的情况是 inside 和 outside 都很小，这代表提取出的因子能够解释特征的变化【inside】，同时这些特征的变化也可以解释收益率的变化【outside】。
 
 > [!TIP]
-> 还有一个问题是，凭什么就能说哪个是 inside，哪个是outside？
+> 第一步 $k$ 到 $l$，是 PCA 类方法在干的事情。
 >
-> 首先可以从其维度方面来看，例如对于 $P_{i,t}$ 其维度为 $n\times (l-k)$ 可以看出是特征与因子之间的差，其次，是其与谁 orthogonal， $P_{i,t}$ 与 $\underbrace{(Z_t+1_n\psi') \Gamma}_{\boldsymbol{n \times k}}$ 正交，也可以说明是 $k$ 个因子所不能解释的部分。
+> 第二步 $l$ 到 $n$，是 Fama 在干的事情。
+>
+> 第二步选特征，回答是否选择了 factor zoo 中最核心的几个特征，第一步则回答能否再降维。
 
 
 ## More details
