@@ -1,5 +1,11 @@
 # Foundations of Optimization
 
+证明一个集合为凸集，有两种方式：
+
+（1）利用定义
+（2）简单的凸集【**hyperplanes, halfspaces, norm balls**】经过保凸运算【**intersection, affine function, perspective function**】后仍是凸集
+
+
 ## Operations that Preserve Convexity
 
 ### Affine function 
@@ -67,7 +73,7 @@ Let $S\subset \mathbb{R}^n $ be arbitrary. Then, any $x\in\mathrm{conv}(S)$ can 
 >
 > we want to show one of the $\alpha_i$ can be set to $0$.
 >
-> $\{x_{2}-x_{1},x_{3}-x_{1},\cdots x_{k}-x_{1}\}$ must be linearly dependetn in $R^n$
+> $\{x_{2}-x_{1},x_{3}-x_{1},\cdots x_{k}-x_{1}\}$ must be linearly depedent in $R^n$
 >
 > $\exist \ \beta_{1},\cdots\beta_{k}\in R$ not all zero, s.t. $\sum_{i=1}^{k}\beta_{i}x_{i}=0\quad\mathrm{and} \quad \sum_{i=1}^{k}\beta_{i}=0$
 >
@@ -112,11 +118,16 @@ Let $S \subset R^n $ be non-empty and convex. We say a non-empty convex set $F \
 
 ## Topological Properties
 
+For an arbitrary set, its interior is defined by $\operatorname{int}(S)=\{x\in S:B(x,\epsilon)\subset S\text{ for some }\epsilon>0\}.$
 
+**Relative interior**: Let $\mathcal{S}\subset\mathbb{R}^n$ be arbitrary. We say that $x\in S$ belongs to the relative interior of $S$, denoted by $x\in relint(S)$, if there exists an $\varepsilon > 0$ such that $B(x,\epsilon)\cap aff(S)\subset S$. The **relative boundary** of $S$, denoted by $relbd(S)$, is defined $relbd(S)=cl(S)\backslash relint(S)$
 
+The closure of $S$ is denoted by $cl(S)=S\cup S^{\prime}$, where $S'$ is the set of limit points of $S$
 
+**line segment principle**: Let $S\in \mathbb{R}^n$ be non-empty and convex. For any $x\in cl(S)$ and $x' \in relint(S)$, we have
 
-## Projection onto Closed Convex Sets
-
+$$
+(x,x^{\prime}]=\{\alpha x+(1-\alpha)x^{\prime}\in\mathbb{R}^n:\alpha\in(0,1]\}\subset relint(S)
+$$
 
 

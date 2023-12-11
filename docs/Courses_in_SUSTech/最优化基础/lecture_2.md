@@ -71,7 +71,7 @@ $$\begin{aligned}
 >
 > Then for any $z_1,z_2 \in S$, there exist $v_1,v_2 \in V, \text{ s.t. } z_1 = x+v_1, z_2 = x+v_2$.
 >
-> Since $V$ is linear, for any $\alpha\in R$, we have $\alpha z_{1}+(1-\alpha)z_{2}=x+\alpha v_{1}+(1-\alpha)v_{2}\in S$
+> Since $V$ is linear, for any $\alpha\in R$, we have $\alpha z_{1}+(1-\alpha)z_{2}=x+\underbrace{\alpha v_{1}+(1-\alpha)v_{2}}_{\in V}\in S$
 >
 > By c, We refer to *an affine set as an affine subspace*.
 
@@ -201,7 +201,7 @@ $$
 $$\begin{aligned}
 & ||x+y||_{Q}^{2}=(x+y)^{T}Q(x+y)=x^{T}Qx+y^{T}Qy+2x^{T}Qy \\
 =& ||x||_{Q}^{2}+||y||_{Q}^{2}+2x^{T}Q^{\frac{1}{2}}Q^{\frac{1}{2}}y \quad (Q^{\frac{1}{2}}=U\Lambda^{\frac{1}{2}}U^{T})  \\ 
-=& ||x||_{Q}^{2}+||y||_{Q}^{2}+2||Q^{\frac{1}{2}}x||_{2}\cdot||Q^{\frac{1}{2}}y||_{2} \quad \text{ Cauchy-Schwarz inequality} \\
+\leq& ||x||_{Q}^{2}+||y||_{Q}^{2}+2||Q^{\frac{1}{2}}x||_{2}\cdot||Q^{\frac{1}{2}}y||_{2} \quad \text{ Cauchy-Schwarz inequality} \\
 =& \|x\|_{Q}^{2}+\|y\|_{Q}^{2}+2\|x\|_{Q}\cdot\|y\|_{Q}=(\|x\|_{Q}+\|y\|_{Q})^{2}
 \end{aligned}$$
 >
@@ -227,13 +227,6 @@ where, $A\in\mathbb{R}^{m\times n},C\in\mathbb{R}^{p\times n}$
 
 ![](../image/20230921CV3.png)
 </div>
-
-### Operations that Preserve Convexity
-
-证明一个集合为凸集，有两种方式：
-
-（1）利用定义
-（2）简单的凸集【**hyperplanes, halfspaces, norm balls**】经过保凸运算【**intersection, affine function, perspective function**】后仍是凸集
 
 
 

@@ -275,6 +275,12 @@ mark {
   border-color: #ffbdaa !important;
 }
 
+.alert.flat.theorem {
+  background-color: #ae8cc1 !important;
+  border-color: #ae8cc1 !important;
+  font-size: 30px !important;
+}
+
 hr {
   height:  3px;
   background-color: rgb(0, 0, 0);

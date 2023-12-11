@@ -62,7 +62,7 @@ Nope
 - A set $\mathcal{F}$ is **closed** if it contains all its limit points.
 
 
-- A set $\mathcal{F}$ is **bounded** if $\exists \ k>0$ (ball in $\mathbb{R}^n$ with radius $k$). If there is no such $k$ then $\mathcal{F}$ is unbounded.
+- A set $\mathcal{F}$ is **bounded** if $\exists \ k>0$ such that $\mathcal{F}\subseteq\mathcal{B}_k$ (ball in $\mathbb{R}^n$ with radius $k$). If there is no such $k$ then $\mathcal{F}$ is unbounded.
 
 
 #### Bolzano-Weierstrass theorem
