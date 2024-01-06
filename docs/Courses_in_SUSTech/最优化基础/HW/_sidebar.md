@@ -1,3 +1,5 @@
 - [hw1](/Courses_in_SUSTech/最优化基础/HW/hw1.md)
 - [hw2](/Courses_in_SUSTech/最优化基础/HW/hw2.md)
+- [hw3](/Courses_in_SUSTech/最优化基础/HW/hw3.md)
+- [hw4](/Courses_in_SUSTech/最优化基础/HW/hw4.md)
 - [Back to Optimization](/Courses_in_SUSTech/最优化基础/README.md)

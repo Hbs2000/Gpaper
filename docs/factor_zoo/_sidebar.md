@@ -6,4 +6,5 @@
 - [[MS2023] Testing Pricing Errors of Models with Latent Factors and Firm Characteristics as Covariances](/factor_zoo/test_pricing_error.md)
 - [SDF theory](/factor_zoo/SDF_theory/README.md)
 - [Toolkit](/factor_zoo/toolkit/README.md)
+- [Misalignment](/factor_zoo/misalignment.md)
 - [Back to Homepage](README.md)

@@ -1,6 +1,6 @@
 # Frequency dependent risk
 
-Andreas Neuhierl<sup>1</sup>, Rasmus T. Varneskov<sup>2</sup>,, ***Journal of Financial Economics***, 2021
+Andreas Neuhierl<sup>1</sup>, Rasmus T. Varneskov<sup>2</sup>, ***Journal of Financial Economics***, 2021
 
 1. *Washington University in St. Louis, Olin Business School, United States*
 2. *Copenhagen Business School, Denmark*
@@ -46,11 +46,11 @@ $$
 
 $$
 \begin{equation}
-    C_{yx}(h)=\mathrm{Cov}(\mathbf{y}_t,\mathbf{x}_{t-h}),\quad f_{yx}(\lambda)=\frac1{2\pi}\sum_{h=-\infty}^\infty\mathbf{C}_{yx}(h)e^{-\mathrm{i}\lambda h},
+    C_{yx}(h)=\mathrm{Cov}(\mathbf{y}_t,\mathbf{x}_{t-h}),\quad f_{yx}(\lambda)=\frac1{2\pi}\sum_{h=-\infty}^\infty\mathbf{C}_{yx}(h)e^{-\mathrm{i}\lambda h}, \label{3}
 \end{equation}
 $$
 
-式（2）给出了有关协方差分解的核心定义部分。其中 $\lambda$ 代表频率，$C_{yx}(h)$ 代表互协方差（cross-covariance，当 lag 为 0 则等同于协方差），$f_{yx}(\lambda)$ 代表 cospectral density。基于这两个概念，可以告诉我们在**不同频率下两个时间序列的“相关性”**。
+式（3）给出了有关协方差分解的核心定义部分。其中 $\lambda$ 代表频率，$C_{yx}(h)$ 代表互协方差（cross-covariance，当 lag 为 0 则等同于协方差），$f_{yx}(\lambda)$ 代表 cospectral density。基于这两个概念，可以告诉我们在**不同频率下两个时间序列的“相关性”**。
 
 通过 Parseval 定理，有：
 
@@ -60,12 +60,22 @@ $$
 \end{equation}
 $$
 
-$\Re()$ 代表实部。
+$\Re()$ 代表实部，$\lambda_j = 2\pi j/T$。
 
 > [!Theorem|label:Parseval theorem]
 > Parseval's theorem states that the total energy (or variance) in the time domain is equal to the total energy in the frequency domain. It's a fundamental principle in signal processing that bridges the time and frequency domains, which allows us to infer time-domain relationships (like covariance) using frequency-domain data (like spectral density)
 
-> Parseval theorem 能否考虑虚部，这样就有了相位信息
+> [!TIP|label:Derivation]
+$$
+\begin{aligned}
+    C_{yx}(h) &= 2\pi\int_0^\infty f_{yx}(\lambda) e^{\mathrm{i}\lambda h} d\lambda \\
+    &=2\pi\int_0^\infty \left(\Re({f_{yx}})+\Im({f_{yx}})i\right) \left(\cos(\lambda h)+i \sin(\lambda h)\right) d\lambda\\
+    &= 2\pi \left[\int_0^\infty \Re({f_{yx}})\cos(\lambda h)  - \Im({f_{yx}}) \sin(\lambda h)d\lambda\right] \\
+    &+ 2\pi i \left[  \int_0^\infty \Re({f_{yx}})\sin(\lambda h)+ \Im({f_{yx}}) \cos(\lambda h) d\lambda \right] \\
+    C_{yx}(0) &= 2\pi\int_0^\infty f_{yx}(\lambda) d\lambda = 2\pi\int_0^\infty \Re({f_{yx}}) d\lambda
+\end{aligned}
+$$
+> 
 
 这一公式的含义是：通过 Parseval theorem 以及 cospectral density，**可以衡量 covariance 这一静态指标中的动态贡献**。
 
@@ -76,7 +86,7 @@ $\Re()$ 代表实部。
 
 $$
 \begin{equation}
-    E[R^e] = \frac{1}{E[M]} Cov(R^e,M) \label{3}
+    E[R^e] = \frac{1}{E[M]} Cov(R^e,M) \label{5}
 \end{equation}
 $$
 
@@ -84,13 +94,13 @@ $$
 
 $$
 \begin{equation}
-    \Delta\ln S_{t+1}=\mu+\underbrace{\boldsymbol{F}^{\prime}\boldsymbol{X}_t}_{\begin{array}{c}\text{State vector}\\\mathrm{dynamics}\end{array}}+\underbrace{\boldsymbol{G}_t^{\prime}\boldsymbol{W}_{t+1}}_{\begin{array}{c}\mathrm{Gaussian}\\\mathrm{shocks}\end{array}}+\underbrace{\boldsymbol{H}^{\prime}\Delta\boldsymbol{J}_{t+1}}_{\begin{array}{c}\mathrm{Jumps}\\\end{array}}, \label{5}
+    \Delta\ln S_{t+1}=\mu+\underbrace{\boldsymbol{F}^{\prime}\boldsymbol{X}_t}_{\begin{array}{c}\text{State vector}\\\mathrm{dynamics}\end{array}}+\underbrace{\boldsymbol{G}_t^{\prime}\boldsymbol{W}_{t+1}}_{\begin{array}{c}\mathrm{Gaussian}\\\mathrm{shocks}\end{array}}+\underbrace{\boldsymbol{H}^{\prime}\Delta\boldsymbol{J}_{t+1}}_{\begin{array}{c}\mathrm{Jumps}\\\end{array}}, \label{6}
 \end{equation}
 $$
 
 即 SDF 由三部分组成，state variable，Gaussian shocks，Non-Gaussian shocks (jumps)。
 
-则，式 ($\ref{3}$) 可写为：
+则，式 ($\ref{5}$) 可写为：
 
 $$
 \begin{equation}
@@ -102,15 +112,21 @@ $$
 
 既然已经给出了具体形式，则我们可以直接对 SDF 的方差进行分解：
 
-为方便起见，将式 $\ref{5}$ 重新表达为；
+为方便起见，将式 ($\ref{6}$) 重新表达为：
 
 $$
 \varrho_{t+1} = \mu + \boldsymbol{F}^{\prime}\boldsymbol{X}_t + g_{t+1} + \ell_{t+1}
 $$
 
-我们可以将 SDF 的 Variance 和  分解为 ：
+首先，根据式 ($\ref{3}$) 将 Spectrum 写为：
 
-首先我们可以对 SDF 进行方差分解(**shocks are uncorrelated with state variable**)。shocks 方差为常数，其中并不包含周期信息，而对于 state vector，可以进行方差的分解：
+$$
+\begin{equation}
+f_{\varrho\varrho}(\lambda)=\frac{C_{\mathrm{gg}}(0)+C_{\ell\ell}(0)}{2\pi}+F^{\prime}f_{XX}(\lambda)F,
+\end{equation}
+$$
+
+得到 Spectral density后，进一步计算 SDF 的方差(**shocks are uncorrelated to state variable**)。shocks 方差为常数，其中并不包含周期信息，而对于 state vector，可以进行方差的分解：
 
 $$
 \begin{equation}
@@ -125,15 +141,6 @@ $$
 \end{align*}
 \end{equation}
 $$
-
-得到方差分解后，进而计算**spectral density**
-
-$$
-\begin{equation}
-f_{\varrho\varrho}(\lambda)=\frac{C_{\mathrm{gg}}(0)+C_{\ell\ell}(0)}{2\pi}+F^{\prime}f_{XX}(\lambda)F,
-\end{equation}
-$$
-
 
 此时我们发现，两类 shocks 对于 SDF variance 和 spectral 的 contribution 都是**常数**（permanent），仅由频率的部分提供变化（transitory），因此，这一分解也被称为 **permanent-transitory decomposition**。
 
@@ -239,6 +246,8 @@ $$
 
 Methodology 部分从 SDF 无条件定价公式开始，告诉我们 SDF 自身，以及 SDF 与资产之间的协方差可以进行分解，但是这种分解有一个问题，就是 SDF 的序列数据并不好得到。因此，在给定收益率结构假设后，该方法论可以迁移到资产与资产之间。
 
+> 所以其实到这一步之后，就已经与 SDF 没有关系了
+
 然而，**迁移到资产之间后，从理论上，就只有计算的方式，而没有了方法论的支撑**。
 
 因此，我们从资产与资产之间的关系，**CAPM**，出发，得到理论上的直觉：
@@ -287,16 +296,90 @@ $$
 \end{equation}
 $$
 
+这是因为我们想对于每一只股票计算 cov ratio，而在计算 cov ratio 的过程中，作为常数的 shock variance 和 loading 均不起作用，因此我们只需计算频率分解的结果即可。
+
 其中，
 
 $$
-I_{iM}(\lambda_j)=w_i(\lambda_j)\bar{\boldsymbol{w}}_M(\lambda_j), \qquad, \mathbf{w}_i(\lambda_j)=\frac1{\sqrt{2\pi T}}\sum_{t=1}^T\tilde{r}_{i,t}e^{\mathrm{i}t\lambda},
+I_{iM}(\lambda_j)=\boldsymbol{w}_i(\lambda_j)\bar{\boldsymbol{w}}_M(\lambda_j), \qquad, \mathbf{w}_i(\lambda_j)=\frac1{\sqrt{2\pi T}}\sum_{t=1}^T\tilde{r}_{i,t}e^{\mathrm{i}t\lambda},
 $$
 
-bar 代表 complex conjugate, $\tilde{r}_{i,t}=\sum_{k=0}^2\text{ln}(1+r_{i,t+k}).$
+bar 代表 complex conjugate, $\tilde{r}_{i,t}=\sum_{k=0}^2\text{ln}(1+r_{i,t+k})$ to eliminate concerns due to nonsynchronous trading.
 
 > [!TIP|label:实证设计]
 > 在每个月初，使用过去五年的**月频**收益率数据，要求最少 2.5 年的非缺失数据（375 observations），将频率**十等分**，并计算 cov ratio，按照每个 bins 的 cov ratio 排序，采用等权构造投资组合。
 
+### Sorting <!-- {docsify-ignore} -->
+
+计算 stock 与 market factor 的 cov ratio 并进行排序，可以看到显著的单调性。
+
+<div align = 'center'>
+
+![](image/20231212PP1.png)
+</div>
+
+
+#### The symmetry between LF and HF <!-- {docsify-ignore} -->
+
+因为计算指标是一个 cov ratio，所以低频低就一定意味着高频高，反之亦然。举例来说，我们可以将频率区间分为两半，分别计算 cov ratio 并构建 long-short投资组合，此时 LF 与 HF portfolio 一定会有着完全相反的收益率。
+
+然而，当分组数目增多后，情况发生了变化。例如，分组数量为3，如果仅**存在一个 state variable**，那么不同频率 ratio 的大小也就由其 Loading 决定，如果随着低频成分不断增加 Loading 也会不断增加，那么反之，高频成分的不断增加也对应了 Loading 的不断减少，那么结果仍然会是完美相关。
+
+然而，实证数据表明了二者的相关性仅为 **-0.49**，也就是说，**此时 state variable 的数量绝对不止一个**。导致了如下情况的出现
+
+$$
+\begin{aligned}
+    & \text{Ratio value from low-to-high freq} \\
+    & \text{Stock A}: [0.1,0.3,0.6] \\
+    & \text{Stock B}: [0.05,0,55,0.4] \\
+\end{aligned}
+$$
+
+
+### Alpha <!-- {docsify-ignore} -->
+
+**Low Frequency**
+
+最低频部分构造出的投资组合并不能被传统因子模型所解释：
+
+<div align = 'center'>
+
+![](image/20231212PP2.png)
+</div>
+
+**High Frequency**
+
+高频部分同样无法被解释，不过显著性和数值大小都小了很多：
+
+<div align = 'center'>
+
+![](image/20231212PP3.png)
+</div>
+
+### Other factors <!-- {docsify-ignore} -->
+
+与 size or momentum 计算 cov ratio 之后的 alpha 情况
+
+<div align = 'center'>
+
+![](image/20231212PP4.png)
+</div>
+
+### Transaction cost  <!-- {docsify-ignore} -->
+
+组合内股票比较稳定，因此transaction cost也比较低。
+
+<div align = 'center'>
+
+![](image/20231212PP5.png)
+</div>
+
+## Conclusion
+
+总结起来就是，只要符合式 $\ref{10}$ 的结构，就可以计算协方差并进行分解。文章还给出了 4 个 asset pricing model 的例子，并说明这四个模型的 SDF 都可以写成此类结构，因而均可以进行分解，这样的话就提供了经济学理论的联系。
+
+而在分解的过程中，核心部分是 Parseval's theorem。让我们再回顾一下 Parseval theorem：信号在时域内的能量等于其在频域内的能量。这一 theorem 将频域与时域连接起来，可用以研究不同频率上的能量分布。
+
+那么下一步的研究自然针对于 [Parseval's theorem](/finance_saliency/Parseval.md)
 
 

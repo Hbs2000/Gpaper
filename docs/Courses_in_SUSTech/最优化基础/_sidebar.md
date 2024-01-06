@@ -8,5 +8,8 @@
 - [Lecture 8](/Courses_in_SUSTech/最优化基础/lecture_8.md)
 - [Lecture 9](/Courses_in_SUSTech/最优化基础/lecture_9.md)
 - [Lecture 10](/Courses_in_SUSTech/最优化基础/lecture_10.md)
+- [Lecture 11](/Courses_in_SUSTech/最优化基础/lecture_11.md)
+- [Lecture 18](/Courses_in_SUSTech/最优化基础/lecture_18.md)
+- [Lecture 21](/Courses_in_SUSTech/最优化基础/lecture_21.md)
 - [HW](/Courses_in_SUSTech/最优化基础/HW/README.md)
 - [Back to Courses](/Courses_in_SUSTech/README.md)
