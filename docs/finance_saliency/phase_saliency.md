@@ -56,3 +56,7 @@ $$
 
 根据原文，二者之间的区别 are **negligible**。说明 SR 其实没什么用。
 
+
+## Takeaway <!-- {docsify-ignore} -->
+
+SR 不好使，phase 才是最重要的。

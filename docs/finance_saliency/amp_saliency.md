@@ -59,8 +59,6 @@ $$
 ![](image/20231230PP3.png)
 </div>
 
-
-
 ## Methodology
 
 ### Log or Log-Log
@@ -116,12 +114,19 @@ $$
 - $\mathcal{P}(f)$ 代表 phase spectrum of the image。
 - $ g(x) (\sigma = 8) $ is a gaussian filter
 
-对于输入图像做傅里叶变换，求出振幅谱 $\mathcal{A}(f)$ 和相位谱 $\mathcal{P}(f)$，对于 Log 振幅谱 $\mathcal{L}(f)$ 进行卷积并相减得到 Spectral Residual 谱 $\mathcal{R}(f)$，
+对于输入图像做傅里叶变换，得到振幅谱 $\mathcal{A}(f)$ 和相位谱 $\mathcal{P}(f)$，对于 Log 振幅谱 $\mathcal{L}(f)$ 进行卷积并相减得到 Spectral Residual 谱 $\mathcal{R}(f)$，通过 SR 和相位谱，得到逆傅里叶变换后的图像。
+
+> [!TIP|label:Gaussian filter]
+> The farther away from the center, the lower the value
+$$
+G(x,y)=\frac1{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}
+$$
+> 
 
 
 ### Detecting proto-objects in a saliency map
 
-得到 Saliency map 后，剩下的就是识别 proto-objects，object map 定义如下：
+得到 Saliency map 后，剩下的就是识别 proto-objects，**object map** 定义如下：
 
 $$
 \begin{equation}
@@ -162,4 +167,6 @@ In a large scale, one may perceive a house as an object, but in a small scale, i
 </div>
 
 
+## Takeaway <!-- {docsify-ignore} -->
 
+利用“异于常人”的特点 —— Spectral Residual，可以识别出显著的部分。
