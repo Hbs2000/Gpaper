@@ -1,2 +1,0 @@
-- [Entropy](/entropy/entropy.md)
-- [Back to Homepage](README.md)

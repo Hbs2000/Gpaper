@@ -1,7 +1,60 @@
 # Foundations of optimization 21
 
+## Combinatorial/Discrete Optimization
 
-## NP and NP-hard
+### Knapsack Problem
+
+**Input**
+
+- $n$ items, each item $i$ has cost $c_i \in \mathbb{Z}^+$ and value $v_i \in \mathbb{Z}^+$
+- budget $B \in \mathbb{Z}^+$, assume $c_i \leq B$ for all $i$
+
+**Output**
+
+Find a subset $S$ of items whose cost $c(S) = \sum_{i \in S} c_i$ is less or equal to $B$, and whose value $v(S) = \sum_{i \in S}v_i $ is maximal
+
+Write as the following integer program:
+
+$$
+\begin{aligned}
+    \max \ & v^T x \\
+    \text{s.t. } & v^T x \leq B \\
+    & x_i \in \{ 0,1 \}
+\end{aligned}
+$$
+
+Relax the integer constraints:
+
+$$
+\begin{aligned}
+    \max \ & v^T x \\
+    \text{s.t. } & c^T x \leq B \\
+    & 0 \leq x_i \leq 1
+\end{aligned}
+$$
+
+A simple modification can achieve $\frac{1}{2}$-approximation.
+
+> [!THEOREM]
+> Let $S^* = \argmax \{ v(S),v(a) \}$, where $S$ is the solution returned by Greedy Algorithm, $a$ is the element with highest density that is not in $S$. Then 
+$$
+v(S^*)\geq\frac{OPT}2
+$$
+> where $OPT$ denotes the value of an optimal solution
+
+## Theory of Computation Complexity
+
+The theory of computational complexity usually considers decision problems. 
+
+> [!THEOREM|label:Definition]
+> A decision problem is a function $Q:\{0,1\}^x\to\{ YES,NO\}.$ In other words, the input of a decision problem is a sequence $x$ of bits.
+
+Any optimization problem can be reformulted as a decision problem.
+
+> **KNAPSACK**: $Q(x)=$ does there exist a subset of the $n$ items of cost at most $B$ and value at least $V$?
+
+
+### P and NP
 
 
 **时间复杂度**： 时间复杂度并不是表示一个程序解决问题需要花多少时间，而是当问题规模扩大后，程序需要的时间长度增长得有多快。
@@ -40,6 +93,8 @@ Non-Polynomial class
 
 之所以要定义 NP 问题，是因为 **通常只有 NP 问题才可能找到多项式算法**。如果一个问题连多项式地验证一个解都做不到，那么更不能指望存在一个解决它的多项式算法。
 
+> KNAPSACK $\in$ NP
+
 ### The relationship
 
 信息学中号称最难的问题，就是在讨论 NP 问题与 P 类问题之间的关系。
@@ -50,6 +105,8 @@ Non-Polynomial class
 
 ### Reducibility and NPC
 
+**How to compare two problems and show that one is harder or simpler than the other?**
+
 简单地说，一个问题 A 可以约化为问题 B 的含义既是：**可以用问题 B 的解法解决问题 A**。
 
 > 例如，现在有两个问题，求解一元一次方程和求解一元二次方程，那么我们可以说，前者可以约化为后者，也就是说知道如何解一元二次方程一定知道如何解一元一次方程。
@@ -57,6 +114,13 @@ Non-Polynomial class
 用时间复杂度来解释，就是 **B 的时间复杂度高于或等于 A 的时间复杂度**，也就是说，问题 A 不比问题 B 难。
 
 约化的标准概念：如果能找到这样一个变化法则，对任意一个程序A的输入，都能按这个法则变换成程序B的输入，使两程序的输出相同，那么我们说，问题A可约化为问题B。当然，此处说的可约值得是多项式地可约，该约化的过程只有用多项式的时间完成才有意义。
+
+> [!THEOREM|label:Reducibility]
+> Let $Q$ and $R$ be two decision problems. $Q$ is poly-time reducible to $R$ is written as:
+$$
+Q \leq_P R
+$$
+> 
 
 约化具有**传递性**：如果 A 可以约化为 B，B 可以约化为 C，那么 A 也可以约化为 C。
 
@@ -78,15 +142,54 @@ NPC 问题的存在使得整个 NP 问题的研究出现了飞跃式的发展。
 **NP-Hard**：NP-Hard 问题满足 NPC 定义的第二条，**但不满足第一条**。这种问题不列入研究范围，因为不是 NP 问题。若问题 A 不属于 NP 问题，已知某 NPC 问题可在多项式时间内转化为问题 A，则称 A 为 NP-Hard 问题。
 
 
+## Submodular Function
+
+A function $f:2^N \to \mathbb{R}$ with $f(\emptyset)=0$ is **submodular** if
+
+$$
+f(S\cup T)\leq f(S)+f(T)-f(S\cap T),\mathrm{~}S,T\subseteq N.
+$$
+
+**Marginal contribution**: For a function $f:2^N \to \mathbb{R}$ and a set $S \subseteq N $, the marginal contribution of $T \subseteq N$ to $S$ is:
+
+$$
+f_S(T)=f(T\cup S)-f(S).
+$$
+
+> [!THEOREM]
+> A function $f:2^N \to \mathbb{R}$ is **submodular** iff 
+$$
+f_S(a)\geq f_T(a),S\subseteq T,\mathrm{~}a\in N\setminus T.
+$$
+> 次模函数描述的就是**边际效应递减**
 
 
+### An algorithm for Submodular Maximization
 
+For any submodualr function $f$, our goal is to 
 
+$$
+\max_{T:|T|\leq k}f(T)
+$$
 
+<div align='center'>
 
+![](../image/20240110CV1.png)
+</div>
 
+For any monotone submodular function $f$, Algorithm 2 returns a set $S$ such that:
 
+$$
+f(S)\geq(1-\frac1e)\max_{T:|T|\leq k}f(T).
+$$
 
+**Lemma**: Let $S$ be the set selected by the greedy algorithm at some stage and let $a \in S$ be the element added to $S$ at this stage. Then
+
+$$
+f_S(a)\geq\frac1k[\max_{T:|T|\leq k}f(T)-f(S)].
+$$
+
+> It was proven in 1998 that unless $P=NP$, no polynomial time algorithm can obtian an approximation ratio better than $1 - 1/e$
 
 
 

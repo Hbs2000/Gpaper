@@ -1,0 +1,5 @@
+- [Mean Variance Optimization](/papers/factor_zoo/toolkit/mean_var_opt.md)
+- [Lasso Derivation](/papers/factor_zoo/toolkit/lasso_derivation.md)
+- [Generalized Least Square](/papers/factor_zoo/toolkit/GLS.md)
+- [R Square](/papers/factor_zoo/toolkit/r_square.md)
+- [Back to Factor Zoo](/papers/factor_zoo/README.md)
