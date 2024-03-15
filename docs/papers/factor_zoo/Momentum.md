@@ -35,6 +35,9 @@ Kent Daniel<sup>1,3</sup>, Tobias J. Moskowitz<sup>2,3</sup>, ***Journal of Fina
 ![](./image/20240311PP4.png)
 </div>
 
+> 在 2009-03，loser portfolio 的股票包括 Citigroup，Bank of America，Ford，GM，International paper，winne portfolio 包括 defensive or counter cyclical firms such as 2.
+
+
 <div align ='center'>
 
 ![](./image/20240311PP5.png)
@@ -100,11 +103,11 @@ $\hat{\beta}$ 为 -0.576，$\hat{\alpha} $ 为 1.852% per month，t 值为 7.3�
 
 $$
 \begin{equation}
-    \tilde{R}_{\mathsf{WML},t}=(\alpha_0+\alpha_Bl_{B,t-1})+(\beta_0+\beta_Bl_{B,t-1})\tilde{R}_{m,t}+\tilde{\epsilon}_t.
+    \tilde{R}_{\mathsf{WML},t}=(\alpha_0+\alpha_B I_{B,t-1})+(\beta_0+\beta_B I_{B,t-1})\tilde{R}_{m,t}+\tilde{\epsilon}_t.
 \end{equation}
 $$
 
-相比于回归式 1，式 2 可以捕捉**熊市中的区别**。结果显示，在熊市中 $\beta$ 非常明显，为 −1.131，t 值高达 -13.4，并且熊市中的 $\alpha$ 也显著为负。并且，当考虑两个 $\alpha$ 相加后，连 $\alpha$ 也不再显著。
+相比于回归式 1，式 2 可以捕捉**熊市中的区别**。结果显示，在熊市中 $\beta$ 非常明显，为 −1.131，t 值高达 -13.4，并且熊市中的 $\alpha$ 也显著为负。并且，当考虑两个 $\alpha$ 相加后，$\alpha = \hat{\alpha}_0 + \hat{\alpha}_B$ is just below zero，并且不再显著，也就是说在熊市中，conditional CAPM 可以很好的解释 Momentum。
 
 
 **Regression 3**
@@ -163,7 +166,7 @@ $$
 
 $$
 \begin{equation}
-    R_{WML,t}=\mu+\epsilon_t,
+    R_{\mathsf{WML},t}=\mu+\epsilon_t,
 \end{equation}
 $$
 
@@ -175,13 +178,13 @@ $$
 \end{equation}
 $$
 
-文章使用极大似然法估计 $(\mu,\omega,\alpha,\gamma,\beta)$。式（8）代表了当 $t-1$ 期 WML 组合收益率低于均值时，则降低下一期权重配置。
+文章使用极大似然法估计 $(\mu,\omega,\alpha,\gamma,\beta)$。式（8）估计出的 $\gamma$ 是负值（-0.016，但并不十分显著），代表了当 $t-1$ 期 WML 组合收益率低于均值时，则降低下一期组合的波动会降低。
 
 还有一项对比策略来自于 Barroso and Santa-Clara (2015)，其仅根据 **trailing volatility** 来调整权重。通过式（5）可以看出，当 WML 的夏普比率保持不变时，本文的策略表现与 Barroso and Santa-Clara 近似。
 
 > Barroso, P., Santa-Clara, P., 2015. *Momentum has its moments*. Journal of Financial Economics 116 , 111–120.
 
-但是这实际上是有问题的，从上文的结论可以看出，当 WML 策略收益率很低时，未来常常出现市场波动，也就意味着 WML 的收益率与预测收益率的波动性呈现出负相关，**夏普比率并非一成不变的**。
+但是这实际上是有问题的，从上文的结论可以看出，当 WML 策略收益率很低时，未来常常出现市场波动，造成 WML 收益率波动，也就意味着 WML 的收益率与预测收益率的波动性呈现出负相关，**夏普比率并非一成不变**。
 
 我们现在有三个对比组
 
@@ -213,7 +216,7 @@ $$
 
 #### Out-of-sample test <!-- {docsify-ignore} -->
 
-上述的测试中涉及到了未来数据，因为对于式 ($\ref{6}$) 系数的估计使用了全样本数据。下文调整了这一估计，测试了样本外表现情况
+上述的测试中涉及到了未来数据，因为对于式 ($\ref{6}$) 系数的估计使用了全样本数据。下文调整了这一估计，将系数转变为 rolling 估计，测试了样本外表现情况
 
 $$
 \begin{equation}
@@ -221,7 +224,6 @@ $$
 \end{equation}
 $$
 
-此时系数就变为了 rolling 估计，可以看到后半段稳定后与全样本估计比较相似了。
 
 <div align = 'center'>
 
@@ -266,14 +268,10 @@ SINA EHSANI<sup>1,3</sup>, JUHANI T. LINNAINMAA<sup>2,4</sup>. *The Journal of F
 
 > 2022 DFA Distinguished Paper in AFA 2023
 
-动量因子与因子动量之间的关系
 
 > [!NOTE|label:Momentum]
 > Models without momentum cannot explain it and those with momentum cannot explain anything more than just momentum. 
 > Fama E F, French K R. Dissecting anomalies with a five-factor model[J]. *The Review of Financial Studies*, 2016, 29(1): 69-103.
-
-因此，看似动量因子与其他因子的相关性极低，但实际上，本文发现，动量因子与所有因子均相关。
-
 
 ### Factor correlation
 
@@ -306,6 +304,8 @@ TS 收益率高于 CS 收益率是因为 TS 仅 bet on 因子收益率的自相�
 
 ### Factor Momentum and the Covariance Structure of Returns
 
+***Why are factors autocorrelated?***
+
 #### Factor Momentum in Economies with Sentiment Investors <!-- {docsify-ignore} -->
 
 本文从 KNS 的角度加以解释。
@@ -316,7 +316,7 @@ TS 收益率高于 CS 收益率是因为 TS 仅 bet on 因子收益率的自相�
 
 KNS 指出，套利者会完全捕捉情绪驱动的交易中不与因子协方差矩阵相关的部分。这是因为不与因子协方差矩阵相关则意味着没有风险暴露，而对于与因子暴露相关的情绪交易，套利者则会由于不情愿承担风险而无能为力。
 
-KNS 的结论是，当不存在套利机会，并且资产收益率有显著的共性成分时（commonality），SDF 才可以被表示为少数几个 dominant factors 的函数。这一结论并不涉及资产定价是理性定价或是由于行为偏差导致的结果。
+KNS 的结论是，**当不存在套利机会，并且资产收益率有显著的共性成分时（commonality），SDF 才可以被表示为少数几个 dominant factors 的函数**。**这一结论并不涉及资产定价是理性定价或是由于行为偏差导致的结果**。
 
 
 $$
@@ -367,8 +367,8 @@ $$
 
 1. Compute eigenvectors using **daily returns** on the 47 factors from July 1973 through the end of month $t$ from the correlation matrix of factor returns.
 2. Compute **monthly returns** for the PC factors up to month $t+1$ using these eigenvectors. PC factor $f$'s return is $\begin{aligned}r_{f,t}^{pc}=\sum_{j=1}^{47}v_j^fr_{j,t}\end{aligned}$, where $v_j^f$ is the $j^{th}$ element of the $f^{th}$ eigenvector and $r_{j,t}$ is the return on individual factor $j$.
-3. Compute individual factors’ variances using data up to month $t$. Demean and lever the PC factors so that their variances up to month $t$ are equal to the variance of the average individual factor and their average returns up to month $t$ are zero.
-4. Construct a factor momentum strategy that is long factors with positive average returns from month $t-11$ to $t$ and short factors with negative average returns.
+3. Compute individual factors’ variances using data up to month $t$. **Demean** and **lever** the PC factors so that their variances up to month $t$ are equal to the variance of the average individual factor and their average returns up to month $t$ are zero.
+4. Construct a factor momentum strategy that is long factors with positive average returns from month **$t-11$** to $t$ and short factors with negative average returns.
 5. Compute the return on the resulting factor momentum strategy in month $t+1$.
 
 <div align='center'>
@@ -512,7 +512,7 @@ Momentum 一直以来被认为是与其他因子相关性很低的因子，使�
 
 </div>
 
-除了 reversal 因子，在前一年因子收益率为正时，所有因子都与 UMD 正相关，当前一年因子收益率为负时，结果同样十分显著。因此，尽管 unconditional correlation 接近零使得 UMD 看起来与其他因子并不相关，但实际上 momentum relate to all factors。
+除了 reversal 因子，在前一年因子收益率为正时，所有因子都与 UMD 正相关，当前一年因子收益率为负时，结果同样十分显著。因此，尽管 unconditional correlation 接近零使得 UMD 看起来与其他因子并不相关，但实际上 **momentum relate to all factors**。
 
 > Reversal 因子换手率接近 100%，因此上一期的持仓与下一期的持仓并没有什么关系。
 
@@ -546,5 +546,11 @@ $$
 ### Take away <!-- {docsify-ignore} -->
  
 动量因子的真正来源是因子动量，并且动量并非独特的因子。
+
+
+
+
+
+
 
 
