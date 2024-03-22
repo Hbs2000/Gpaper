@@ -13,4 +13,6 @@
 - [【20240306】Analysis of Frequency ratio](/papers/finance_saliency/Log_Book/20240306.md)
 - [【20240308】Canonical Correlation Analysis](/papers/finance_saliency/Log_Book/20240308.md)
 - [【20240311】Some attempts](/papers/finance_saliency/Log_Book/20240311.md)
+- [【20240318】Daily portfolio data](/papers/finance_saliency/Log_Book/20240318.md)
+- [【20240320】PCA](/papers/finance_saliency/Log_Book/20240320.md)
 - [Back to Frequency](/papers/finance_saliency/README.md)

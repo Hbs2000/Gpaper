@@ -1,5 +1,6 @@
 # Momentum
 
+
 1. Daniel K, Moskowitz T J. Momentum crashes. *Journal of Financial economics*, 2016. 
 2. Ehsani S, Linnainmaa J T. Factor momentum and the momentum factor. *The Journal of Finance*, 2022, 77(3): 1877-1919.
 
@@ -478,12 +479,20 @@ $$
 1. 所有因子自相关性相似，同时对于资产的解释也相似
 2. 第一个因子解释资产的能力是其他因子的五倍，但是在时序上是不相关的（**市场因子**），其他九个因子符合情况1
 
+下表汇报了各种情况的 $t$ 值
 
 <div align='center'>
 
 ![](./image/20240314PP8.png)
 
 </div>
+
+这个表里有三处信息值得关注
+
+1. Individual 强于 factor momentum，这是因为在根据收益率筛选股票的时候，implicitly bet on the best and worst factor，但是 factor momentum 中还包含并不十分强势的 factor，残差动量强于因子动量也是同样的原因。
+2. Uncorrelated factor momentum 均弱于 symmetric factor momentum，这是因为 market factor hurts the strategy，从 uncorrelated residual for 1 factor 强于uncorrelated individual stock momentum 也可以看出来。
+3. Uncorrelated residual momentum 均弱与 symmetric factor momentum，这是由于 market factor 解释股票收益率的力度是其他因子的五倍，而模拟中的股票收益率是一样的，因此，symmetric factor 的收益率水平要弱于 uncorrelated factors。
+
 
 > *This strategy continues to be hurt by including the market factor.*
 
