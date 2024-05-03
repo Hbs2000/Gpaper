@@ -27,4 +27,7 @@
 - [【20240412】Some Attempts](/papers/finance_saliency/Log_Book/20240412.md)
 - [【20240415】Low-Frequency Risk Factors and Their Fundamental Drivers](/papers/finance_saliency/Log_Book/20240415.md)
 - [【20240417】Frequency Dependent Risks in the Factor Zoo](/papers/finance_saliency/Log_Book/20240417.md)
+- [【20240422】Future explorations](/papers/finance_saliency/Log_Book/20240422.md)
+- [【20240424】](/papers/finance_saliency/Log_Book/20240424.md)
+- [【20240426】](/papers/finance_saliency/Log_Book/20240426.md)
 - [Back to Frequency](/papers/finance_saliency/README.md)
