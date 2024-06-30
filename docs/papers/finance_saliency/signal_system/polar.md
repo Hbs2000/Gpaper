@@ -26,11 +26,11 @@ $$
 
 接着，做逆变换时有：
 $$\begin{aligned}
-x[n]&=\frac1N\sum_{k=0}^{N-1}X[k]\cdot e^{iwn}=\frac1N\sum_{k=0}^{N-1}A(\cos(\phi)+i\sin(\phi)) \cdot (cos(wn)+isin(wn)) \\ 
-&=\frac1N\sum_{k=0}^{N-1}A\{[cos(\phi)*cos(wn)-sin(\phi)*sin(wn)]+i[cos(\phi)*sin(wn)+sin(\phi)*cos(wn)]\}
+x[n]&=\frac1N\sum_{k=0}^{N-1}X[k]\cdot e^{iw_kn}=\frac1N\sum_{k=0}^{N-1}A(\cos(\phi)+i\sin(\phi)) \cdot (cos(w_kn)+isin(w_kn)) \\ 
+&=\frac1N\sum_{k=0}^{N-1}A\{[cos(\phi)*cos(w_kn)-sin(\phi)*sin(w_kn)]+i[cos(\phi)*sin(w_kn)+sin(\phi)*cos(w_kn)]\}
 \end{aligned}$$
 
-根据辅助角公式 
+其中 $w_k = \frac{2 \pi k}{N}, \ k = 1 \cdots N-1$，根据辅助角公式 
 
 $$
 \begin{aligned}
@@ -43,8 +43,8 @@ $$
 
 $$
 \begin{aligned}
-    x[n] &= \frac1N\sum_{k=0}^{N-1}A\{cos(wn+\phi)+i*sin(wn+\phi)\} \\
-    &= \frac1N\sum_{k=0}^{N-1}A\cdot e^{i(wn+\phi)}
+    x[n] &= \frac1N\sum_{k=0}^{N-1}A\{cos(w_kn+\phi)+i*sin(w_kn+\phi)\} \\
+    &= \frac1N\sum_{k=0}^{N-1}A\cdot e^{i(w_kn+\phi)}
 \end{aligned}
 $$
 
