@@ -42,4 +42,5 @@
 - [【20240619】](/papers/finance_saliency/Log_Book/20240619.md)
 - [【20240621】](/papers/finance_saliency/Log_Book/20240621.md)
 - [【20240626】](/papers/finance_saliency/Log_Book/20240626.md)
+- [【20240703】](/papers/finance_saliency/Log_Book/20240703.md)
 - [Back to Frequency](/papers/finance_saliency/README.md)
