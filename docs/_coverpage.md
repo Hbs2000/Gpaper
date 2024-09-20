@@ -1,7 +1,7 @@
 # I'M B:cyclone:isheng He 
-![](H.ico)
+![](dragon.png)
 
-雪夜书千卷，花时酒一瓢
+一朝尘尽光生，照破山河万朵
 
 [Github](https://github.com/Hbs2000/Gpaper)
 [Start learning](README.md)
