@@ -6,5 +6,8 @@
 - [[CVPR2008] Saliency Detection Using Phase Spectrum](finance_saliency/phase_saliency.md)
 - [[CVPR2018] Squeeze-and-Excitation Networks](/papers/finance_saliency/se_net.md) 
 - [[CVPR2020] Learning in the Frequency Domain](/papers/finance_saliency/learning_fre.md)
+- [[JASA2019] Bayesian spectral modeling for multiple time series](/papers/finance_saliency/jasa2019_bayes.md)
+- [[WP2023] Frequency dependent risk in factor zoo](/papers/finance_saliency/wp2023_fdr_factorzoo.md)
+- [[WP2024] Low-frequency risk factors and their fundamental drivers](/papers/finance_saliency/wp2024_lowfreqfactor.md)
 - [Project log](/papers/finance_saliency/Log_Book/README.md)
 - [Back to Papers](/papers/README.md)
