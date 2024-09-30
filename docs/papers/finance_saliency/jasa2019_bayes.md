@@ -2,8 +2,112 @@
 
 Cadonna A, Kottas A, Prado R. ***Journal of the American Statistical Association***, 2019.
 
+## Periodogram
+
+对于一个时间序列 $x(t)$，我们可以对其进行傅里叶变换得到频率成分，$T$ 代表其周期，
+
+$$
+\begin{equation}
+    X_T(f)=\int_{-\frac T2}^{\frac T2}x(t)e^{-i2\pi ft}\mathrm{~d}t
+\end{equation}
+$$
+
+此时的频率成分，仅仅是一个虚数，并没有能量的概念，在频域中的能量概念，我们用 Power Spectral Density (PSD) 表示，准确来说，是单位时间内的能量，也就是功率：
+
+
+$$
+\begin{equation}
+    \begin{aligned}
+        S_x(f) &=\int_{-\infty}^\infty R_x(\tau)e^{-i2\pi f\tau}\mathrm{~d}\tau \\
+        R_x(\tau) &=\int_{-\infty}^\infty S_x(f)e^{i2\pi f\tau}\mathrm{~d}f 
+    \end{aligned}
+\end{equation}
+$$
+
+其中，$R_x(\tau)$ 是 $x(t)$ 的自相关函数，$\tau$ 代表滞后阶数。
+
+通过这种方法推导出的 PSD 是一个真实值的概念，我们需要用样本值进行估计，根据推导过程，其估计量就是周期图 (Periodogram)
+
+$$
+\begin{equation}
+    I_x(f) = \frac{1}{T} X_T(f) X^*_T(f)
+\end{equation}
+$$
+
+当 $T \rightarrow \infty$，并取期望时，就得到了 PSD。
+
+
+[Derivation](https://leetah666.github.io/Notes/#/frequency/energy_power_and_spectral_density)
+
+同理，当我们想衡量两个时间序列间的能量时，我们可以通过互相关函数（Cross-Correlation function）定义出互功率谱密度（Cross Power Spectral Density，CPSD），
+
+$$
+\begin{equation}
+    \begin{aligned}
+        S_{xy}(f)&=\int_{-\infty}^\infty R_{xy}(\tau)e^{-i2\pi f\tau}\mathrm{~d}\tau\\R_{xy}(\tau)&=\int_{-\infty}^\infty S_{xy}(f)e^{i2\pi f\tau}\mathrm{~d}f
+    \end{aligned}
+\end{equation}
+$$
+
+此时 CPSD 的估计量就是互周期图（Cross Periodogram）
+
+$$
+\begin{equation}
+    I_{xy}(f) = \frac{1}{N} X(f) Y^*(f)
+\end{equation}
+$$
+
+既然是估计量，就有优化的空间，这篇文章就是在 **周期图** 的基础上提出了贝叶斯优化来提高估计。
+
+而根据 CPSD 的定义，当 $\tau$ 取零时，有
+
+$$
+\begin{equation}
+    R_{xy}(0) = \int_{-\infty}^\infty S_{xy}(f)\mathrm{~d}f 
+\end{equation}
+$$
+
+这也就是协方差的概念，此式也正是 FDR 中应用的式子，而后续在实证计算中，作者直接使用了互周期图来计算 CPSD，所以理论上来说，互周期图作为一个估计量，也有提升的空间。
 
 ## 从 Whittle Likelihood 谈起
+
+周期图作为一个估计量，有许多很好的性质，这是频域估计中的出发点。
+
+根据周期图定义，有
+
+$$
+I_n(f_j)=\frac1N X_jX_j^*  =\frac1N(\mathrm{Re}({X}_j)^2+\mathrm{Im}(X_j)^2)
+$$
+
+当 $x(t)$ 是零均值平稳高斯时间序列，$X_j$ 的实部和虚部也是零均值高斯分布，
+
+$$
+\begin{aligned}\operatorname{Re}(X_j)\sim\mathcal{N}(0,\sigma^2) \quad \operatorname{Im}(X_j)\sim\mathcal{N}(0,\sigma^2)\end{aligned}
+$$
+
+并且和功率谱密度之间的关系为
+
+$$
+\mathrm{Var}(\mathrm{Re}(X_j))=\mathrm{Var}(\mathrm{Im}(X_j))=\frac{S(f_j)}2
+$$
+
+也就是说，$X_j$ 的总方差为 $S(f_j)$，并且有 $\sigma^2 = S(f_j)/2$。
+ 
+由于其实部和虚部是独立的零均值高斯分布，那么他们的平方和服从 $\chi^2$ 分布，自由度为 2，因此 $X_j^2$ 的概率密度函数为
+
+$$
+f_{\chi^2}(x;2\sigma^2)=\frac1{2\sigma^2}e^{-x/(2\sigma^2)},\quad x\geq0
+$$ 
+
+这实际上就是参数为 $\frac{1}{2\sigma^2}$ 的指数分布，所以 $I(f_j)$ 服从
+
+$$
+I(f_j)\sim  \text{Exponential}(\frac{1}{S(f_j)}) =  \text{Exponential}\left(\frac1{2\sigma^2}\right)
+$$
+
+> 根据指数分布的性质有 $E[I(f_j)] = S(f_j) $
+
+<hr>
 
 对于一个时间序列 $\boldsymbol{X}_t$ 来说，当我们假设其服从多元正态分布 $\mathcal{N}(0,\Sigma)$ ，那么其概率密度函数为
 
@@ -13,241 +117,75 @@ $$
 \end{equation}
 $$
 
-其对数似然函数为
-
-$$
-L(\mathbf{X};\theta)=-\frac{T}{2}\log(2\pi)-\frac{1}{2}\log|\Sigma_{\theta}|-\frac{1}{2}\mathbf{X}^{\prime}\Sigma_{\theta}^{-1}\mathbf{X}
-$$
-
-整理一下为
+此时的问题在于，$\Sigma^{-1}$ 和 $|\Sigma|$ 的计算复杂度为 $O(N^3)$，当 $N$ 过大时不可行而如果通过傅里叶变换转换到频域上，那么当 $N \rightarrow \infty$，不同频率的 $X_j$ **近似独立**，因此总似然函数可以表示为各频率上似然函数的乘积
 
 $$
 \begin{equation}
--2L(\mathbf{X};\theta)=T\log(2\pi) + \log|\Sigma_{\theta}|+\mathbf{X}^{\prime}\Sigma_{\theta}^{-1}\mathbf{X}
+    L\approx\prod_{k=1}^Np\left(X(f_j);\theta\right)
 \end{equation}
 $$
 
-但是，传统的极大似然估计在处理长时间序列时计算复杂度很高 $O(T^3)$，在进行似然估计时使用 Whittle Likelihood 可以降低复杂度至 $O(T\log T)$。
-
-对于单个序列，自协方差矩阵是 **Toeplitz矩阵**，依赖于时间滞后的自协方差函数。之所以说这个协方差矩阵是 Toeplitz，是因为对于平稳序列来说，其协方差**只和滞后阶数有关**，跟具体的 $t$ 无关。
-
-$$
-\mathbf{C}=\begin{pmatrix}\gamma_0&\gamma_1&\gamma_2&\cdots&\gamma_{N-1}\\\gamma_1&\gamma_0&\gamma_1&\cdots&\gamma_{N-2}\\\gamma_2&\gamma_1&\gamma_0&\cdots&\gamma_{N-3}\\\vdots&\vdots&\vdots&\ddots&\vdots\\\gamma_{N-1}&\gamma_{N-2}&\gamma_{N-3}&\cdots&\gamma_0\end{pmatrix}
-$$
-
-
-> [!NOTE|label:Toeplitz matrix]
-> Toeplitz矩阵是一个各对角线元素相同的矩阵，即矩阵中的元素 $T_{ij}$ 满足
-$$
-T_{ij}=T_{i+k,j+k}
-$$
-> 例如，
-$$
-T=\begin{pmatrix}a&b&c&d\\b&a&b&c\\c&b&a&b\\d&c&b&a\end{pmatrix}
-$$
-
-
-
-对于 Toeplitz 矩阵，可以通过 DFT 进行对角化近似
+因为周期图服从指数分布，所以其概率密度函数为
 
 $$
 \begin{equation}
-    \Sigma \approx  F\Lambda F^*
+    p\left(I(f_j);\theta\right)=\frac1{S(f_j)}\exp\left(-\frac{I(f_j)}{S(f_j)}\right)
 \end{equation}
 $$
 
-其中 $\Lambda$ 是一个对角矩阵，对角元素为频谱密度函数 $f(\omega_k)$，$F$ 是傅里叶变换基向量
+将所有频率的似然函数相乘，得到 Whittle 似然函数
 
 $$
 \begin{equation}
-    F_k=\frac1{\sqrt{N}}\begin{pmatrix}1\\e^{-i2\pi k/N}\\e^{-i4\pi k/N}\\\varvdots\\e^{-i2\pi(N-1)k/N}\end{pmatrix},\quad k=0,1,\ldots,N-1
+    L_{\mathrm{Whittle}}=\prod_{j=1}^{N}\left[\frac1{S(f_j)}\exp\left(-\frac{I(f_j)}{S(f_j)}\right)\right]
 \end{equation}
 $$
 
-> 加入 $\sqrt{N}$ 是为了标准化，使得向量长度为1。
-
-因为 $F$ 是一个酉矩阵，即 $FF^*=I$，其行列式 $|F| = 1$，因此有
+为了方便计算，取对数有
 
 $$
 \begin{equation}
-\begin{aligned}
-    \log|\Sigma_{\theta}|&\approx\log|F\Lambda F^*| \\
-    &=\log|F|+\log|\Lambda|+\log|F^*|\\
-    &=\log|\Lambda|
-\end{aligned}
+    \ln L_{\mathrm{Whittle}}=\boldsymbol{-}\sum_{j=1}^{N}\left[\ln S(f_{j})+\frac{I(f_{j})}{S(f_{j})}\right]
 \end{equation}
 $$
 
-> [!NOTE|label:酉矩阵]
-> 一个复矩阵 $U$ 是酉矩阵，如果它满足以下条件
-$$
-UU^*=U^*U=I
-$$
-> $*$ 代表共轭转置，DFT 矩阵是最常见的酉矩阵之一。
+此时 Whittle Likelihood 可以降低复杂度至 $O(T\log T)$。
 
-而对角矩阵的行列式就是对角元素的乘积，因此
+就像传统的似然函数方法，给定数据的情况下，我们会首先计算样本中的周期图 $I(f_j)$，接着计算理论谱密度，$S(f_j,\theta)$，接着通过 Whittle Likelihood 来调整 $\theta$，使得在 $S(f_j)$ 下观测到 $I(f_j)$ 的概率最大。
 
-$$
-\begin{equation}
-    \log|\Lambda|=\log\left(\prod_{k=1}^{T/2}f(\omega_k)\right)=\sum_{k}\log f(\omega_k)
-\end{equation}
-$$
-
-所以最终得到了
-
-$$
-\begin{equation}
-    \log|\Sigma_{\theta}|\approx\log|F\Lambda F^*|=\log|\Lambda|=\sum_{k}\log f_{\theta}(\omega_k)
-\end{equation}
-$$
-
-对 $\Sigma$ 取逆有
-
-$$
-\begin{equation}
-    \Sigma^{-1}=(F\Lambda F^{*})^{-1}=(F^{*})^{-1}\Lambda^{-1}(F)^{-1}=F(\Lambda^{-1})F^{*}
-\end{equation}
-$$
-
-因此
-
-$$
-\begin{equation}
-\begin{aligned}
-\mathbf{X}^{\prime}\Sigma^{-1}\mathbf{X}&=\mathbf{X}^{\prime}F(\Lambda^{-1})F^{*}\mathbf{X} \\
-&= (\mathbf{X}' F \Lambda^{-\frac{1}{2}})(\mathbf{X}' F \Lambda^{-\frac{1}{2}})^*
-\end{aligned}
-\end{equation}
-$$
-
-而
-
-$$
-\begin{equation}
-    \mathbf{X}'F_j = \frac1{\sqrt{N}}\sum_{t=0}^{n-1}x_t\exp(-i\omega_kt)=\frac1{\sqrt{N}} S(f_k)
-\end{equation}
-$$
-
-所以
-
-$$
-\begin{equation}
-    \mathbf{X}'F_j\Lambda^{-\frac{1}{2}} = \frac{S(f_k)}{\sqrt{N}\sqrt{ f_{\theta}(\omega_k)}}
-\end{equation}
-$$
-
-所以最终
-
-$$
-\begin{equation}
-\mathbf{X}^{\prime}\Sigma^{-1}\mathbf{X} = \sum_{k} \frac{S^2(f_k)}{N f_{\theta}(\omega_k)} = \sum_{k} \frac{I(\omega_k)}{f_{\theta}(\omega_k)}
-\end{equation}
-$$
-
-所以最终的似然函数形式为
-
-$$
-\begin{equation}
-    \log|\Sigma_{\theta}|+\mathbf{X}^{\prime}\Sigma_{\theta}^{-1}\mathbf{X} = \sum_{k} \left(\log f(\omega_k) + \frac{I(\omega_k)}{f_{\theta}(\omega_k)} \right)
-\end{equation}
-$$
-
-这就是 Whittle Approximation，将时域上的拟合转化为了频域上的拟合。Whittle approximation 最主要的优点就是，将频谱密度直接**显式**地表达了出来，而不是像原本的似然函数，要通过自协方差来隐含地表达。
-
-## Intro
-
-首先是一些基础的定义，频谱密度
-
-$$
-\begin{equation}
-    f(\omega)=\sum_{k=-\infty}^{+\infty}\gamma(k)\exp\left(-ik\omega\right),\quad\mathrm{for}-\pi\leq\omega\leq\pi,
-\end{equation}
-$$
-
-其中 $\gamma(k)=\mathbb{E}(X_{t+k}X_t)$ 就是 auto-covariance，其周期图为
-
-$$
-\begin{equation}
-    I_n(\omega)=\left|\sum_{t=1}^nx_t\exp{(-it\omega)}\right|^2/n
-\end{equation}
-$$
-
-当样本规模足够大时，可以认为周期图 $I_n(\omega)$ 是独立的。此外，对于零均值高斯时间序列（Zero-mean Gaussian time series），周期图服从均值为 $f(\omega)$ 的指数分布。
-
-> [!NOTE|label: Exponential Distribution]
-> 周期图 （periodogram） 通过DFT计算得到的频谱密度估计，用于从有限样本数据中估计频谱密度 $f(\omega)$，这也就是说当样本足够大时，周期图的期望就是频谱密度，即样本估计等于真实值，接下来我们看看为什么会服从指数分布。
-> 
-> 对于一个长度为 $N$ 的零均值平稳高斯时间序列 $x_t$，其 DFT 为
-$$
-\tilde{X}_j=\sum_{t=0}^{N-1}x_te^{-i2\pi jt/N},\quad j=0,1,\ldots,N-1
-$$
-> 
-> 周期图定义为
-$$
-I_n(\omega_j)=\frac1N|\tilde{X}_j|^2=\frac1N(\mathrm{Re}(\tilde{X}_j)^2+\mathrm{Im}(\tilde{X}_j)^2)
-$$
-> 由于 $x(t)$ 是零均值平稳高斯时间序列，$\tilde{X}_j$ 的实部和虚部也是零均值高斯分布
-$$
-\begin{aligned}\operatorname{Re}(\tilde{X}_j)\sim\mathcal{N}(0,\sigma^2)\\\operatorname{Im}(\tilde{X}_j)\sim\mathcal{N}(0,\sigma^2)\end{aligned}
-$$
-> 并且和功率谱密度之间的关系为
-$$
-\mathrm{Var}(\mathrm{Re}(\tilde{X_j}))=\mathrm{Var}(\mathrm{Im}(\tilde{X_j}))=\frac{S(f_j)}2
-$$
-> 也就是说，$\tilde{X}_j$ 的总方差为 $S(f_j)$，并且有 $\sigma^2 = S(f_j)/2$。
-> 
-> 由于其实部和虚部是独立的零均值高斯分布，那么他们的平方和服从 $\chi^2$ 分布，自由度为 2，因此 $|\tilde{X}_j|^2$ 的概率密度函数为
-$$
-f_{\chi^2}(x;2\sigma^2)=\frac1{2\sigma^2}e^{-x/(2\sigma^2)},\quad x\geq0
-$$ 
->
-> 所以 $I_n(\omega_j)=\frac1N|\tilde{X}_j|^2$ 服从
-$$
-I_n(\omega_j)\sim\text{Exponential}\left(\frac{2\sigma^2}N\right)
-$$
->
-> 尺度参数为 $\beta$ 的指数分布的概率密度函数为
-$$
-f_{\text{Exp}}(x;\beta)= \frac{1}{\beta} e^{-  x / \beta},\quad x\geq0
-$$
->
-
-基于周期图和频谱密度之间的关系，可以提出各种各样的模型进行估计，例如对数周期图的回归函数
-
-$$
-\begin{equation}
-    \log(I_n(\omega_j))=\log(f(\omega_j))+\epsilon_j,\mathrm{~for~}j=1,\ldots,N,
-\end{equation}
-$$
-
-其中，$\epsilon_j$ 服从对数-指数分布，尺度参数为 1，频率学派估计方法包括
-
-- Wahba (1980) 将 $\epsilon_j$ 定义为一个正态分布，并用 Smoothing Spline 将其拟合到对数周期图上
-- Pawitan and O’Sullivan (1994) 通过加上惩罚项的 Whittle 似然函数估计 $\epsilon_j$
-
-贝叶斯学派的估计方法包括
-
-- CarterandKohn (1997) 通过 mixture of normal distributions 估计 $\epsilon_j$ 的分布，并给 $\log(\omega)$ 分配了一个 smoothing prior。
-- Choudhuri, Ghosal, and Roy (2004) 使用 Bernstein polynomial priors 来估计频谱密度
-- Rosen and Stoffer (2007) 将对数频谱表达为 $\log(f(\omega))=\alpha_0+\alpha_1\omega+h(\omega)$，并给 $h(\omega)$ 分配了 Gaussian process prior
-- Pensky,Vidakovic,and DeCanditiis (2007) 提出了 Bayesian wavelet-based smoothing of the log-periodogram.
-
-Here,we propose a flexible Bayesian modeling approach for multiple time series that leads to full inference of the **multiple spectral densities** and also allows us to **identify groups of time series with similar spectral characteristics**.
 
 
 ## Mixture Model Approximation to the Whittle Log-Likelihood
 
-在 Whittle Approximation 下，可以定义一个转换后的对数频谱密度 (log-spectral density)
+> 文章后续的推导用 $\omega_j$ 代替 $f_j$，用 $f(\omega_j)$ 代替 $S(f_j)$
+
+
+当数据不满足假设的情况下，周期图之间的值会存在相关性，并且其分布在有限样本下并不完全服从指数分布，所以，为了更好的处理周期图的统计特性，可以考虑对数周期图，$\log(I(\omega_j))$。
+
+定义对数周期图：
 
 $$
 \begin{equation}
-    y_j=\log(I_n(\omega_j))+\gamma,
+    Y_j = \log (I(\omega_j))
 \end{equation}
 $$
 
-其中 $\gamma\approx0.57722$ 是 Euler–Mascheroni constant。
+为了调整对数周期图的期望，引入 Euler–Mascheroni constant $\gamma$
 
-log-spectral density 的分布定义如下
+$$
+\begin{equation}
+y_j = Y_j + \gamma = \log (I(\omega_j)) + \gamma
+\end{equation}
+$$
+
+> [!NOTE|label: Euler–Mascheroni constant]
+> Euler–Mascheroni constant 定义为
+$$
+\gamma=\lim_{n\to\infty}\left(\sum_{k=1}^n\frac1k-\log n\right)\approx0.5772.
+$$
+> 
+
+因此，总共的调整过程分为两步，首先是 **取对数**，其次是 **引入EM常数**，那么概率密度函数就会变为
 
 $$
 \begin{equation}
@@ -259,11 +197,22 @@ $$
 
 根据这个分布，有 $\mathbb{E}[y_j]=\log(f(\omega_j)),\mathrm{var}[y_j]=\pi^2/6.$
 
-但是这个分布有一些问题
-
-> Although it is a standard distribution, the spectral density enters the likelihood in a nonstandard fashion through the mean parameter. Nevertheless, the Whittle approximation has been widely used in the literature because the spectral density appears explicitly in the approximate likelihood rather than through the covariance function.
-
 > [!TIP|label:Derivation]
+> 对于 $X \sim \text{Exp}(\lambda)$，其概率密度函数为
+$$
+f_X(x)=\frac1\lambda e^{-x/\lambda},\quad x>0.
+$$
+> 对 $X$ 取对数就会得到 $Y = \log(X)$，则其概率密度函数为
+$$
+f_Y(y)=\frac1\lambda e^ye^{-e^y/\lambda}=e^{y-\log(\lambda)-e^y/\lambda}.
+$$
+> 接着将 $Y$ 调整为 $y = Y + \gamma$，得到
+$$
+f_Y(y)=\exp\left\{y-\gamma-\log(\lambda)-\exp\left(y-\gamma-\log(\lambda)\right)\right\}.
+$$
+> 在我们的模型中 $\lambda = f(\omega_j)$，代入即得。
+
+> [!TIP|label:Derivation2]
 > 对这个分布进行重参数化，令 $z=y-\gamma-\log(f(\omega))$，那么 $y$ 可以表示为
 $$
 y=z+\gamma+\log(f(\omega))
@@ -293,7 +242,9 @@ $$
 $$
 > 
 
-因此作者提出了一个新的分布，用 $k$ 个高斯分布拟合这一模型，也就是 mixture of Gasussian distributions
+此时的问题在于，原本的指数分布中，谱密度 $f(\omega_j)$ 作为 scale parameter 同时影响分布的均值和方差，但是在这种分布下，$f(\omega_j)$ 仅能影响均值，而不再影响方差了，在统计上是一种缺陷，但是由于 Whittle 似然函数的优越性，大家还是会采用这种方法。
+
+作者则提出了一个新的分布，用 $k$ 个高斯分布拟合这一模型，
 
 $$
 \begin{equation}
@@ -309,15 +260,17 @@ $$
 - 向量 $\boldsymbol{\theta}$ 包括了所有模型参数
 
 
-这里将 $\omega$ 除 $\pi$ 是为了标准化频率到 $(0,1)$ 的范围内（common practice），在 weight function $\boldsymbol{\xi}$ 中也做了该处理。
+> 将 $\omega$ 除 $\pi$ 是为了标准化频率到 $(0,1)$ 的范围内（common practice），在 weight function $\boldsymbol{\xi}$ 中也做了该处理。
 
-因为根据 Whittle Approximation $E[y_i] = \log(f(\omega))$，在 Gaussian mixture distribution 下，
+此时的分布仍然满足 Whittle Approximation $E[y_j] = \log(f(\omega_j))$,
 
 $$
 \begin{equation}
-    \log(f(\omega))=\sum_{k=1}^Kg_k(\omega;\xi)\left\{\alpha_k+\beta_k\omega/\pi\right\},\quad\omega\in(0,1),
+    \log(f(\omega_j))=\sum_{k=1}^Kg_k(\omega_j;\xi)\left\{\alpha_k+\beta_k\omega/\pi\right\},\quad\omega\in(0,1),
 \end{equation}
 $$
+
+但是此时 $f(\omega_j)$ 就能够 **同时影响分布背后的均值和方差了**。
 
 其中，权重是关于频率的函数，consecutive difference，通过连续差分能保证权重和为1。
 
@@ -337,9 +290,7 @@ $$
 \end{equation}
 $$
 
-> 定义这种形式的权重和 logit-normal distribution，是为了应用 MCMC 算法进行估计。
-
-并且，文章在原有模型的基础上，加入了一个 auxiliary variables，对于每一个频率密度 $y_j$ ，都有 auxiliary variable $r_j$，因此这个增广模型可写为
+文章在原有模型的基础上进行了增广，加入了一个 auxiliary variables，对于每一个频率密度 $y_j$ ，都有 auxiliary variable $r_j$，因此这个增广模型可写为
 
 $$
 \begin{equation}
@@ -349,22 +300,19 @@ $$
 
 Auxiliary variable 通过 Indicator function 决定了最终频谱密度分布的形状。
 
+辅助变量的引入使得原本的混合模型变为了更容易处理和估计的条件模型，即对于每一个频率 $\omega_j$，$y_j$ 在条件上只来自于一个高斯分布，这也就是稀疏性。
+
 > [!NOTE|label:Auxiliary variable]
-> 令 
-$$
-r_j = \log \frac{y_j}{1-y_j}
-$$
-> 因为 $f_Y(y\mid\mu(\omega),\tau)$ 是定义在 $(0,1)$ logit-normal 分布，所以 $r_j$ 为正态分布，均值为 $\mu(\omega)$，方差为 $1/ \tau$。变换得
+> 对于一个正态分布 $R \sim (\mu, \sigma^2)$，通过 logit 逆变换可以将其映射到 $[0,1]$ 的区间上，从而构造出一个新的随机变量 $Y$
 $$
 y = \frac{e^r}{1+e^r}
 $$
-> 因此 Indicator function 中的不等式 bound 就是 $y_j$ 的积分上下限。
+> 则 $f_Y(y\mid\mu(\omega),\tau)$ 是定义在 $(0,1)$ logit-normal 分布，因此 Indicator function 中的不等式 bound 就是 $y_j$ 的积分上下限。
 
-辅助变量 $r_j$ 服从正态分布，均值为 $\mu(\omega)=\zeta+\phi\omega/\pi $，precision parameter 为 $\tau$，指示函数的作用是给模型增加了稀疏性。
 
 ### Hierarchical Model for Multiple Spectral Densities
 
-对于 $M$ 个时间序列，假设基础分布 $(\alpha_k,\beta_m)$ 是一样的，只是权重 $\xi_m\quad=\quad(\zeta_m,\phi_m,\tau_m)$ 不同。
+对于 $M$ 个时间序列，假设基础分布 $(\alpha_k,\beta_k)$ 是一样的，只是权重 $\xi_m=(\zeta_m,\phi_m,\tau_m)$ 不同。
 
 $$
 \begin{equation}
@@ -497,7 +445,7 @@ Total Variation Distance (TVD)，用以衡量两个**标准化**分布之间的�
 
 <div align = 'center'>
 
-![](../work_img/20240605PP1.png)
+![](./work_img/20240605PP1.png)
 
 </div>
 
@@ -516,7 +464,7 @@ $$
 
 <div align = 'center'>
 
-![](../work_img/20240605PP2.png)
+![](./work_img/20240605PP2.png)
 
 </div>
 
@@ -524,7 +472,7 @@ $$
 
 <div align = 'center'>
 
-![](../work_img/20240605PP6.png)
+![](./work_img/20240605PP6.png)
 
 </div>
 
@@ -538,7 +486,7 @@ Scenario 2 基于 AR2 同样 simulate 了 15 个时间序列，前八个 AR2 mod
 
 <div align = 'center'>
 
-![](../work_img/20240605PP4.png)
+![](./work_img/20240605PP4.png)
 
 </div>
 
@@ -550,7 +498,7 @@ Scenario 3 中，所有的时间序列都包含一个 AR1 with parameter 0.9 的
 
 <div align = 'center'>
 
-![](../work_img/20240605PP3.png)
+![](./work_img/20240605PP3.png)
 
 </div>
 
@@ -558,7 +506,7 @@ Scenario 3 中，所有的时间序列都包含一个 AR1 with parameter 0.9 的
 
 <div align = 'center'>
 
-![](../work_img/20240605PP5.png)
+![](./work_img/20240605PP5.png)
 
 </div>
  
