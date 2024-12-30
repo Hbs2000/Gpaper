@@ -1,0 +1,3 @@
+- [Midterm](/Courses_in_SUSTech/高等统计学/midterm.md)
+- [QE](/Courses_in_SUSTech/高等统计学/QE.md)
+- [Back to Courses](/Courses_in_SUSTech/README.md)

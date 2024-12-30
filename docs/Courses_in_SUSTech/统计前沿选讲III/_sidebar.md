@@ -1,2 +1,0 @@
-- [Math prerequiste](/Courses_in_SUSTech/统计前沿选讲III/1_math_req.md)
-- [Back to Courses](/Courses_in_SUSTech/README.md)

@@ -18,8 +18,10 @@
 
 <div align='center'>
 
-![](image/20231227PP1.png)
+![](../image/20231227PP1.png)
+
 </div>
+
 
 ***那么如何确定一组样本值来源于哪一个信号呢？***
 
@@ -84,7 +86,7 @@ $$
 
 $$
 \begin{equation}
-    X_{p}(j\omega)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}X(j(\omega-k\omega_{s})) \label{2}
+    X_{p}(j\omega)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}X(j(\omega-k\omega_{s}))
 \end{equation}
 $$
 
@@ -92,17 +94,16 @@ $$
 
 <div align='center'>
 
-![](image/20231228PP1.png)
+![](../image/20231228PP1.png)
 </div>
 
 当 $\omega_s > 2\omega_M$ 时，采样信号的频谱是由 $x(t)$ 的频谱**重复组成**的，而这正是采样定理的基础。
 
-然而，如图 (d) 所示，如果当 $\omega_s < 2\omega_M$ 时，$x(t)$ 的频谱 $X(j\omega)$ 不再在 $X_{_p}(\mathrm{j}\omega)$ 中重复，因此低通滤波也就不再能把 $x(t)$ 从采样信号中恢复出来。此时，式 ($\ref{2}$) 的那些单项发生重叠，这一现象称之为混叠（*Aliasing*）。
+然而，如图 (d) 所示，如果当 $\omega_s < 2\omega_M$ 时，$x(t)$ 的频谱 $X(j\omega)$ 不再在 $X_{_p}(\mathrm{j}\omega)$ 中重复，因此低通滤波也就不再能把 $x(t)$ 从采样信号中恢复出来。此时，式 (2) 的那些单项发生重叠，这一现象称之为混叠（*Aliasing*）。
 
 **To sum up**：对一组连续信号进行采样后，得到的频谱会呈现重复的特征，如果确保采样频率 $\omega_s > 2\omega_M$，那么通过低通滤波就可以恢复原有信号。
 
 ## 采样与分解
-
 
 
 
