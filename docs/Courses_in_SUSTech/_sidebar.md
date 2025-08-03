@@ -4,4 +4,5 @@
 - [金融学术](/Courses_in_SUSTech/金融学术/README.md)
 - [最优化基础](/Courses_in_SUSTech/最优化基础/README.md)
 - [高等统计学](/Courses_in_SUSTech/高等统计学/README.md)
+- [大数据分析及应用](/Courses_in_SUSTech/大数据/README.md)
 - [Back to Homepage](README.md)

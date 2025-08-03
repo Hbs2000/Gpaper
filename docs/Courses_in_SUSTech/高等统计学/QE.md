@@ -693,7 +693,7 @@ $$
 Completeness: Consider $f_{X_{(1)}} = n[1-F(X)]^{n-1} f(x) = ne^{-n(x-n)}$, where $x > \mu$. Now discuss
 
 $$
-\begin{aligned} Eg(X_1) \int_{\mu}^{\infty}g(x)ne^{-n(x-\mu)}dx=ne^{n\mu}\int_{\mu}^{\infty}g(x)e^{-nx}dx.\end{aligned}
+\begin{aligned} Eg(X_1) =  \int_{\mu}^{\infty}g(x)ne^{-n(x-\mu)}dx=ne^{n\mu}\int_{\mu}^{\infty}g(x)e^{-nx}dx.\end{aligned}
 $$
 
 we set $Eg(X_1) =0$, because $ne^{n\mu} >0 $, then the derivative of $\mu$ on the second term is 

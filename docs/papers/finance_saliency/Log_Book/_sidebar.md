@@ -55,4 +55,6 @@
 - [【20241225】](/papers/finance_saliency/Log_Book/20241225.md)
 - [【20241229】](/papers/finance_saliency/Log_Book/20241229.md)
 - [【20250101】](/papers/finance_saliency/Log_Book/20250101.md)
+- [【20250108 Wold Skew】](/papers/finance_saliency/Log_Book/20250108.md)
+- [【20250112 Harvey】](/papers/finance_saliency/Log_Book/20250112.md)
 - [Back to Frequency](/papers/finance_saliency/README.md)

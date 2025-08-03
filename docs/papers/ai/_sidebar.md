@@ -1,0 +1,5 @@
+- [AI base](/papers/ai/ai_learn.md)
+- [Score Matching](/papers/ai/score_matching.md)
+- [VAE class](/papers/ai/VAE.md)
+- [Temporal Fusion Transformers](/papers/ai/tft.md)
+- [Back to Papers](/papers/README.md)
