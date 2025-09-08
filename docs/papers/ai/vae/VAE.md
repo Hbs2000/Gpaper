@@ -40,7 +40,7 @@ $$
 
 <div align='center'>
 
-![](../ai/image/20250217PP1.jpg)
+![](../image/20250217PP1.jpg)
 
 </div>
 

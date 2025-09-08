@@ -1,6 +1,39 @@
-# Score matching
+# Generative time series forecasting with diffusion, denoise, and disentanglement
 
-> Li Y, Lu X, Wang Y, et al. Generative time series forecasting with diffusion, denoise, and disentanglement[J]. Advances in Neural Information Processing Systems, 2022, 35: 23009-23022.
+Li Y<sup>1</sup>, Lu X<sup>1</sup>, Wang Y<sup>1</sup>, Dou Dejing<sup>1</sup>. Advances in ***NeurIPS***, 2022.
+
+1. *Business Intelligence Lab, Baidu Research*
+2. *Zhejiang University*
+
+<div align='center'>
+
+![](../image/20250815PP1.jpg)
+
+</div>
+
+文章的核心在于使用 Bidirectional VAE 代替 diffusion 的 reverse process，这是第一个 D。第二个 D 来自于 denoise，也就是将加噪的数据放入模型，模型最终会学出一个有偏的分布，因此去噪后回归真实分布。第三个 D 来自于 disentanglement，在 BVAE 的过程中，每一步都会得到一个中间状态隐变量 $Z$，在每一步的 $Z$ 中，都会使得 $Z$ 不同维度之间尽可能独立，增加可解释性，同时控制过拟合。
+
+因为使用 BVAE 是想用来代替 reverse process，所以 VAE 是一个 H (Hierarchical) VAE 的结构，有很多层级，之所以叫做 Bidirectional，就在于用于得到 disentanglement $Z$ 的过程是通过 encoder 和 decoder 的互相融合得到的，使用了双向之间的关系。
+
+为什么要使用 Diffusion？ 因为作者还是想要从生成模型的角度来理解 $Y$，认为 $Y$ 是一个与 $X$ 有关的隐变量而生成的。
+
+<div align='center'>
+
+![](../image/20250815PP2.jpg)
+
+</div>
+
+这里的四个 Loss 分别是
+
+- 加噪后的 $Y$ 和预测值 $\hat{Y}$ 分布之间的 KL 散度
+- 去噪后的 $\hat{Y}_{\text{clean}}$ 和真实 $Y$ 之间的损失
+- Total correlation，disentanglement 项
+- 加噪后的 $Y$ 和预测值 $\hat{Y}$ 之间的损失
+
+> 从生成模型的角度理解 $X$ 和 $Y$ 之间的关系没问题，但是套在 diffusion 框架下不是很适用在于，diffusion 过程中的 $x$ 维度是不可变的，因此为了适配 $X$ 和 $Y$ 不同的维度，就势必要做一些变换。Diffusion 作为 HVAE 下的一个特例，也许 HVAE 的灵活性会更高些。
+
+
+### Score matching
 
 文章中使用的 score matching 方法称之为 denoising score matching (DSM)，是与其提出的 diffusion process 共同使用的。
 
@@ -47,23 +80,6 @@ $$
 \nabla_{\widehat{Y}}\log p_\theta(\widehat{Y})=-\nabla_{\widehat{Y}}E(\widehat{Y};\zeta).
 $$
 > 因而可以直接学习能量函数的梯度，避免直接计算 $Z(\zeta)$。这也就是**模型输出的梯度**。
-
-我们的网络使用 DSM 的逻辑略有不同。首先，因为我们是预测任务，所以拿不到 $Y$，因而无法直接对 $Y$ 加噪构建出 $\hat{Y}$，所以通过 $X$ 来得到 $Y$。其次，$X$ 和 $Y$ 的空间可能比较稀疏，所以我们对这两个空间进行加噪。
-
-此时需要注意的是，加噪后的 $Y_t$ 和 $Y$ 本质上属于同一空间的不同分布，预测过程中，
-
-- 第一步使得 $X_t$ 映射到 $Y$ 空间，所以使用 $\hat{Y}_t$ 和 $Y_t$ 作 loss
-- 第二步使得 $\hat{Y}_t$ 通过 score matching 在同一空间内调整到 $Y$ 分布，学习逆向降噪过程
-
-在新的框架下，不再对 $Y$ 加噪来填满空间，所以可以理解为只有 $Y$ 附近的空间是密度比较高的，其他的位置密度并不一定高，所以
-
-- 我们希望 $X$ 第一步就能够映射到 $Y$ 的附近，因而第一步中就是通过 $\hat{Y}$ 和 $Y$ 做 loss
-- 但是第一步并不能保证就跟 $Y$ 一样了，所以通过第二步 Score Matching 微调，再次使得 $Y$ 和 $\hat{Y}$ 做 loss
-
-跟澈哥交流的过程中，澈哥还说了一个十分有意思的观点，就是使用第一步的预测误差 $\epsilon = ||f(x) - Y||$ 作为 sigma_t 来指导第二步的降噪过程，背后的逻辑就是第一步的误差越大，第二步应该降得越多。有个小问题在于这个 $\epsilon$ 可能不为正态分布，在这种情况下 Score Matching 的适用条件可能不再满足了。
-
-
-
 
 
 

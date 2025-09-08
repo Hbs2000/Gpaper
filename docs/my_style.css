@@ -1,3 +1,21 @@
+/* 设置根元素基础字体大小，用于rem单位计算 */
+html {
+  font-size: 16px; /* 基础字体大小，可根据需要调整 */
+}
+
+/* 响应式设计：根据屏幕大小调整基础字体 */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  html {
+    font-size: 18px;
+  }
+}
+
 /* LM Roman 10 
 @font-face {
   font-family: 'LM Roman 10';
@@ -132,21 +150,21 @@
 
 
 h1 {
-  font-size: 34px !important;
+  font-size: 2.1rem !important;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 h2 {
-  font-size: 32px !important;
+  font-size: 2rem !important;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
   background-color: #5ac6df4d;
 }
 h3 {
-  font-size: 27px !important;
+  font-size: 1.7rem !important;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
   background-color: #90d3e33b;
 }
 h4 {
-  font-size: 25px !important;
+  font-size: 1.56rem !important;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
 }
 
@@ -164,41 +182,41 @@ code {
 
 p {
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
-  font-size: 23px !important;
+  font-size: 1.44rem !important;
   line-height: 140% !important;
 }
 
 li {
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
-  font-size: 23px !important;
+  font-size: 1.44rem !important;
   line-height: 140% !important;
 }
 
 .markdown-section ol {
-  font-size: 23px !important;
+  font-size: 1.44rem !important;
 }
 
 .markdown-section ul {
-  font-size: 23px !important;
+  font-size: 1.44rem !important;
   list-style-type: square;
 }
 
 .markdown-section ul ul {
-  font-size: 23px !important;
+  font-size: 1.44rem !important;
 }
 
 .markdown-section ol ol {
-  font-size: 23px !important;
+  font-size: 1.44rem !important;
 }
 
 
 .sidebar ul li a {
-  font-size: 20px !important;
+  font-size: 1.25rem !important;
 }
 
 .sidebar li {
   margin: 4px 0;
-  font-size: 22px !important;
+  font-size: 1.38rem !important;
 }
 
 
@@ -221,7 +239,7 @@ strong {
 }
 
 .katex {
-  font-size: 26px !important;
+  font-size: 1.63rem !important;
 }
 
 .centerwords {
@@ -232,7 +250,7 @@ strong {
 }
 
 .centerwords p {
-  font-size: 30px !important;
+  font-size: 1.88rem !important;
 }
 
 section.cover h1 {
@@ -245,7 +263,7 @@ section.cover h1 {
   margin-left: auto;
   margin-right: auto;
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial', 'Source Han Serif SC', 'SimSum-ExtB';
-  font-size: 23px !important;
+  font-size: 1.44rem !important;
 }
 
 
@@ -257,7 +275,7 @@ mark {
 .alert.flat.note {
   background-color: #b0d9df !important;
   border-color: #b0d9df !important;
-  font-size: 30px !important;
+  font-size: 1.88rem !important;
 }
 
 .alert.flat.tip {
@@ -278,7 +296,7 @@ mark {
 .alert.flat.theorem {
   background-color: #ae8cc1 !important;
   border-color: #ae8cc1 !important;
-  font-size: 30px !important;
+  font-size: 1.88rem !important;
 }
 
 .alert.flat.cite {
@@ -296,7 +314,7 @@ hr {
 
 details summary {
   font-family: 'Georgia,serif', 'Times New Roman', 'Arial';
-  font-size: 23px;
+  font-size: 1.44rem;
 }
 
 
